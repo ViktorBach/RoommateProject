@@ -34,5 +34,14 @@ class RegisterViewModel: ViewModel() {
         }
     }
 
-
+    fun loginWithUser(navigateRoomLogin: () -> Unit) {
+        accountService.login(email, password) { success, errorMessage ->
+            if (success as Boolean) {
+                println("Login successful!!!!")
+                navigateRoomLogin() // Navigates user to the RoomLogin screen
+            } else {
+                println("Login failed: $errorMessage") // Login failed
+            }
+        }
+    }
 }

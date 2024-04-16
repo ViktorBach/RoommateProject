@@ -22,8 +22,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
 fun Register (navigateRoomLogin: () -> Unit) {
-    val registerViewModel = viewModel<RegisterViewModel>()
 
+    val registerViewModel = viewModel<RegisterViewModel>()
 
     Box{
         Text(text = "Home")
@@ -59,7 +59,7 @@ fun Register (navigateRoomLogin: () -> Unit) {
             ) {
                     Text(text = "Register")
                 }
-                Button(onClick = navigateRoomLogin) {
+                Button(onClick = { registerViewModel.loginWithUser(navigateRoomLogin) }) {
                     Text(text = "Login")
                 }
             }
