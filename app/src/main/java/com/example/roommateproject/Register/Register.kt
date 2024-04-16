@@ -16,12 +16,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
-fun Register (goToFrontPage: () -> Unit) {
+fun Register (navigateRoomLogin: () -> Unit) {
+    val registerViewModel = viewModel<RegisterViewModel>()
 
-    var text by remember { mutableStateOf("") }
 
     Box{
         Text(text = "Home")
@@ -33,9 +35,9 @@ fun Register (goToFrontPage: () -> Unit) {
             Text(text = "Welcome home")
 
             TextField(
-                value = text,
-                onValueChange = { newText ->
-                    text = newText
+                value = registerViewModel.email,
+                onValueChange = {
+                    registerViewModel.onEmailChange(it)
                 },
                 label = { Text("Enter text") },
                 modifier = Modifier
@@ -43,9 +45,9 @@ fun Register (goToFrontPage: () -> Unit) {
                     .padding(horizontal = 16.dp)
             )
             TextField(
-                value = text,
-                onValueChange = { newText ->
-                    text = newText
+                value = registerViewModel.password,
+                onValueChange = {
+                    registerViewModel.onPasswordChange(it)
                 },
                 label = { Text("Enter text") },
                 modifier = Modifier
@@ -53,13 +55,20 @@ fun Register (goToFrontPage: () -> Unit) {
                     .padding(horizontal = 16.dp)
             )
             Row {
-                Button(onClick = goToFrontPage ) {
+                Button(onClick = { registerViewModel.registerNewUser(navigateRoomLogin) }
+            ) {
                     Text(text = "Register")
                 }
-                Button(onClick = goToFrontPage ) {
+                Button(onClick = navigateRoomLogin) {
                     Text(text = "Login")
                 }
             }
         }
     }
+}
+
+@Preview
+@Composable
+fun RegisterPreview () {
+    Register(navigateRoomLogin = {})
 }
