@@ -55,8 +55,7 @@ fun Register (navigateRoomLogin: () -> Unit) {
                     .padding(horizontal = 16.dp)
             )
             Row {
-                Button(onClick = { registerViewModel.registerNewUser(navigateRoomLogin) }
-            ) {
+                Button(onClick = { registerViewModel.registerNewUser(navigateRoomLogin) }) {
                     Text(text = "Register")
                 }
                 Button(onClick = { registerViewModel.loginWithUser(navigateRoomLogin) }) {
@@ -67,7 +66,6 @@ fun Register (navigateRoomLogin: () -> Unit) {
     }
 }
 
-@Preview
 @Composable
 fun RegisterPreview () {
     Register(navigateRoomLogin = {})

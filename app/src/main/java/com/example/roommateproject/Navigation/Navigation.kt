@@ -14,10 +14,10 @@ fun Navigation() {
 
     NavHost(navController = navController, startDestination = "Register") {
         composable("Register"){
-            Register(navigateRoomLogin = { navController.navigate("RoomLogin")})
+            Register(navigateRoomLogin = { navController.navigate("RoomLogin") })
         }
         composable("RoomLogin"){
-            RoomLogin()
+            RoomLogin(navigateFrontPage = { navController.navigate("FrontPage") })
         }
         composable("FrontPage"){
             FrontPage()
