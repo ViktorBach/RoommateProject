@@ -11,7 +11,6 @@ import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 
@@ -40,9 +39,9 @@ fun RoomLogin (navigateFrontPage: () -> Unit) {
                     .padding(horizontal = 16.dp)
             )
             TextField(
-                value = roomViewModel.members,
+                value = roomViewModel.password,
                 onValueChange = {
-                    roomViewModel.onMembersChange(it)
+                    roomViewModel.onPasswordChange(it)
                 },
                 label = { Text("Enter text") },
                 modifier = Modifier
@@ -51,7 +50,10 @@ fun RoomLogin (navigateFrontPage: () -> Unit) {
             )
             Row {
                 Button(onClick = { roomViewModel.registerNewHouse(navigateFrontPage) }) {
-                    Text(text = "Continue")
+                    Text(text = "Register")
+                }
+                Button(onClick = { roomViewModel.registerNewHouse(navigateFrontPage) }) {
+                    Text(text = "Login")
                 }
             }
         }
