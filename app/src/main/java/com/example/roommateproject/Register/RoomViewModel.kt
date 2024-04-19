@@ -13,16 +13,22 @@ class RoomViewModel: ViewModel() {
 
     var houseName by mutableStateOf("")
         private set;
+    var password by mutableStateOf("")
+        private set;
 
     var members by mutableStateOf("")
         private set;
 
-    fun onHouseNameChange(email: String) {
-        this.houseName = email;
+    fun onHouseNameChange(name: String) {
+        this.houseName = name;
     }
 
-    fun onMembersChange(password: String) {
-        this.members = password;
+    fun onPasswordChange(password: String) {
+        this.password = password;
+    }
+
+    fun onMembersChange(members: ArrayList<String>) {
+        this.members = members.toString();
     }
 
     fun registerNewHouse(navigateFrontPage: () -> Unit) {
