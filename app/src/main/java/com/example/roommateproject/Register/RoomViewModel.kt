@@ -16,8 +16,8 @@ class RoomViewModel: ViewModel() {
     var password by mutableStateOf("")
         private set;
 
-    var members by mutableStateOf("")
-        private set;
+    var members by mutableStateOf<List<String>>(emptyList())
+        private set
 
     fun onHouseNameChange(name: String) {
         this.houseName = name;
@@ -27,12 +27,13 @@ class RoomViewModel: ViewModel() {
         this.password = password;
     }
 
-    fun onMembersChange(members: ArrayList<String>) {
-        this.members = members.toString();
+    fun onMembersChange(members: List<String>) {
+        this.members = members;
     }
 
+
     fun registerNewHouse(navigateFrontPage: () -> Unit) {
-        accountService.authenticate(houseName, members) { success, errorMessage ->
+        accountService.createNewHouse(houseName, password, members) { success, errorMessage ->
             if (success as Boolean) {
                 println("House registered successfully!")
                 navigateFrontPage() // Navigates user to the RoomLogin screen

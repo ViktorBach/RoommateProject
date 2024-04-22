@@ -20,7 +20,7 @@ fun Navigation() {
             RoomLogin(navigateFrontPage = { navController.navigate("FrontPage") })
         }
         composable("FrontPage"){
-            FrontPage()
+            FrontPage(navigateRegisterPage = { navController.navigate("Register") }) {}
         }
     }
 }
