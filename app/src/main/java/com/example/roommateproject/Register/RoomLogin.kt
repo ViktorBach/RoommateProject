@@ -33,7 +33,7 @@ fun RoomLogin (navigateFrontPage: () -> Unit) {
                 onValueChange = {
                     roomViewModel.onHouseNameChange(it)
                 },
-                label = { Text("Enter text") },
+                label = { Text("Enter household name") },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp)
@@ -43,7 +43,15 @@ fun RoomLogin (navigateFrontPage: () -> Unit) {
                 onValueChange = {
                     roomViewModel.onPasswordChange(it)
                 },
-                label = { Text("Enter text") },
+                label = { Text("Enter password") },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp)
+            )
+            TextField(
+                value = roomViewModel.members.joinToString(),
+                onValueChange = { roomViewModel.onMembersChange(it.split(",").map { it.trim() }) },
+                label = { Text("Enter members (comma-separated)") },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp)

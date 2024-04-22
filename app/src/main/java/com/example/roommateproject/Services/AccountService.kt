@@ -11,9 +11,9 @@ class AccountService {
     private val auth = FirebaseAuth.getInstance()
     private val db = FirebaseFirestore.getInstance()
     private val usersCollection = db.collection("users")
-    private val homeCollection = db.collection("homes")
+    private val homesCollection = db.collection("homes")
 
-    fun authenticate(email: String, password: String, username: String, onResult: (Boolean, String?) -> Unit) {
+    fun authenticate(email: String, password: String, username: List<String>, onResult: (Boolean, String?) -> Unit) {
         Firebase.auth.createUserWithEmailAndPassword(email, password)
             .addOnSuccessListener { authResult ->
         val user = authResult.user
@@ -62,7 +62,58 @@ class AccountService {
 
     }
 
-    fun home(name: String, password: String, onResult: (Boolean, String?) -> Unit) {
+    fun homeLogin(name: String, password: String, usernames: List<String>, onResult: (Boolean, String?) -> Unit) {
+        homesCollection.whereEqualTo("home", name).get()
+            .addOnSuccessListener { querySnapshot ->
+                if (querySnapshot.isEmpty) {
+                    onResult(false, "Household not found")
+                } else {
+                    val homeDocument = querySnapshot.documents.first()
+                    val storedPassword = homeDocument.getString("password")
+                    if (storedPassword == password) {
+                        val userIDs = mutableListOf<String>()
+                        var completedTasks = 0
+                        val totalTasks = usernames.size
 
+                        for (username in usernames) {
+                            usersCollection.whereEqualTo("username", username).get()
+                                .addOnSuccessListener { userQuerySnapshot ->
+                                    if (userQuerySnapshot.isEmpty) {
+                                        onResult(false, "User '$username' not found")
+                                    } else {
+                                        val userDocument = userQuerySnapshot.documents.first()
+                                        val userId = userDocument.id
+                                        userIDs.add(userId)
+                                    }
+                                    completedTasks++
+                                    if (completedTasks == totalTasks) {
+                                        // All tasks completed, update the home document
+                                        val homeData = hashMapOf(
+                                            "name" to name,
+                                            "members" to userIDs
+                                        )
+                                        homeDocument.reference.set(homeData)
+                                            .addOnSuccessListener {
+                                                onResult(true, null)
+                                            }
+                                            .addOnFailureListener { exception ->
+                                                onResult(false, exception.message)
+                                            }
+                                    }
+                                }
+                                .addOnFailureListener { exception ->
+                                    onResult(false, exception.message)
+                                }
+                        }
+                    } else {
+                        onResult(false, "Incorrect password")
+                    }
+                }
+            }
+            .addOnFailureListener { exception ->
+                onResult(false, exception.message)
+            }
     }
+
+
 }
