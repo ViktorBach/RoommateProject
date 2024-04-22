@@ -13,10 +13,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.roommateproject.Navigation.Navigation
 import com.example.roommateproject.ui.theme.RoommateProjectTheme
 
-class MainActivity : ComponentActivity() {
+
+public open class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+
+
             RoommateProjectTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(

@@ -6,6 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.roommateproject.FrontPage.FrontPage
 import com.example.roommateproject.Register.Register
+import com.example.roommateproject.Register.RoomLogin
 
 @Composable
 fun Navigation() {
@@ -13,7 +14,10 @@ fun Navigation() {
 
     NavHost(navController = navController, startDestination = "Register") {
         composable("Register"){
-            Register(goToFrontPage = { navController.navigate("FrontPage")})
+            Register(navigateRoomLogin = { navController.navigate("RoomLogin") })
+        }
+        composable("RoomLogin"){
+            RoomLogin(navigateFrontPage = { navController.navigate("FrontPage") })
         }
         composable("FrontPage"){
             FrontPage()
