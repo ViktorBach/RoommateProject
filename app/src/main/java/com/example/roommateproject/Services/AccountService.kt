@@ -13,7 +13,7 @@ class AccountService {
     private val usersCollection = db.collection("users")
     private val homesCollection = db.collection("homes")
 
-    fun authenticate(email: String, password: String, username: List<String>, onResult: (Boolean, String?) -> Unit) {
+    fun authenticate(email: String, password: String, username: String, onResult: (Boolean, String?) -> Unit) {
         Firebase.auth.createUserWithEmailAndPassword(email, password)
             .addOnSuccessListener { authResult ->
         val user = authResult.user
@@ -30,12 +30,11 @@ class AccountService {
             .addOnFailureListener { exception ->
                 onResult(false, exception.message)
             }
-    }
-    .addOnFailureListener { exception ->
+            }
+            .addOnFailureListener { exception ->
         onResult(false, exception.message)
+            }
     }
-}
-
 
     fun login(email: String, password: String, onResult: (Boolean, String?) -> Unit) {
         // Attempt to sign in the user
