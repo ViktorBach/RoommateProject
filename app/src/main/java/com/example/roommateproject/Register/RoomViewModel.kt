@@ -31,8 +31,9 @@ class RoomViewModel: ViewModel() {
         this.members = members.toString();
     }
 
+
     fun registerNewHouse(navigateFrontPage: () -> Unit) {
-        accountService.authenticate(houseName, members) { success, errorMessage ->
+        accountService.authenticate(houseName, password, members) { success, errorMessage ->
             if (success as Boolean) {
                 println("House registered successfully!")
                 navigateFrontPage() // Navigates user to the RoomLogin screen

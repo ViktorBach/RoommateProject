@@ -1,9 +1,9 @@
 package com.example.roommateproject.Register
 
-import androidx.lifecycle.ViewModel
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.ViewModel
 import com.example.roommateproject.Services.AccountService
 
 class RegisterViewModel: ViewModel() {
@@ -15,6 +15,9 @@ class RegisterViewModel: ViewModel() {
     var password by mutableStateOf("")
         private set;
 
+    var username by mutableStateOf("")
+        private set
+
     fun onEmailChange(email: String) {
         this.email = email;
     }
@@ -23,8 +26,12 @@ class RegisterViewModel: ViewModel() {
         this.password = password;
     }
 
+    fun onUsernameChange(username: String) {
+        this.username = username
+    }
+
     fun registerNewUser(navigateRoomLogin: () -> Unit) {
-        accountService.authenticate(email, password) { success, errorMessage ->
+        accountService.authenticate(email, password, username) { success, errorMessage ->
             if (success as Boolean) {
                 println("User registered successfully!")
                 navigateRoomLogin() // Navigates user to the RoomLogin screen
