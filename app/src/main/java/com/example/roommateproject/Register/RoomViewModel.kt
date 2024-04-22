@@ -33,7 +33,7 @@ class RoomViewModel: ViewModel() {
 
 
     fun registerNewHouse(navigateFrontPage: () -> Unit) {
-        accountService.homeLogin(houseName, password, members) { success, errorMessage ->
+        accountService.createNewHouse(houseName, password, members) { success, errorMessage ->
             if (success as Boolean) {
                 println("House registered successfully!")
                 navigateFrontPage() // Navigates user to the RoomLogin screen

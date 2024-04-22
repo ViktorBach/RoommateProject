@@ -113,6 +113,46 @@ class AccountService {
                 onResult(false, exception.message)
             }
     }
+    fun createNewHouse(name: String, password: String, usernames: List<String>, onResult: (Boolean, String?) -> Unit) {
+        val userIds = mutableListOf<String>()
+        var completedTasks = 0
+        val totalTasks = usernames.size
+
+        // Iterate over the usernames and get their corresponding document IDs
+        for (username in usernames) {
+            usersCollection.whereEqualTo("username", username).get()
+                .addOnSuccessListener { querySnapshot ->
+                    if (querySnapshot.isEmpty) {
+                        onResult(false, "User '$username' not found") // User not found
+                    } else {
+                        val userDocument = querySnapshot.documents.first()
+                        userIds.add(userDocument.id) // Add document ID to the list
+                    }
+
+                    completedTasks++
+                    if (completedTasks == totalTasks) {
+                        // If all tasks are completed, create the new household
+                        val homeData = hashMapOf(
+                            "home" to name,
+                            "password" to password,
+                            "members" to userIds
+                        )
+
+                        homesCollection.add(homeData) // Add new household to Firestore
+                            .addOnSuccessListener {
+                                onResult(true, null) // Household added successfully
+                            }
+                            .addOnFailureListener { exception ->
+                                onResult(false, exception.message) // Handle errors
+                            }
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    onResult(false, exception.message) // Handle query error
+                }
+        }
+    }
+
 
 
 }
