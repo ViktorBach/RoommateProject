@@ -51,8 +51,8 @@ val Typography = Typography(
     titleSmall = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Bold,
-        fontSize = 30.sp,
-        lineHeight = 32.sp,
+        fontSize = 34.sp,
+        lineHeight = 34.sp,
         letterSpacing = 0.sp
     ),
     // Large label text

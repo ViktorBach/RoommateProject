@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -27,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.roommateproject.ui.theme.Typography
 import com.example.roommateproject.ui.theme.lightBlue
+import com.example.roommateproject.ui.theme.lightGrey
 import com.example.roommateproject.ui.theme.lightYellow
 import com.example.roommateproject.ui.theme.orange
 
@@ -73,7 +75,7 @@ fun Register (navigateRoomLogin: () -> Unit) {
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = "Welcome Homie",
+                    text = "Welcome Homie!",
                     style = Typography.titleSmall,
                     color = lightYellow
                 )
@@ -167,6 +169,9 @@ fun Register (navigateRoomLogin: () -> Unit) {
             ) {
                 Button(
                     onClick = { registerViewModel.registerNewUser(navigateRoomLogin) },
+                    colors = ButtonDefaults.buttonColors(
+                        lightYellow
+                    )
                 ) {
                     Text(text = "Register",
                         style = Typography.labelMedium,
@@ -181,7 +186,10 @@ fun Register (navigateRoomLogin: () -> Unit) {
                 contentAlignment = Alignment.Center
             ) {
                 Button(
-                    onClick = { registerViewModel.loginWithUser(navigateRoomLogin) }
+                    onClick = { registerViewModel.loginWithUser(navigateRoomLogin) },
+                    colors = ButtonDefaults.buttonColors(
+                        lightYellow // Set the text color to lightYellow
+                    )
                 ) {
                     Text(text = "Login",
                         style = Typography.labelMedium,
