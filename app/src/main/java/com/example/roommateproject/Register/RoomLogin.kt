@@ -60,7 +60,7 @@ fun RoomLogin (navigateFrontPage: () -> Unit) {
                 Button(onClick = { roomViewModel.registerNewHouse(navigateFrontPage) }) {
                     Text(text = "Register")
                 }
-                Button(onClick = { roomViewModel.registerNewHouse(navigateFrontPage) }) {
+                Button(onClick = { roomViewModel.houselogin(navigateFrontPage) }) {
                     Text(text = "Login")
                 }
             }
