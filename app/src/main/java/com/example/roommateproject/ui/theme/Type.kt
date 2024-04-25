@@ -44,10 +44,10 @@ val Typography = Typography(
     // Medium title text
     titleMedium = TextStyle(
         fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.ExtraBold,
-        fontSize = 42.sp,
-        lineHeight = 45.sp,
-        letterSpacing = 2.sp,
+        fontWeight = FontWeight.Normal,
+        fontSize = 50.sp,
+        lineHeight = 50.sp,
+        letterSpacing = 0.sp,
     ),
     // Small title text
     titleSmall = TextStyle(
@@ -67,17 +67,17 @@ val Typography = Typography(
     ),
     labelMedium = TextStyle(
         fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Bold,
-        fontSize = 20.sp,
-        lineHeight = 28.sp,
+        fontWeight = FontWeight.Normal,
+        fontSize = 24.sp,
+        lineHeight = 26.sp,
         letterSpacing = 0.sp
     ),
     // Small label text
     labelSmall = TextStyle(
         fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Medium,
-        fontSize = 12.sp,
-        lineHeight = 16.sp,
+        fontWeight = FontWeight.Normal,
+        fontSize = 22.sp,
+        lineHeight = 22.sp,
         letterSpacing = 0.sp
     )
 )
@@ -88,4 +88,12 @@ val karantinaFontFamily = FontFamily(
 
 val katibehFontFamily = FontFamily(
     Font(R.font.katibeh_regular, FontWeight.Normal)
+)
+
+val playFairDisplayFontFamily = FontFamily(
+    Font(R.font.playfairdisplay_regular, FontWeight.Normal)
+)
+
+val jaldiFontFamily = FontFamily(
+    Font(R.font.jaldi_bold, FontWeight.Normal)
 )

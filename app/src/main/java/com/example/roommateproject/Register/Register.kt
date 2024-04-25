@@ -30,12 +30,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.roommateproject.ui.theme.Typography
+import com.example.roommateproject.ui.theme.green
+import com.example.roommateproject.ui.theme.jaldiFontFamily
 import com.example.roommateproject.ui.theme.karantinaFontFamily
 import com.example.roommateproject.ui.theme.katibehFontFamily
 import com.example.roommateproject.ui.theme.lightBlue
 import com.example.roommateproject.ui.theme.lightGrey
 import com.example.roommateproject.ui.theme.lightYellow
 import com.example.roommateproject.ui.theme.orange
+import com.example.roommateproject.ui.theme.playFairDisplayFontFamily
 
 
 @Composable
@@ -63,7 +66,7 @@ fun Register (navigateRoomLogin: () -> Unit) {
             Box(
                 modifier = Modifier
                     .background(Color.White)
-                    .fillMaxHeight(0.134f),
+                    .fillMaxHeight(0.13f),
                 contentAlignment = Alignment.CenterStart
             ) {
                 Text(
@@ -78,14 +81,15 @@ fun Register (navigateRoomLogin: () -> Unit) {
             Box(
                 modifier = Modifier
                     .background(Color.White)
-                    .fillMaxHeight(0.25f)
+                    .fillMaxHeight(0.2f)
                     .fillMaxWidth(),
                 contentAlignment = Alignment.Center
             ) {
                 Text(
                     text = "Welcome Homie!",
+                    fontFamily = playFairDisplayFontFamily,
                     style = Typography.titleSmall,
-                    color = lightYellow
+                    color = lightYellow,
                 )
             }
         }
@@ -93,7 +97,7 @@ fun Register (navigateRoomLogin: () -> Unit) {
             Box(
                 modifier = Modifier
                     .background(Color.White)
-                    .fillMaxHeight(0.15f)
+                    .fillMaxHeight(0.17f)
                     .fillMaxWidth(),
                 contentAlignment = Alignment.Center
             ) {
@@ -105,6 +109,7 @@ fun Register (navigateRoomLogin: () -> Unit) {
                     label = {
                         Text(
                             "Enter e-mail",
+                            fontFamily = jaldiFontFamily,
                             style = Typography.labelMedium,
                             color = lightBlue
                         )
@@ -119,7 +124,7 @@ fun Register (navigateRoomLogin: () -> Unit) {
             Box(
                 modifier = Modifier
                     .background(Color.White)
-                    .fillMaxHeight(0.15f)
+                    .fillMaxHeight(0.18f)
                     .fillMaxWidth(),
                 contentAlignment = Alignment.Center
             ) {
@@ -131,6 +136,7 @@ fun Register (navigateRoomLogin: () -> Unit) {
                     label = {
                         Text(
                             "Enter password",
+                            fontFamily = jaldiFontFamily,
                             style = Typography.labelMedium,
                             color = lightBlue,
 
@@ -146,7 +152,7 @@ fun Register (navigateRoomLogin: () -> Unit) {
             Box(
                 modifier = Modifier
                     .background(Color.White)
-                    .fillMaxHeight(0.2f)
+                    .fillMaxHeight(0.23f)
                     .fillMaxWidth(),
                 contentAlignment = Alignment.Center
             ) {
@@ -158,6 +164,7 @@ fun Register (navigateRoomLogin: () -> Unit) {
                     label = {
                         Text(
                             "Enter username",
+                            fontFamily = jaldiFontFamily,
                             style = Typography.labelMedium,
                             color = lightBlue
                         )
@@ -183,8 +190,9 @@ fun Register (navigateRoomLogin: () -> Unit) {
                     )
                 ) {
                     Text(text = "Register",
-                        style = Typography.labelMedium,
-                        color = lightBlue)
+                        fontFamily = jaldiFontFamily,
+                        style = Typography.labelSmall,
+                        color = green)
                 }
             }
             Box(
@@ -201,8 +209,9 @@ fun Register (navigateRoomLogin: () -> Unit) {
                     )
                 ) {
                     Text(text = "Login",
-                        style = Typography.labelMedium,
-                        color = lightBlue)
+                        fontFamily = jaldiFontFamily,
+                        style = Typography.labelSmall,
+                        color = green)
                 }
             }
         }
