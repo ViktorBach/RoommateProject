@@ -84,5 +84,6 @@ const val AlphaNearOpaque = 0.95f
 val orange = Color(0xFFFFAB07)
 val lightYellow = Color(0xFFFAD58C)
 val lightBlue = Color(0xFF6CB1F1)
+val green = Color(0xFF36A324)
     // border and bow coloring
 val lightGrey = Color(0xFFF5F5F5)

@@ -1,42 +1,40 @@
 package com.example.roommateproject.Register
 
-import android.content.res.Resources
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.roommateproject.ui.theme.Typography
+import com.example.roommateproject.ui.theme.green
 import com.example.roommateproject.ui.theme.lightBlue
 import com.example.roommateproject.ui.theme.lightYellow
 import com.example.roommateproject.ui.theme.orange
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Register (navigateRoomLogin: () -> Unit) {
 
     val registerViewModel = viewModel<RegisterViewModel>()
 
-    Column {
+    Column(Modifier.background(Color.White)) {
         Spacer(modifier = Modifier.width(16.dp))
         Row {
             Box(
@@ -140,6 +138,7 @@ fun Register (navigateRoomLogin: () -> Unit) {
                 contentAlignment = Alignment.Center
             ) {
                 TextField(
+                    colors = TextFieldDefaults.textFieldColors(Color.White),
                     value = registerViewModel.username,
                     onValueChange = {
                         registerViewModel.onUsernameChange(it)
@@ -165,12 +164,12 @@ fun Register (navigateRoomLogin: () -> Unit) {
                     .fillMaxWidth(0.5f),
                 contentAlignment = Alignment.Center
             ) {
-                Button(
+                Button(colors = ButtonDefaults.buttonColors(lightYellow),
                     onClick = { registerViewModel.registerNewUser(navigateRoomLogin) },
                 ) {
                     Text(text = "Register",
                         style = Typography.labelMedium,
-                        color = lightBlue)
+                        color = green)
                 }
             }
             Box(
@@ -180,12 +179,13 @@ fun Register (navigateRoomLogin: () -> Unit) {
                     .fillMaxWidth(1f),
                 contentAlignment = Alignment.Center
             ) {
-                Button(
+                Button(colors = ButtonDefaults.buttonColors(lightYellow),
                     onClick = { registerViewModel.loginWithUser(navigateRoomLogin) }
+
                 ) {
                     Text(text = "Login",
                         style = Typography.labelMedium,
-                        color = lightBlue)
+                        color = green)
                 }
             }
         }
