@@ -1,9 +1,11 @@
 package com.example.roommateproject.ui.theme
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import com.example.roommateproject.R
 
 // Set of Material typography styles to start with
 val Typography = Typography(
@@ -34,18 +36,18 @@ val Typography = Typography(
     // Large title text
     titleLarge = TextStyle(
         fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Bold,
-        fontSize = 52.sp,
-        lineHeight = 52.sp,
-        letterSpacing = 2.sp
+        fontWeight = FontWeight.Thin,
+        fontSize = 75.sp,
+        lineHeight = 80.sp,
+        letterSpacing = 3.sp
     ),
     // Medium title text
     titleMedium = TextStyle(
         fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Bold,
-        fontSize = 38.sp,
-        lineHeight = 38.sp,
-        letterSpacing = 0.sp,
+        fontWeight = FontWeight.ExtraBold,
+        fontSize = 42.sp,
+        lineHeight = 45.sp,
+        letterSpacing = 2.sp,
     ),
     // Small title text
     titleSmall = TextStyle(
@@ -78,4 +80,12 @@ val Typography = Typography(
         lineHeight = 16.sp,
         letterSpacing = 0.sp
     )
+)
+
+val karantinaFontFamily = FontFamily(
+    Font(R.font.karantina_regular, FontWeight.Normal),
+)
+
+val katibehFontFamily = FontFamily(
+    Font(R.font.katibeh_regular, FontWeight.Normal)
 )

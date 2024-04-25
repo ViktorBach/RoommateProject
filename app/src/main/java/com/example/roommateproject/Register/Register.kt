@@ -1,6 +1,7 @@
 package com.example.roommateproject.Register
 
 import android.content.res.Resources
+import android.graphics.fonts.Font
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -22,12 +23,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.roommateproject.ui.theme.Typography
+import com.example.roommateproject.ui.theme.karantinaFontFamily
+import com.example.roommateproject.ui.theme.katibehFontFamily
 import com.example.roommateproject.ui.theme.lightBlue
 import com.example.roommateproject.ui.theme.lightGrey
 import com.example.roommateproject.ui.theme.lightYellow
@@ -50,18 +54,21 @@ fun Register (navigateRoomLogin: () -> Unit) {
             ) {
                 Text(
                     text = "H",
+                    fontFamily = karantinaFontFamily,
                     style = Typography.titleLarge,
-                    color = orange
+                    color = orange,
+                    modifier = Modifier.padding(start = 8.dp)
                 )
             }
             Box(
                 modifier = Modifier
                     .background(Color.White)
-                    .fillMaxHeight(0.115f),
+                    .fillMaxHeight(0.134f),
                 contentAlignment = Alignment.CenterStart
             ) {
                 Text(
                     text = "omie",
+                    fontFamily = katibehFontFamily,
                     style = Typography.titleMedium,
                     color = orange
                 )
@@ -125,7 +132,8 @@ fun Register (navigateRoomLogin: () -> Unit) {
                         Text(
                             "Enter password",
                             style = Typography.labelMedium,
-                            color = lightBlue
+                            color = lightBlue,
+
                         )
                     },
                     modifier = Modifier
