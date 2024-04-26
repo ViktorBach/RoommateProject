@@ -145,24 +145,8 @@ fun Register (navigateRoomLogin: () -> Unit) {
                         color = green)
                 }
             }
-            Box(
-                modifier = Modifier
-                    .background(Color.White)
-                    .fillMaxHeight(0.75f)
-                    .fillMaxWidth(1f),
-                contentAlignment = Alignment.Center
-            ) {
-                Button(
-                    onClick = { registerViewModel.loginWithUser(navigateRoomLogin) },
-                    colors = ButtonDefaults.buttonColors(
-                        lightYellow // Set the text color to lightYellow
-                    )
-                ) {
-                    Text(text = "Login",
-                        fontFamily = jaldiFontFamily,
-                        style = Typography.labelSmall,
-                        color = green)
-                }
+            Login {
+
             }
         }
     }
@@ -202,4 +186,5 @@ fun BoxLayout( value: String, onValueChange: (String) -> Unit, labelText: String
 @Composable
 fun RegisterPreview () {
     Register(navigateRoomLogin = {})
+
 }
