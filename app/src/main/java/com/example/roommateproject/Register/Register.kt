@@ -13,10 +13,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -42,7 +44,7 @@ import com.example.roommateproject.ui.theme.playFairDisplayFontFamily
 
 
 @Composable
-fun Register (navigateRoomLogin: () -> Unit) {
+fun Register (navigateRoomLogin: () -> Unit, navigateFrontPage: () -> Unit) {
 
     val registerViewModel = viewModel<RegisterViewModel>()
 
@@ -94,86 +96,28 @@ fun Register (navigateRoomLogin: () -> Unit) {
             }
         }
         Row {
-            Box(
-                modifier = Modifier
-                    .background(Color.White)
-                    .fillMaxHeight(0.17f)
-                    .fillMaxWidth(),
-                contentAlignment = Alignment.Center
-            ) {
-                OutlinedTextField(
-                    value = registerViewModel.email,
-                    onValueChange = {
-                        registerViewModel.onEmailChange(it)
-                    },
-                    label = {
-                        Text(
-                            "Enter e-mail",
-                            fontFamily = jaldiFontFamily,
-                            style = Typography.labelMedium,
-                            color = lightBlue
-                        )
-                    },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp)
-                )
-            }
+            BoxLayout(
+                value = registerViewModel.email,
+                onValueChange = { newValue -> registerViewModel.onEmailChange(newValue) },
+                labelText = "Enter email",
+                height = 0.17f
+            )
         }
         Row {
-            Box(
-                modifier = Modifier
-                    .background(Color.White)
-                    .fillMaxHeight(0.18f)
-                    .fillMaxWidth(),
-                contentAlignment = Alignment.Center
-            ) {
-                OutlinedTextField(
-                    value = registerViewModel.password,
-                    onValueChange = {
-                        registerViewModel.onPasswordChange(it)
-                    },
-                    label = {
-                        Text(
-                            "Enter password",
-                            fontFamily = jaldiFontFamily,
-                            style = Typography.labelMedium,
-                            color = lightBlue,
-
-                        )
-                    },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp)
-                )
-            }
+            BoxLayout(
+                value = registerViewModel.password,
+                onValueChange = { newValue -> registerViewModel.onPasswordChange(newValue) },
+                labelText = "Enter password",
+                height = 0.18f
+            )
         }
         Row {
-            Box(
-                modifier = Modifier
-                    .background(Color.White)
-                    .fillMaxHeight(0.23f)
-                    .fillMaxWidth(),
-                contentAlignment = Alignment.Center
-            ) {
-                OutlinedTextField(
-                    value = registerViewModel.username,
-                    onValueChange = {
-                        registerViewModel.onUsernameChange(it)
-                    },
-                    label = {
-                        Text(
-                            "Enter username",
-                            fontFamily = jaldiFontFamily,
-                            style = Typography.labelMedium,
-                            color = lightBlue
-                        )
-                    },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp)
-                )
-            }
+            BoxLayout(
+                value = registerViewModel.username,
+                onValueChange = { newValue -> registerViewModel.onUsernameChange(newValue) },
+                labelText = "Enter username",
+                height = 0.23f
+            )
         }
         Row {
             Box(
@@ -203,7 +147,7 @@ fun Register (navigateRoomLogin: () -> Unit) {
                 contentAlignment = Alignment.Center
             ) {
                 Button(
-                    onClick = { registerViewModel.loginWithUser(navigateRoomLogin) },
+                    onClick = { registerViewModel.loginWithUser(navigateFrontPage) },
                     colors = ButtonDefaults.buttonColors(
                         lightYellow // Set the text color to lightYellow
                     )
@@ -218,8 +162,38 @@ fun Register (navigateRoomLogin: () -> Unit) {
     }
 }
 
+@Composable
+fun BoxLayout( value: String, onValueChange: (String) -> Unit, labelText: String, height: Float ) {
+    Box(
+        modifier = Modifier
+            .background(Color.White)
+            .fillMaxHeight(height)
+            .fillMaxWidth(),
+        contentAlignment = Alignment.Center
+    ) {
+        OutlinedTextField(
+            value = value,
+            onValueChange = onValueChange,
+            label = {
+                Text(
+                    labelText,
+                    fontFamily = jaldiFontFamily,
+                    style = Typography.labelMedium,
+                    color = Color.DarkGray
+                )
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp),
+            shape = RoundedCornerShape(20.dp),
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedBorderColor = Color.Gray,
+                unfocusedBorderColor = Color.LightGray)
+        )
+    }
+}
 
 @Composable
 fun RegisterPreview () {
-    Register(navigateRoomLogin = {})
+    Register(navigateRoomLogin = {}, navigateFrontPage = {})
 }
