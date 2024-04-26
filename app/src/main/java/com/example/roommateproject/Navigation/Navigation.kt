@@ -12,7 +12,7 @@ import com.example.roommateproject.Register.RoomLogin
 fun Navigation() {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = "Register") {
+    NavHost(navController = navController, startDestination = "FrontPage") {
         composable("Register"){
             Register(navigateRoomLogin = { navController.navigate("RoomLogin") })
         }

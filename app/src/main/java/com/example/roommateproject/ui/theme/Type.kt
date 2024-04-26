@@ -95,5 +95,9 @@ val playFairDisplayFontFamily = FontFamily(
 )
 
 val jaldiFontFamily = FontFamily(
+    Font(R.font.jaldi_regular, FontWeight.Normal)
+)
+
+val jaldiBoldFontFamily = FontFamily(
     Font(R.font.jaldi_bold, FontWeight.Normal)
 )

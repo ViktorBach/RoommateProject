@@ -70,7 +70,7 @@ val Neutral4 = Color(0x1f000000)
 val Neutral3 = Color(0x1fffffff)
 val Neutral2 = Color(0x61ffffff)
 val Neutral1 = Color(0xbdffffff)
-val Neutral0 = Color(0xffffffff)
+val white = Color(0xffffffff)
 
 val FunctionalRed = Color(0xffd00036)
 val FunctionalRedDark = Color(0xffea6d7e)
