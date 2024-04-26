@@ -89,7 +89,8 @@ class AccountService {
                                         // All tasks completed, update the home document
                                         val homeData = hashMapOf(
                                             "name" to name,
-                                            "members" to userIDs
+                                            "members" to userIDs,
+                                            "password" to password
                                         )
                                         homeDocument.reference.set(homeData)
                                             .addOnSuccessListener {

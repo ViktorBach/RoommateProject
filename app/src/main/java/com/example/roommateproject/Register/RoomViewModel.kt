@@ -43,13 +43,13 @@ class RoomViewModel: ViewModel() {
         }
     }
 
-    fun houselogin(navigateFrontPage: () -> Unit) {
+    fun houseLogin(navigateFrontPage: () -> Unit) {
         accountService.homeLogin(houseName, password, members) { success, errorMessage ->
             if (success as Boolean) {
                 println("House Login Successful!")
                 navigateFrontPage() // Navigates user to the RoomLogin screen
             } else {
-                println("House registration failed: $errorMessage") // Registration failed
+                println("House login failed: $errorMessage") // Registration failed
             }
         }
     }
