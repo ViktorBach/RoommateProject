@@ -187,7 +187,7 @@ fun RoomLogin (navigateFrontPage: () -> Unit) {
                 contentAlignment = Alignment.Center
             ) {
                 Button(
-                    onClick = { roomViewModel.houselogin(navigateFrontPage) },
+                    onClick = { roomViewModel.houseLogin(navigateFrontPage) },
                     colors = ButtonDefaults.buttonColors(
                         lightYellow // Set the text color to lightYellow
                     )
