@@ -128,7 +128,17 @@ fun Register (navigateRoomLogin: () -> Unit, navigateFrontPage: () -> Unit) {
                 contentAlignment = Alignment.Center
             ) {
                 Button(
-                    onClick = { registerViewModel.registerNewUser(navigateRoomLogin) },
+                    onClick = {
+                        if (registerViewModel.email.isNotEmpty() &&
+                            registerViewModel.password.isNotEmpty() &&
+                            registerViewModel.username.isNotEmpty()
+                        ) {
+                            registerViewModel.registerNewUser(navigateRoomLogin)
+                        } else {
+                            println("Error: All fields must be filled")
+                            // Show an appropriate error message to the user (e.g., Toast)
+                        }
+                    },
                     colors = ButtonDefaults.buttonColors(
                         lightYellow
                     )
@@ -147,7 +157,15 @@ fun Register (navigateRoomLogin: () -> Unit, navigateFrontPage: () -> Unit) {
                 contentAlignment = Alignment.Center
             ) {
                 Button(
-                    onClick = { registerViewModel.loginWithUser(navigateFrontPage) },
+                    onClick = {
+                        if (registerViewModel.email.isNotEmpty() &&
+                            registerViewModel.password.isNotEmpty()) {
+                            registerViewModel.loginWithUser(navigateFrontPage)
+                        } else {
+                            println("Error: Email and password must be filled")
+                            // Show an appropriate error message to the user
+                        }
+                    },
                     colors = ButtonDefaults.buttonColors(
                         lightYellow // Set the text color to lightYellow
                     )
