@@ -31,6 +31,11 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.roommateproject.Register.Components.EnterEmailInput
+import com.example.roommateproject.Register.Components.EnterPasswordInput
+import com.example.roommateproject.Register.Components.EnterUsernameInput
+import com.example.roommateproject.Register.Components.LoginButton
+import com.example.roommateproject.Register.Components.RegisterButton
 import com.example.roommateproject.Register.Components.WelcomeHomieTab
 import com.example.roommateproject.SharedComponents.Header
 import com.example.roommateproject.ui.theme.Typography
@@ -59,86 +64,17 @@ fun Register (navigateRoomLogin: () -> Unit, navigateFrontPage: () -> Unit) {
             WelcomeHomieTab()
         }
         Row {
-            BoxLayout(
-                value = registerViewModel.email,
-                onValueChange = { newValue -> registerViewModel.onEmailChange(newValue) },
-                labelText = "Enter email",
-                height = 0.17f
-            )
+            EnterEmailInput {}
         }
         Row {
-            BoxLayout(
-                value = registerViewModel.password,
-                onValueChange = { newValue -> registerViewModel.onPasswordChange(newValue) },
-                labelText = "Enter password",
-                height = 0.18f
-            )
+            EnterPasswordInput {}
         }
         Row {
-            BoxLayout(
-                value = registerViewModel.username,
-                onValueChange = { newValue -> registerViewModel.onUsernameChange(newValue) },
-                labelText = "Enter username",
-                height = 0.23f
-            )
+            EnterUsernameInput {}
         }
         Row {
-            Box(
-                modifier = Modifier
-                    .background(Color.White)
-                    .fillMaxHeight(0.75f)
-                    .fillMaxWidth(0.5f),
-                contentAlignment = Alignment.Center
-            ) {
-                Button(
-                    onClick = {
-                        if (registerViewModel.email.isNotEmpty() &&
-                            registerViewModel.password.isNotEmpty() &&
-                            registerViewModel.username.isNotEmpty()
-                        ) {
-                            registerViewModel.registerNewUser(navigateRoomLogin)
-                        } else {
-                            println("Error: All fields must be filled")
-                            // Show an appropriate error message to the user (e.g., Toast)
-                        }
-                    },
-                    colors = ButtonDefaults.buttonColors(
-                        lightYellow
-                    )
-                ) {
-                    Text(text = "Register",
-                        fontFamily = jaldiFontFamily,
-                        style = Typography.labelSmall,
-                        color = green)
-                }
-            }
-            Box(
-                modifier = Modifier
-                    .background(Color.White)
-                    .fillMaxHeight(0.75f)
-                    .fillMaxWidth(1f),
-                contentAlignment = Alignment.Center
-            ) {
-                Button(
-                    onClick = {
-                        if (registerViewModel.email.isNotEmpty() &&
-                            registerViewModel.password.isNotEmpty()) {
-                            registerViewModel.loginWithUser(navigateFrontPage)
-                        } else {
-                            println("Error: Email and password must be filled")
-                            // Show an appropriate error message to the user
-                        }
-                    },
-                    colors = ButtonDefaults.buttonColors(
-                        lightYellow // Set the text color to lightYellow
-                    )
-                ) {
-                    Text(text = "Login",
-                        fontFamily = jaldiFontFamily,
-                        style = Typography.labelSmall,
-                        color = green)
-                }
-            }
+            RegisterButton (navigateRoomLogin = navigateRoomLogin)
+            LoginButton (navigateFrontPage = navigateFrontPage)
         }
     }
 }
