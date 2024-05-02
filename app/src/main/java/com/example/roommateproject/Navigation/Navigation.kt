@@ -6,7 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.roommateproject.FrontPage.FrontPage
 import com.example.roommateproject.Register.Register
-import com.example.roommateproject.Register.RoomLogin
+import com.example.roommateproject.RoomLogin.RoomLogin
 
 @Composable
 fun Navigation() {
