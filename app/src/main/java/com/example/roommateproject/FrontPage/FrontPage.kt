@@ -48,7 +48,7 @@ fun FrontPage(navigateRegisterPage: () -> Unit, function: () -> Unit) {
         }
 
         Row {
-            NewsTab()
+            NewsTab() // Calls the NewsTab file from Components
         }
         Spacer(modifier = Modifier.height(16.dp))
 
