@@ -1,4 +1,4 @@
-package com.example.roommateproject.Register
+package com.example.roommateproject.Login
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -6,6 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.ViewModel
+import com.example.roommateproject.Login.Login
 import com.example.roommateproject.Services.AccountService
 
 class LoginViewModel: ViewModel() {

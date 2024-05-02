@@ -1,4 +1,4 @@
-package com.example.roommateproject.Register
+package com.example.roommateproject.Login
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
