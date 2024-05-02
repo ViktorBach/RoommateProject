@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.roommateproject.SharedComponents.Header
 import com.example.roommateproject.ui.theme.Typography
 import com.example.roommateproject.ui.theme.green
 import com.example.roommateproject.ui.theme.jaldiFontFamily
@@ -37,33 +38,7 @@ fun RoomLogin (navigateFrontPage: () -> Unit) {
     Column {
         Spacer(modifier = Modifier.width(16.dp))
         Row {
-            Box(
-                modifier = Modifier
-                    .background(Color.White)
-                    .fillMaxHeight(0.1f),
-                contentAlignment = Alignment.CenterStart
-            ) {
-                Text(
-                    text = "H",
-                    fontFamily = karantinaFontFamily,
-                    style = Typography.titleLarge,
-                    color = orange,
-                    modifier = Modifier.padding(start = 8.dp)
-                )
-            }
-            Box(
-                modifier = Modifier
-                    .background(Color.White)
-                    .fillMaxHeight(0.13f),
-                contentAlignment = Alignment.CenterStart
-            ) {
-                Text(
-                    text = "omie",
-                    fontFamily = katibehFontFamily,
-                    style = Typography.titleMedium,
-                    color = orange
-                )
-            }
+            Header()
         }
         Row {
             Box(
