@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.roommateproject.RoomLogin.Components.SetUpYourHomeTab
 import com.example.roommateproject.SharedComponents.Header
 import com.example.roommateproject.ui.theme.Typography
 import com.example.roommateproject.ui.theme.green
@@ -41,20 +42,7 @@ fun RoomLogin (navigateFrontPage: () -> Unit) {
             Header()
         }
         Row {
-            Box(
-                modifier = Modifier
-                    .background(Color.White)
-                    .fillMaxHeight(0.2f)
-                    .fillMaxWidth(),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    text = "Set up your home",
-                    fontFamily = playFairDisplayFontFamily,
-                    style = Typography.titleSmall,
-                    color = lightYellow
-                )
-            }
+            SetUpYourHomeTab()
         }
         Row {
             Box(

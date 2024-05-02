@@ -1,4 +1,4 @@
-package com.example.roommateproject.Register.Components
+package com.example.roommateproject.RoomLogin.Components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -14,8 +14,7 @@ import com.example.roommateproject.ui.theme.lightYellow
 import com.example.roommateproject.ui.theme.playFairDisplayFontFamily
 
 @Composable
-
-fun WelcomeHomieTab() {
+fun SetUpYourHomeTab() {
     Box(
         modifier = Modifier
             .background(Color.White)
@@ -24,10 +23,10 @@ fun WelcomeHomieTab() {
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = "Welcome Homie!",
+            text = "Set up your home",
             fontFamily = playFairDisplayFontFamily,
             style = Typography.titleSmall,
-            color = lightYellow,
+            color = lightYellow
         )
     }
 }
