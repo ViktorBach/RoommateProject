@@ -31,6 +31,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.roommateproject.Register.Components.WelcomeHomieTab
+import com.example.roommateproject.SharedComponents.Header
 import com.example.roommateproject.ui.theme.Typography
 import com.example.roommateproject.ui.theme.green
 import com.example.roommateproject.ui.theme.jaldiFontFamily
@@ -51,49 +53,10 @@ fun Register (navigateRoomLogin: () -> Unit, navigateFrontPage: () -> Unit) {
     Column {
         Spacer(modifier = Modifier.width(16.dp))
         Row {
-            Box(
-                modifier = Modifier
-                    .background(Color.White)
-                    .fillMaxHeight(0.1f),
-                contentAlignment = Alignment.CenterStart
-            ) {
-                Text(
-                    text = "H",
-                    fontFamily = karantinaFontFamily,
-                    style = Typography.titleLarge,
-                    color = orange,
-                    modifier = Modifier.padding(start = 8.dp)
-                )
-            }
-            Box(
-                modifier = Modifier
-                    .background(Color.White)
-                    .fillMaxHeight(0.13f),
-                contentAlignment = Alignment.CenterStart
-            ) {
-                Text(
-                    text = "omie",
-                    fontFamily = katibehFontFamily,
-                    style = Typography.titleMedium,
-                    color = orange
-                )
-            }
+            Header()
         }
         Row {
-            Box(
-                modifier = Modifier
-                    .background(Color.White)
-                    .fillMaxHeight(0.2f)
-                    .fillMaxWidth(),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    text = "Welcome Homie!",
-                    fontFamily = playFairDisplayFontFamily,
-                    style = Typography.titleSmall,
-                    color = lightYellow,
-                )
-            }
+            WelcomeHomieTab()
         }
         Row {
             BoxLayout(
@@ -211,6 +174,7 @@ fun BoxLayout( value: String, onValueChange: (String) -> Unit, labelText: String
     }
 }
 
+@Preview
 @Composable
 fun RegisterPreview () {
     Register(navigateRoomLogin = {}, navigateFrontPage = {})
