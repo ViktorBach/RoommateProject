@@ -19,6 +19,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.roommateproject.RoomLogin.Components.EnterHouseholdNameTab
+import com.example.roommateproject.RoomLogin.Components.EnterPasswordInput
+import com.example.roommateproject.RoomLogin.Components.EnterUserNameInput
+import com.example.roommateproject.RoomLogin.Components.LoginButton
+import com.example.roommateproject.RoomLogin.Components.RegisterButton
 import com.example.roommateproject.RoomLogin.Components.SetUpYourHomeTab
 import com.example.roommateproject.SharedComponents.Header
 import com.example.roommateproject.ui.theme.Typography
@@ -45,123 +50,17 @@ fun RoomLogin (navigateFrontPage: () -> Unit) {
             SetUpYourHomeTab()
         }
         Row {
-            Box(
-                modifier = Modifier
-                    .background(Color.White)
-                    .fillMaxHeight(0.17f)
-                    .fillMaxWidth(),
-                contentAlignment = Alignment.Center
-            ) {
-                OutlinedTextField(
-                    value = roomViewModel.houseName,
-                    onValueChange = {
-                        roomViewModel.onHouseNameChange(it)},
-                    label = {
-                        Text(
-                            "Enter household name",
-                            fontFamily = jaldiFontFamily,
-                            style = Typography.labelMedium,
-                            color = lightBlue
-                        )},
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp)
-                    )
-                }
+            EnterHouseholdNameTab {}
             }
         Row {
-            Box(
-                modifier = Modifier
-                    .background(Color.White)
-                    .fillMaxHeight(0.18f)
-                    .fillMaxWidth(),
-                contentAlignment = Alignment.Center
-            ) {
-                OutlinedTextField(
-                    value = roomViewModel.password,
-                    onValueChange = {
-                        roomViewModel.onPasswordChange(it)},
-                    label = {
-                        Text(
-                            "Enter password",
-                            fontFamily = jaldiFontFamily,
-                            style = Typography.labelMedium,
-                            color = lightBlue
-                        )},
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp)
-                    )
-                }
+            EnterPasswordInput {}
             }
         Row {
-            Box(
-                modifier = Modifier
-                    .background(Color.White)
-                    .fillMaxHeight(0.23f)
-                    .fillMaxWidth(),
-                contentAlignment = Alignment.Center
-            ) {
-                OutlinedTextField(
-                    value = roomViewModel.members.joinToString(),
-                    onValueChange = {
-                        roomViewModel.onMembersChange(
-                            it.split(",").map { it.trim() })},
-                    label = {
-                        Text(
-                            "Enter members (comma-separated)",
-                            fontFamily = jaldiFontFamily,
-                            style = Typography.labelMedium,
-                            color = lightBlue
-                        )},
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp)
-                    )
-                }
+            EnterUserNameInput {}
             }
         Row {
-            Box(
-                modifier = Modifier
-                    .background(Color.White)
-                    .fillMaxHeight(0.75f)
-                    .fillMaxWidth(0.5f),
-                contentAlignment = Alignment.Center
-            ) {
-                Button(
-                    onClick = { roomViewModel.registerNewHouse(navigateFrontPage) },
-                    colors = ButtonDefaults.buttonColors(
-                        lightYellow // Set the text color to lightYellow
-                    )
-                ) {
-                    Text(
-                        text = "Register",
-                        fontFamily = jaldiFontFamily,
-                        style = Typography.labelSmall,
-                        color = green
-                    )}
-                } // Add this closing parenthesis here
-            Box(
-                modifier = Modifier
-                    .background(Color.White)
-                    .fillMaxHeight(0.75f)
-                    .fillMaxWidth(1f),
-                contentAlignment = Alignment.Center
-            ) {
-                Button(
-                    onClick = { roomViewModel.houseLogin(navigateFrontPage) },
-                    colors = ButtonDefaults.buttonColors(
-                        lightYellow // Set the text color to lightYellow
-                    )
-                ) {
-                    Text(
-                        text = "Login",
-                        fontFamily = jaldiFontFamily,
-                        style = Typography.labelSmall,
-                        color = green
-                    )
-                }
-            }
+            RegisterButton { roomViewModel.registerNewHouse(navigateFrontPage) }
+            LoginButton { roomViewModel.houseLogin(navigateFrontPage) }
         }
     }
 }
