@@ -1,283 +1,73 @@
 package com.example.roommateproject.FrontPage
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.AlertDialogDefaults.shape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.roommateproject.R
-import com.example.roommateproject.ui.theme.Neutral2
-import com.example.roommateproject.ui.theme.Neutral3
+import com.example.roommateproject.FrontPage.Components.AddToListButton
+import com.example.roommateproject.FrontPage.Components.CalendarTab
+import com.example.roommateproject.FrontPage.Components.ChatButton
+import com.example.roommateproject.FrontPage.Components.EarlyMorningButton
+import com.example.roommateproject.FrontPage.Components.GuestVisitButton
+import com.example.roommateproject.SharedComponents.Header
+import com.example.roommateproject.FrontPage.Components.HomeButton
+import com.example.roommateproject.FrontPage.Components.LogoutButton
+import com.example.roommateproject.FrontPage.Components.NewsTab
+import com.example.roommateproject.FrontPage.Components.SleepingButton
+import com.example.roommateproject.FrontPage.Components.WorkingLateButton
 import com.example.roommateproject.ui.theme.Typography
-import com.example.roommateproject.ui.theme.green
 import com.example.roommateproject.ui.theme.jaldiBoldFontFamily
-import com.example.roommateproject.ui.theme.jaldiFontFamily
-import com.example.roommateproject.ui.theme.karantinaFontFamily
-import com.example.roommateproject.ui.theme.katibehFontFamily
-import com.example.roommateproject.ui.theme.lightBlue
-import com.example.roommateproject.ui.theme.lightGrey
 import com.example.roommateproject.ui.theme.lightYellow
-import com.example.roommateproject.ui.theme.orange
 import com.example.roommateproject.ui.theme.white
+
 
 @Composable
 fun FrontPage(navigateRegisterPage: () -> Unit, function: () -> Unit) {
     val frontPageViewModel = viewModel<FrontPageViewModel>()
 
     Column {
-        Spacer(modifier = Modifier.width(16.dp))
+        Header() // Calls the Header file from Components
         Row {
-            Box(
-                modifier = Modifier
-                    .background(Color.White)
-                    .fillMaxHeight(0.1f),
-                contentAlignment = Alignment.CenterStart
-            ) {
-                Text(
-                    text = "H",
-                    fontFamily = karantinaFontFamily,
-                    style = Typography.titleLarge,
-                    color = orange,
-                    modifier = Modifier.padding(start = 8.dp)
-                )
-            }
-            Box(
-                modifier = Modifier
-                    .background(Color.White)
-                    .fillMaxHeight(0.13f),
-                contentAlignment = Alignment.CenterStart
-            ) {
-                Text(
-                    text = "omie",
-                    fontFamily = katibehFontFamily,
-                    style = Typography.titleMedium,
-                    color = orange
-                )
-            }
+            HomeButton() // Calls the HomeButton file from Components
+            AddToListButton() // Calls the AddToListButton file from Components
+            ChatButton() // Calls the ChatButton file from Components
         }
-        Row {
-            Box(
-                modifier = Modifier
-                    .background(Color.White)
-                    .fillMaxHeight(0.2f)
-                    .fillMaxWidth(0.33f),
-                contentAlignment = Alignment.Center
-            ) {
-                Button(
-                    onClick = {}, //insert notification that user is home
-                    colors = ButtonDefaults.buttonColors(
-                        lightYellow
-                    ), modifier = Modifier.padding(start = 10.dp)
-                ) {
-                    Text(
-                        text = "I'm home",
-                        fontFamily = jaldiBoldFontFamily,
-                        style = Typography.labelSmall,
-                        color = white
-                    )
-                }
-            }
-            Box(
-                modifier = Modifier
-                    .background(Color.White)
-                    .fillMaxHeight(0.2f)
-                    .fillMaxWidth(0.63f),
-                contentAlignment = Alignment.Center
-            ) {
-                Button(
-                    onClick = {}, //Insert pop-up with grocery list
-                    colors = ButtonDefaults.buttonColors(
-                        lightYellow // Set the text color to lightYellow
-                    )
-                ) {
-                    Text(
-                        text = "Add to list",
-                        fontFamily = jaldiBoldFontFamily,
-                        style = Typography.labelSmall,
-                        color = white
 
-                    )
-                }
-            }
-            Box(
-                modifier = Modifier
-                    .background(Color.White)
-                    .fillMaxHeight(0.2f)
-                    .fillMaxWidth(0.99f),
-                contentAlignment = Alignment.Center
-            ) {
-                Button(
-                    onClick = {}, //Insert pop-up with chat
-                    colors = ButtonDefaults.buttonColors(
-                        lightYellow // Set the text color to lightYellow
-                    ), modifier = Modifier.padding(end = 8.dp)
-                ) {
-                    Text(
-                        text = "Chat",
-                        fontFamily = jaldiBoldFontFamily,
-                        style = Typography.labelSmall,
-                        color = white
-                    )
-                }
-            }
-        }
         Row {
-            Box(
-                modifier = Modifier
-                    .fillMaxHeight(0.2f)
-                    .fillMaxWidth(),
-                contentAlignment = Alignment.Center
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.news),
-                    contentDescription = null, // Provide proper content description
-                    modifier = Modifier
-                        .height(180.dp) // Adjust the height of the Image
-                )
-            }
+            NewsTab()
         }
         Spacer(modifier = Modifier.height(16.dp))
 
         Row {
-            Box(
-                modifier = Modifier
-                    .fillMaxHeight(0.35f)
-                    .fillMaxWidth(),
-                contentAlignment = Alignment.Center
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.calender),
-                    contentDescription = null, // Provide proper content description
-                    modifier = Modifier
-                        .fillMaxSize()
-                )
-            }
+            CalendarTab() // Calls the CalendarTab file from Components
         }
         Row {
-            Box(
-                modifier = Modifier
-                    .background(Color.White)
-                    .fillMaxHeight(0.3f)
-                    .fillMaxWidth(0.5f),
-                contentAlignment = Alignment.Center
-            ) {
-                Button(
-                    onClick = {}, //insert notification that user is going to bed
-                    colors = ButtonDefaults.buttonColors(
-                        lightYellow
-                    ), modifier = Modifier.padding(start = 25.dp)
-                ) {
-                    Text(
-                        text = "I'm sleeping ",
-                        fontFamily = jaldiBoldFontFamily,
-                        style = Typography.labelSmall,
-                        color = white
-                    )
-                }
-            }
-            Box(
-                modifier = Modifier
-                    .background(Color.White)
-                    .fillMaxHeight(0.3f)
-                    .fillMaxWidth(1f),
-                contentAlignment = Alignment.Center
-            ) {
-                Button(
-                    onClick = {}, //Insert notification that user is going to be home late
-                    colors = ButtonDefaults.buttonColors(
-                        lightYellow // Set the text color to lightYellow
-                    ), modifier = Modifier.padding(end = 25.dp)
-                ) {
-                    Text(
-                        text = " Working late ",
-                        fontFamily = jaldiBoldFontFamily,
-                        style = Typography.labelSmall,
-                        color = white
-                    )
-                }
-            }
+            SleepingButton() // Calls the SleepingButton file from Components
+            WorkingLateButton() // Calls the WorkingLateButton file from Components
         }
         Row {
-            Box(
-                modifier = Modifier
-                    .background(Color.White)
-                    .fillMaxHeight(0.25f)
-                    .fillMaxWidth(0.5f),
-                contentAlignment = Alignment.Center
-            ) {
-                Button(
-                    onClick = {}, //insert notification that user is having guests over
-                    colors = ButtonDefaults.buttonColors(
-                        lightYellow
-                    ), modifier = Modifier.padding(start = 25.dp)
-                ) {
-                    Text(
-                        text = "  Guest visit  ",
-                        fontFamily = jaldiBoldFontFamily,
-                        style = Typography.labelSmall,
-                        color = white
-                    )
-                }
-            }
-            Box(
-                modifier = Modifier
-                    .background(Color.White)
-                    .fillMaxHeight(0.25f)
-                    .fillMaxWidth(1f),
-                contentAlignment = Alignment.Center
-            ) {
-                Button(
-                    onClick = {}, //Insert notification that user is getting up early in the morning
-                    colors = ButtonDefaults.buttonColors(
-                        lightYellow // Set the text color to lightYellow
-                    ), modifier = Modifier.padding(end = 20.dp)
-                ) {
-                    Text(
-                        text = "Early morning",
-                        fontFamily = jaldiBoldFontFamily,
-                        style = Typography.labelSmall,
-                        color = white
-                    )
-                }
-            }
+            GuestVisitButton() // Calls the GuestVisitButton file from Components
+            EarlyMorningButton() // Calls the EarlyMorning file from Components
         }
         Spacer(modifier = Modifier.height(16.dp))
 
         Row {
-            Box(
-                modifier = Modifier
-                    .background(Color.White)
-                    .fillMaxHeight(0.5f)
-                    .fillMaxWidth(1f),
-                contentAlignment = Alignment.Center
-            ) {
-                Button(onClick = { frontPageViewModel.logOut(navigateRegisterPage) }) {
-                    Text(text = "Logout")
-                }
-            }
+            LogoutButton(navigateRegisterPage = navigateRegisterPage) {
+            }  // Calls the LogoutButton file from Components and navigates the user when clicked
         }
     }
 }
