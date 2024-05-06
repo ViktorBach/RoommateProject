@@ -12,14 +12,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.example.roommateproject.ui.theme.Typography
 import com.example.roommateproject.ui.theme.jaldiBoldFontFamily
 import com.example.roommateproject.ui.theme.lightYellow
 import com.example.roommateproject.ui.theme.white
+import sendNotification
 
 @Composable
 fun SleepingButton() {
+    val context = LocalContext.current
     Box(
         modifier = Modifier
             .background(Color.White)
@@ -28,7 +31,9 @@ fun SleepingButton() {
         contentAlignment = Alignment.Center
     ) {
         Button(
-            onClick = {}, //insert notification that user is going to bed
+            onClick = {
+                sendNotification("User is sleeping", context)
+            }, //insert notification that user is going to bed
             colors = ButtonDefaults.buttonColors(
                 lightYellow
             ), modifier = Modifier.padding(start = 25.dp)
