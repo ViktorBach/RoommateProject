@@ -1,5 +1,3 @@
-package com.example.roommateproject.FrontPage.Components
-
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -13,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.platform.LocalContext
 import com.example.roommateproject.ui.theme.Typography
 import com.example.roommateproject.ui.theme.jaldiBoldFontFamily
 import com.example.roommateproject.ui.theme.lightYellow
@@ -20,6 +19,8 @@ import com.example.roommateproject.ui.theme.white
 
 @Composable
 fun HomeButton() {
+    val context = LocalContext.current
+
     Box(
         modifier = Modifier
             .background(Color.White)
@@ -28,7 +29,9 @@ fun HomeButton() {
         contentAlignment = Alignment.Center
     ) {
         Button(
-            onClick = {}, //insert notification that user is home
+            onClick = {
+                sendNotification("User is home", context)
+            },
             colors = ButtonDefaults.buttonColors(
                 lightYellow
             ), modifier = Modifier.padding(start = 10.dp)
