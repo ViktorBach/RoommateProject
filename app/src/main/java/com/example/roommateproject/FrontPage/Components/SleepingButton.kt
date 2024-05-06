@@ -32,7 +32,7 @@ fun SleepingButton() {
     ) {
         Button(
             onClick = {
-                sendNotification("User is sleeping", context)
+                sendNotification("User is going to bed", context)
             }, //insert notification that user is going to bed
             colors = ButtonDefaults.buttonColors(
                 lightYellow
