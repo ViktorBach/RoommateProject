@@ -21,6 +21,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.roommateproject.FrontPage.Components.AddToListButton
 import com.example.roommateproject.FrontPage.Components.CalendarTab
 import com.example.roommateproject.FrontPage.Components.ChatButton
+import com.example.roommateproject.FrontPage.Components.DropDownCalendar
 import com.example.roommateproject.FrontPage.Components.EarlyMorningButton
 import com.example.roommateproject.FrontPage.Components.GuestVisitButton
 import com.example.roommateproject.SharedComponents.Header
@@ -33,6 +34,7 @@ import com.example.roommateproject.ui.theme.Typography
 import com.example.roommateproject.ui.theme.jaldiBoldFontFamily
 import com.example.roommateproject.ui.theme.lightYellow
 import com.example.roommateproject.ui.theme.white
+import java.util.Calendar
 
 
 @Composable
@@ -53,7 +55,7 @@ fun FrontPage(navigateRegisterPage: () -> Unit, function: () -> Unit) {
         Spacer(modifier = Modifier.height(16.dp))
 
         Row {
-            CalendarTab() // Calls the CalendarTab file from Components
+            DropDownCalendar() // Calls the CalendarTab file from Components
         }
         Row {
             SleepingButton() // Calls the SleepingButton file from Components

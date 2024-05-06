@@ -28,6 +28,7 @@ public open class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     Navigation()
+
                 }
             }
         }
