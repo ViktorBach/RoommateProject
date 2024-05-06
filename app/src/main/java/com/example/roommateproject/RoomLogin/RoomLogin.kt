@@ -35,13 +35,17 @@ import com.example.roommateproject.ui.theme.lightBlue
 import com.example.roommateproject.ui.theme.lightYellow
 import com.example.roommateproject.ui.theme.orange
 import com.example.roommateproject.ui.theme.playFairDisplayFontFamily
+import com.example.roommateproject.ui.theme.white
 
 @Composable
 fun RoomLogin (navigateFrontPage: () -> Unit) {
 
     val roomViewModel = viewModel<RoomViewModel>()
 
-    Column {
+    Column (
+        modifier = Modifier
+            .background(white)
+    ){
         Spacer(modifier = Modifier.width(16.dp))
         Row {
             Header()

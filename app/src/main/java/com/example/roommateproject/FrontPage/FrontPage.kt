@@ -41,7 +41,10 @@ import java.util.Calendar
 fun FrontPage(navigateRegisterPage: () -> Unit, function: () -> Unit) {
     val frontPageViewModel = viewModel<FrontPageViewModel>()
 
-    Column {
+    Column (
+        modifier = Modifier
+            .background(white)
+    ){
         Header() // Calls the Header file from Components
         Row {
             HomeButton() // Calls the HomeButton file from Components

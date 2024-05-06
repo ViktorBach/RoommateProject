@@ -33,13 +33,13 @@ fun Header() {
                 fontFamily = karantinaFontFamily,
                 style = Typography.titleLarge,
                 color = orange,
-                modifier = Modifier.padding(start = 8.dp)
+                modifier = Modifier.padding(start = 2.dp)
             )
         }
         Box(
             modifier = Modifier
                 .background(Color.White)
-                .fillMaxHeight(0.13f),
+                .fillMaxHeight(0.165f),
             contentAlignment = Alignment.CenterStart
         ) {
             Text(

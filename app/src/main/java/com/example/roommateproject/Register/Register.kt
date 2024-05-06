@@ -48,6 +48,7 @@ import com.example.roommateproject.ui.theme.lightGrey
 import com.example.roommateproject.ui.theme.lightYellow
 import com.example.roommateproject.ui.theme.orange
 import com.example.roommateproject.ui.theme.playFairDisplayFontFamily
+import com.example.roommateproject.ui.theme.white
 
 
 @Composable
@@ -55,7 +56,10 @@ fun Register (navigateRoomLogin: () -> Unit, navigateFrontPage: () -> Unit) {
 
     val registerViewModel = viewModel<RegisterViewModel>()
 
-    Column {
+    Column (
+        modifier = Modifier
+            .background(white)
+    ){
         Spacer(modifier = Modifier.width(16.dp))
         Row {
             Header()
