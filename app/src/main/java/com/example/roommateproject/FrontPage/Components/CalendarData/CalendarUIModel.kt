@@ -8,6 +8,8 @@ data class CalendarUiModel(
     val visibleDates: List<Date> // the dates shown on the screen
 ) {
 
+
+    val isExpanded: Boolean = true
     val startDate: Date = visibleDates.first() // the first of the visible dates
     val endDate: Date = visibleDates.last() // the last of the visible dates
 

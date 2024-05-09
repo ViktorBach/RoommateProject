@@ -19,9 +19,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.roommateproject.FrontPage.Components.AddToListButton
+import com.example.roommateproject.FrontPage.Components.CalendarApp
 import com.example.roommateproject.FrontPage.Components.CalendarTab
 import com.example.roommateproject.FrontPage.Components.ChatButton
-import com.example.roommateproject.FrontPage.Components.DropDownCalendar
 import com.example.roommateproject.FrontPage.Components.EarlyMorningButton
 import com.example.roommateproject.FrontPage.Components.GuestVisitButton
 import com.example.roommateproject.SharedComponents.Header
@@ -58,7 +58,7 @@ fun FrontPage(navigateRegisterPage: () -> Unit, function: () -> Unit) {
         Spacer(modifier = Modifier.height(16.dp))
 
         Row {
-            DropDownCalendar() // Calls the CalendarTab file from Components
+            CalendarApp() // Calls the CalendarTab file from Components
         }
         Row {
             SleepingButton() // Calls the SleepingButton file from Components

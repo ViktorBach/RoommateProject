@@ -3,28 +3,33 @@ package com.example.roommateproject.FrontPage.Components.CalendarData
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit
+import java.time.temporal.WeekFields
 import java.util.stream.Stream
 
 class CalendarDataSource {
 
     val today: LocalDate
-        get() {
-            return LocalDate.now()
-        }
+        get() = LocalDate.now()
 
     fun getData(startDate: LocalDate = today, lastSelectedDate: LocalDate): CalendarUiModel {
-        val firstDayOfWeek = startDate.with(DayOfWeek.MONDAY)
-        val endDayOfWeek = firstDayOfWeek.plusDays(7)
-        val visibleDates = getDatesBetween(firstDayOfWeek, endDayOfWeek)
+        val firstDayOfMonth = startDate.withDayOfMonth(1)
+        val lastDayOfMonth = firstDayOfMonth.plusMonths(1).minusDays(1)
+        val visibleDates = getDatesBetween(firstDayOfMonth, lastDayOfMonth)
+        return toUiModel(visibleDates, lastSelectedDate)
+    }
+
+    fun getMonthData(startDate: LocalDate = today, lastSelectedDate: LocalDate): CalendarUiModel {
+        val firstDayOfMonth = startDate.withDayOfMonth(1)
+        val lastDayOfMonth = firstDayOfMonth.plusMonths(1).minusDays(1)
+        val visibleDates = getDatesBetween(firstDayOfMonth, lastDayOfMonth)
         return toUiModel(visibleDates, lastSelectedDate)
     }
 
     private fun getDatesBetween(startDate: LocalDate, endDate: LocalDate): List<LocalDate> {
-        val numOfDays = ChronoUnit.DAYS.between(startDate, endDate)
         return generateSequence(startDate) { date ->
-            date.plusDays(/* daysToAdd */ 1)
+            date.plusDays(1)
         }
-            .take((numOfDays + 1).toInt())
+            .takeWhile { it.isBefore(endDate) || it.isEqual(endDate) }
             .toList()
     }
 
@@ -42,5 +47,4 @@ class CalendarDataSource {
         isToday = date.isEqual(today),
         date = date,
     )
-
 }
