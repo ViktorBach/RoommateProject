@@ -26,7 +26,6 @@ import com.example.roommateproject.FrontPage.Components.ChatButton
 import com.example.roommateproject.FrontPage.Components.EarlyMorningButton
 import com.example.roommateproject.FrontPage.Components.GuestVisitButton
 import com.example.roommateproject.SharedComponents.Header
-import com.example.roommateproject.FrontPage.Components.HomeButton
 import com.example.roommateproject.FrontPage.Components.LogoutButton
 import com.example.roommateproject.FrontPage.Components.NewsTab
 import com.example.roommateproject.FrontPage.Components.SleepingButton
