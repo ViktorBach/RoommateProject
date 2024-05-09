@@ -1,5 +1,6 @@
 package com.example.roommateproject.FrontPage
 
+import HomeButton
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -48,7 +49,7 @@ fun FrontPage(navigateRegisterPage: () -> Unit, function: () -> Unit) {
         Header() // Calls the Header file from Components
         Row {
             HomeButton() // Calls the HomeButton file from Components
-            AddToListButton() // Calls the AddToListButton file from Components
+            AddToListButton{} // Calls the AddToListButton file from Components
             ChatButton() // Calls the ChatButton file from Components
         }
 
