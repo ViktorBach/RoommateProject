@@ -12,14 +12,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.example.roommateproject.ui.theme.Typography
 import com.example.roommateproject.ui.theme.jaldiBoldFontFamily
 import com.example.roommateproject.ui.theme.lightYellow
 import com.example.roommateproject.ui.theme.white
+import sendNotification
 
 @Composable
 fun EarlyMorningButton() {
+    val context = LocalContext.current
+
     Box(
         modifier = Modifier
             .background(Color.White)
@@ -28,7 +32,9 @@ fun EarlyMorningButton() {
         contentAlignment = Alignment.Center
     ) {
         Button(
-            onClick = {}, //Insert notification that user is getting up early in the morning
+            onClick = {
+                sendNotification("User is getting up early in the morning", context)
+            }, //Insert notification that user is getting up early in the morning
             colors = ButtonDefaults.buttonColors(
                 lightYellow // Set the text color to lightYellow
             ), modifier = Modifier.padding(end = 20.dp)
