@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -33,6 +34,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import com.example.roommateproject.ui.theme.boxLayerGrey
+import com.google.firebase.annotations.concurrent.Background
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -44,13 +46,13 @@ fun CalenderTab() {
     // State to control the visibility of the event adding interface
     var isAddingEvent by remember { mutableStateOf(false) }
 
-    Scaffold(
+    Box(
         modifier = Modifier
-            .fillMaxSize(0.87f)
-            .padding(start = 60.dp)
-            .padding(bottom = 30.dp)
-            .clip(shape = RoundedCornerShape(20.dp)),
-        containerColor = boxLayerGrey,
+            .fillMaxHeight(0.6f)
+            .fillMaxWidth(0.9f)
+            .padding(start = 35.dp)
+            .clip(shape = RoundedCornerShape(20.dp))
+            .background(color = boxLayerGrey)
     ) {
         Column(
             modifier = Modifier
@@ -94,7 +96,7 @@ fun AddEvent(selectedDate: String, onClose: () -> Unit) {
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White)
-            .padding(16.dp),
+            .padding(5.dp),
         contentAlignment = Alignment.Center
     ) {
         Column(

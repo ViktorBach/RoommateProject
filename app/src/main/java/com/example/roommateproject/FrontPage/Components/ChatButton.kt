@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
@@ -23,15 +24,15 @@ fun ChatButton() {
     Box(
         modifier = Modifier
             .background(Color.White)
-            .fillMaxHeight(0.2f)
-            .fillMaxWidth(0.99f),
+            .fillMaxWidth(0.99f)
+            .wrapContentHeight(),
         contentAlignment = Alignment.TopCenter
     ) {
         Button(
             onClick = {}, //Insert pop-up with chat
             colors = ButtonDefaults.buttonColors(
                 lightYellow // Set the text color to lightYellow
-            ), modifier = Modifier.padding(end = 8.dp)
+            ), modifier = Modifier.padding(end = 10.dp)
         ) {
             Text(
                 text = "Chat",

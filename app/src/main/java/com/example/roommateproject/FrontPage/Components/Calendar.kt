@@ -98,7 +98,7 @@ fun CalendarApp(modifier: Modifier = Modifier) {
     }
     Box(modifier = Modifier
         .fillMaxWidth(0.88f)
-        .fillMaxHeight(0.65f)
+        .fillMaxHeight(0.6f)
         .padding(start = 50.dp)
         .clip(RoundedCornerShape(10)),
         contentAlignment = Alignment.TopCenter
@@ -172,7 +172,7 @@ fun Header(
     onNextClickListener: (LocalDate) -> Unit
 ) {
     Row(modifier = Modifier
-        .fillMaxWidth(0.9f)
+        .fillMaxWidth(0.5f)
     ) {
         Text(
             text = if (data.selectedDate.isToday) {
@@ -202,7 +202,7 @@ fun Header(
     Row(modifier = Modifier
         .background(Color.Gray)
         .fillMaxWidth(0.96f)
-        .fillMaxHeight(0.008f)
+        .fillMaxHeight(0.005f)
     ) {
 
     }
@@ -213,9 +213,9 @@ fun Header(
 @Composable
 fun Content(data: CalendarUiModel, onDateClickListener: (CalendarUiModel.Date) -> Unit) {
     Column(modifier = Modifier
-        .fillMaxHeight()
+        .fillMaxHeight(0.1f)
         .fillMaxWidth(0.95f)
-        .padding(start = 16.dp, top = 10.dp)
+        .padding(start = 16.dp, top = 5.dp)
     ){
         if (data.isExpanded) {
             // Show the month as a grid layout

@@ -45,7 +45,7 @@ fun NewsTab() {
             modifier = Modifier
                 .background(boxLayerGrey)
                 .fillMaxHeight(0.25f)
-                .fillMaxWidth(0.89f)
+                .fillMaxWidth(0.85f)
                 .clip(shape = RoundedCornerShape(52.dp)),
             contentAlignment = Alignment.Center,
         ) {

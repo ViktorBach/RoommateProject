@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
@@ -27,8 +28,8 @@ fun GuestVisitButton() {
     Box(
         modifier = Modifier
             .background(Color.White)
-            .fillMaxHeight(0.25f)
-            .fillMaxWidth(0.5f),
+            .fillMaxWidth(0.5f)
+            .wrapContentHeight(),
         contentAlignment = Alignment.Center
     ) {
         Button(
@@ -43,7 +44,7 @@ fun GuestVisitButton() {
                 text = "  Guest visit  ",
                 fontFamily = jaldiBoldFontFamily,
                 style = Typography.labelSmall,
-                color = white
+                color = white,
             )
         }
     }

@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
@@ -29,8 +30,8 @@ fun SleepingButton() {
     Box(
         modifier = Modifier
             .background(Color.White)
-            .fillMaxHeight(0.3f)
-            .fillMaxWidth(0.5f),
+            .fillMaxWidth(0.5f)
+            .wrapContentHeight(),
         contentAlignment = Alignment.Center
     ) {
         Button(
