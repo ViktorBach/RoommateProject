@@ -23,7 +23,7 @@ fun AddToListButton() {
             .background(Color.White)
             .fillMaxHeight(0.2f)
             .fillMaxWidth(0.63f),
-        contentAlignment = Alignment.Center
+        contentAlignment = Alignment.TopCenter
     ) {
         Button(
             onClick = {}, //Insert pop-up with grocery list

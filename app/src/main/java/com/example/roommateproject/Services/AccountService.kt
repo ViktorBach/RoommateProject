@@ -4,7 +4,16 @@ package com.example.roommateproject.Services
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.suspendCoroutine
 
 class AccountService {
 
@@ -12,6 +21,50 @@ class AccountService {
     private val db = FirebaseFirestore.getInstance()
     private val usersCollection = db.collection("users")
     private val homesCollection = db.collection("homes")
+    private val eventsCollection = db.collection("events")
+
+    companion object  {
+        var currentEvents: List<EventData> = listOf()
+        var currentUser = ""
+        var currentUserName = ""
+        var currentHomeId = "udl6GrFbM5eMcgJc027j"
+    }
+
+    public enum class EventType(val eventText: String) {
+        I_AM_HOME("I'am home"),
+        I_AM_SLEEPING("I'am sleeping"),
+        I_AM_WORKING_LATE("I'm working late")
+    }
+
+    data class EventData (
+        var eventType: EventType,
+        var timeStamp: LocalDateTime
+    )
+
+    fun addEvent(eventType: EventType) {
+        val eventData = hashMapOf(
+            "eventName" to eventType,
+            "homeId" to currentHomeId,
+            "timeStamp" to LocalDateTime.now(),
+            "userId" to currentUser
+        )
+
+        eventsCollection.add(eventData) // Add new event to Firestore
+
+    }
+
+     suspend fun getEvents() {
+         println("AccountService.currentHomeId:  ${AccountService.currentHomeId}")
+        AccountService.currentEvents = eventsCollection.whereEqualTo("homeId", AccountService.currentHomeId).get().await().map { doc -> // map firebase data to internal event data
+                println("DOC: " + doc)
+                val timestamp = doc.data.get("timestamp")
+                EventData(
+                    EventType.valueOf(doc.data.get("eventName").toString()),
+                    LocalDateTime.now() //TODO - parse timestamp from firebase
+                )
+            }.toList();
+            println("DOC data: " + AccountService.currentEvents)
+    }
 
     fun authenticate(email: String, password: String, username: String, onResult: (Boolean, String?) -> Unit) {
         Firebase.auth.createUserWithEmailAndPassword(email, password)
@@ -36,7 +89,7 @@ class AccountService {
             }
     }
 
-    fun login(email: String, password: String, onResult: (Boolean, String?) -> Unit) {
+     suspend fun login(email: String, password: String, onResult: (Boolean, String?) -> Unit) {
         // Attempt to sign in the user
         auth.signInWithEmailAndPassword(email, password)
             .addOnSuccessListener { authResult ->
@@ -45,13 +98,17 @@ class AccountService {
                 // Retrieve the username associated with the logged-in user
                 usersCollection.document(user!!.uid).get()
                     .addOnSuccessListener { document ->
-                        val username = document.getString("username")
+                        val username = document.getString("username").toString()
+                        AccountService.currentUserName = document.getString("username").toString()
+                        AccountService.currentUser = user.uid
+                        AccountService.currentHomeId = document.getString("homeId").toString()
                         // Pass the username along with the login result
                         onResult(true, username)
                     }
                     .addOnFailureListener { exception ->
                         onResult(false, exception.message)
                     }
+
             }
             .addOnFailureListener { exception ->
                 // Login failed
@@ -118,6 +175,7 @@ class AccountService {
         val userIds = mutableListOf<String>()
         var completedTasks = 0
         val totalTasks = usernames.size
+        val userDocs = mutableListOf<DocumentSnapshot>()
 
         // Iterate over the usernames and get their corresponding document IDs
         for (username in usernames) {
@@ -128,6 +186,7 @@ class AccountService {
                     } else {
                         val userDocument = querySnapshot.documents.first()
                         userIds.add(userDocument.id) // Add document ID to the list
+                        userDocs.add(userDocument)
                     }
 
                     completedTasks++
@@ -140,7 +199,10 @@ class AccountService {
                         )
 
                         homesCollection.add(homeData) // Add new household to Firestore
-                            .addOnSuccessListener {
+                            .addOnSuccessListener { newHomeDoc ->
+                                userDocs.forEach{doc ->
+                                    doc.reference.update("homeId", newHomeDoc.id)
+                                }
                                 onResult(true, null) // Household added successfully
                             }
                             .addOnFailureListener { exception ->

@@ -1,6 +1,8 @@
 package com.example.roommateproject.FrontPage
 
+import HomeButton
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -20,18 +22,19 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.roommateproject.FrontPage.Components.AddToListButton
 import com.example.roommateproject.FrontPage.Components.CalendarApp
-import com.example.roommateproject.FrontPage.Components.CalendarTab
+import com.example.roommateproject.FrontPage.Components.CalenderTab
 import com.example.roommateproject.FrontPage.Components.ChatButton
 import com.example.roommateproject.FrontPage.Components.EarlyMorningButton
 import com.example.roommateproject.FrontPage.Components.GuestVisitButton
 import com.example.roommateproject.SharedComponents.Header
-import com.example.roommateproject.FrontPage.Components.HomeButton
 import com.example.roommateproject.FrontPage.Components.LogoutButton
 import com.example.roommateproject.FrontPage.Components.NewsTab
 import com.example.roommateproject.FrontPage.Components.SleepingButton
 import com.example.roommateproject.FrontPage.Components.WorkingLateButton
 import com.example.roommateproject.ui.theme.Typography
+import com.example.roommateproject.ui.theme.earthyBrown
 import com.example.roommateproject.ui.theme.jaldiBoldFontFamily
+import com.example.roommateproject.ui.theme.jaldiFontFamily
 import com.example.roommateproject.ui.theme.lightYellow
 import com.example.roommateproject.ui.theme.white
 import java.util.Calendar
@@ -46,19 +49,20 @@ fun FrontPage(navigateRegisterPage: () -> Unit, function: () -> Unit) {
             .background(white)
     ){
         Header() // Calls the Header file from Components
-        Row {
+        Row{
             HomeButton() // Calls the HomeButton file from Components
             AddToListButton() // Calls the AddToListButton file from Components
             ChatButton() // Calls the ChatButton file from Components
         }
-
-        Row {
-            NewsTab() // Calls the NewsTab file from Components
+        Row(modifier = Modifier
+            .align(Alignment.CenterHorizontally),
+        ) {
+                NewsTab() // Calls the NewsTab file from Components
         }
         Spacer(modifier = Modifier.height(16.dp))
 
         Row {
-            CalendarApp() // Calls the CalendarTab file from Components
+            CalenderTab() // Calls the CalendarTab file from Components
         }
         Row {
             SleepingButton() // Calls the SleepingButton file from Components

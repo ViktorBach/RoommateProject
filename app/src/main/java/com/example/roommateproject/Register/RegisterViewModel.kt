@@ -4,7 +4,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.roommateproject.Services.AccountService
+import kotlinx.coroutines.launch
 
 class RegisterViewModel: ViewModel() {
     private val accountService: AccountService = AccountService();
@@ -42,13 +44,16 @@ class RegisterViewModel: ViewModel() {
     }
 
     fun loginWithUser(navigateFrontPage: () -> Unit) {
-        accountService.login(email, password) { success, errorMessage ->
-            if (success as Boolean) {
-                println("Login successful!!!!")
-                navigateFrontPage() // Navigates user to the frontpage screen
-            } else {
-                println("Login failed: $errorMessage") // Login failed
+        viewModelScope.launch {
+            accountService.login(email, password) { success, errorMessage ->
+                if (success as Boolean) {
+                    println("Login successful!!!!")
+                    navigateFrontPage() // Navigates user to the frontpage screen
+                } else {
+                    println("Login failed: $errorMessage") // Login failed
+                }
             }
+            accountService.getEvents()
         }
     }
 }

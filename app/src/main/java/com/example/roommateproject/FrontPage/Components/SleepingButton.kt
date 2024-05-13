@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import com.example.roommateproject.Services.AccountService
 import com.example.roommateproject.ui.theme.Typography
 import com.example.roommateproject.ui.theme.jaldiBoldFontFamily
 import com.example.roommateproject.ui.theme.lightYellow
@@ -22,6 +23,8 @@ import sendNotification
 
 @Composable
 fun SleepingButton() {
+    val accountService: AccountService = AccountService();
+
     val context = LocalContext.current
     Box(
         modifier = Modifier
@@ -33,6 +36,7 @@ fun SleepingButton() {
         Button(
             onClick = {
                 sendNotification("User is going to bed", context)
+                accountService.addEvent(AccountService.EventType.I_AM_SLEEPING)
             }, //insert notification that user is going to bed
             colors = ButtonDefaults.buttonColors(
                 lightYellow

@@ -20,8 +20,7 @@ import com.example.roommateproject.ui.theme.Typography
 
 @Composable
 fun Header() {
-    Spacer(modifier = Modifier.width(16.dp))
-    Row {
+    Row{
         Box(
             modifier = Modifier
                 .background(Color.White)

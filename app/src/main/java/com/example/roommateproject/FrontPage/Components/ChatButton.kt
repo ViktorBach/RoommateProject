@@ -25,7 +25,7 @@ fun ChatButton() {
             .background(Color.White)
             .fillMaxHeight(0.2f)
             .fillMaxWidth(0.99f),
-        contentAlignment = Alignment.Center
+        contentAlignment = Alignment.TopCenter
     ) {
         Button(
             onClick = {}, //Insert pop-up with chat

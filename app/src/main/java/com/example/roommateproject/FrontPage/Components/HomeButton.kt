@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.platform.LocalContext
+import com.example.roommateproject.Services.AccountService
 import com.example.roommateproject.ui.theme.Typography
 import com.example.roommateproject.ui.theme.jaldiBoldFontFamily
 import com.example.roommateproject.ui.theme.lightYellow
@@ -19,6 +20,8 @@ import com.example.roommateproject.ui.theme.white
 
 @Composable
 fun HomeButton() {
+    val accountService: AccountService = AccountService();
+
     val context = LocalContext.current
 
     Box(
@@ -26,11 +29,14 @@ fun HomeButton() {
             .background(Color.White)
             .fillMaxHeight(0.2f)
             .fillMaxWidth(0.33f),
-        contentAlignment = Alignment.Center
+        contentAlignment = Alignment.TopCenter
     ) {
         Button(
             onClick = {
                 sendNotification("User is home", context)
+
+                accountService.addEvent(AccountService.EventType.I_AM_HOME)
+
             },
             colors = ButtonDefaults.buttonColors(
                 lightYellow
@@ -45,3 +51,5 @@ fun HomeButton() {
         }
     }
 }
+
+

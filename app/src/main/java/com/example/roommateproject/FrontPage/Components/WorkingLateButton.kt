@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import com.example.roommateproject.Services.AccountService
 import com.example.roommateproject.ui.theme.Typography
 import com.example.roommateproject.ui.theme.jaldiBoldFontFamily
 import com.example.roommateproject.ui.theme.lightYellow
@@ -22,6 +23,8 @@ import sendNotification
 
 @Composable
 fun WorkingLateButton() {
+    val accountService: AccountService = AccountService();
+
     val context = LocalContext.current
 
     Box(
@@ -34,6 +37,7 @@ fun WorkingLateButton() {
         Button(
             onClick = {
                 sendNotification("User is going to be home late", context)
+                accountService.addEvent(AccountService.EventType.I_AM_WORKING_LATE)
             }, //Insert notification that user is going to be home late
             colors = ButtonDefaults.buttonColors(
                 lightYellow // Set the text color to lightYellow

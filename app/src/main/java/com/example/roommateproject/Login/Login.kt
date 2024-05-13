@@ -18,7 +18,7 @@ import com.example.roommateproject.ui.theme.jaldiFontFamily
 import com.example.roommateproject.ui.theme.lightYellow
 
 @Composable
-fun Login(navigateFrontPage: () -> Unit) {
+ fun Login(navigateFrontPage: () -> Unit) {
 
     val loginViewModel = viewModel<LoginViewModel>()
 

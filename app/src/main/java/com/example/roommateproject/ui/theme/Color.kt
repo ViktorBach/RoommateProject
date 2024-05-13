@@ -88,3 +88,6 @@ val green = Color(0xFF36A324)
     // border and bow coloring
 val lightGrey = Color(0xFFF5F5F5)
 val boxLayerGrey = Color(0xFFF8F8F8)
+
+// news tap color
+val earthyBrown = Color(0xFF875F24)
