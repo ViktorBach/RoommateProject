@@ -4,20 +4,59 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.example.roommateproject.ui.theme.Typography
-import com.example.roommateproject.ui.theme.jaldiBoldFontFamily
-import com.example.roommateproject.ui.theme.lightYellow
-import com.example.roommateproject.ui.theme.white
+import androidx.compose.ui.platform.LocalContext
+import com.example.roommateproject.ui.theme.*
 
 @Composable
-fun AddToListButton() {
+fun AddToListButton(onAddItem: (String) -> Unit) {
+    var showDialog by remember { mutableStateOf(false) }
+    val context = LocalContext.current
+    var text by remember { mutableStateOf("") }  // Declare text here to use it both in TextField and Button
+
+    if (showDialog) {
+        AlertDialog(
+            onDismissRequest = {
+                showDialog = false
+            },
+            title = {
+                Text(text = "Add New Item")
+            },
+            text = {
+                TextField(
+                    value = text,
+                    onValueChange = { text = it },
+                    label = { Text("Item Name") }
+                )
+            },
+            confirmButton = {
+                Button(
+                    onClick = {
+                        if (text.isNotBlank()) {
+                            onAddItem(text)
+                            showDialog = false
+                            text = ""  // Reset text after adding
+                        }
+                    }
+                ) {
+                    Text("Add")
+                }
+            },
+            dismissButton = {
+                Button(onClick = {
+                    showDialog = false
+                    text = ""  // Reset text when dismissing
+                }) {
+                    Text("Cancel")
+                }
+            }
+        )
+    }
+
     Box(
         modifier = Modifier
             .background(Color.White)
@@ -26,9 +65,9 @@ fun AddToListButton() {
         contentAlignment = Alignment.TopCenter
     ) {
         Button(
-            onClick = {}, //Insert pop-up with grocery list
+            onClick = { showDialog = true },
             colors = ButtonDefaults.buttonColors(
-                lightYellow // Set the text color to lightYellow
+                lightYellow // Set the button background to lightYellow
             )
         ) {
             Text(
@@ -36,7 +75,6 @@ fun AddToListButton() {
                 fontFamily = jaldiBoldFontFamily,
                 style = Typography.labelSmall,
                 color = white
-
             )
         }
     }
