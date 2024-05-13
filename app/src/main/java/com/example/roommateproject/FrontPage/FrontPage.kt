@@ -51,7 +51,7 @@ fun FrontPage(navigateRegisterPage: () -> Unit, function: () -> Unit) {
         Header() // Calls the Header file from Components
         Row{
             HomeButton() // Calls the HomeButton file from Components
-            AddToListButton() // Calls the AddToListButton file from Components
+            AddToListButton {} // Calls the AddToListButton file from Components
             ChatButton() // Calls the ChatButton file from Components
         }
         Row(modifier = Modifier

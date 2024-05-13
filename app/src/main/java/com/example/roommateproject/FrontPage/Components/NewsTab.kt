@@ -1,6 +1,7 @@
 package com.example.roommateproject.FrontPage.Components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -14,6 +15,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -51,6 +53,7 @@ fun NewsTab() {
                 modifier = Modifier
                     .background(Color.White)
                     .fillMaxHeight(0.9f)
+                    .verticalScroll(ScrollState(1),true )
                     .fillMaxWidth(0.95f),
                 contentAlignment = Alignment.TopCenter
             ) {
