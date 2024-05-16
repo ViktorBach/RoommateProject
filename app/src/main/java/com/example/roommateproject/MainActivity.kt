@@ -3,19 +3,29 @@ package com.example.roommateproject
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.material3.rememberDrawerState
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
+import com.example.roommateproject.FrontPage.Components.CustomDrawer
+import com.example.roommateproject.FrontPage.FrontPage
 import com.example.roommateproject.Navigation.Navigation
 import com.example.roommateproject.ui.theme.RoommateProjectTheme
 import createNotificationChannel
+import kotlinx.coroutines.launch
 import sendNotification
 
 class MainActivity : ComponentActivity() {
@@ -25,11 +35,32 @@ class MainActivity : ComponentActivity() {
         createNotificationChannel(this)  // Call to setup notification channel
         setContent {
             RoommateProjectTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed) // Initialize drawer state
+                val coroutineScope = rememberCoroutineScope()
+
+                ModalNavigationDrawer(
+                    drawerContent = {
+                        CustomDrawer(
+                            isOpen = drawerState.isOpen,
+                            onClose = { coroutineScope.launch { drawerState.close() } },
+                            content = {
+                                // Your drawer content here
+                                Text(text = "Drawer Content")
+                            }
+                        )
+                    },
+                    drawerState = drawerState
                 ) {
-                    Navigation()
+                    Surface(
+                        modifier = Modifier.fillMaxSize(),
+                        color = MaterialTheme.colorScheme.background
+                    ) {
+                        FrontPage(
+                            drawerState = drawerState,
+                            navigateRegisterPage = {},
+                            function = {})
+                        Navigation(drawerState = drawerState)
+                    }
                 }
             }
         }

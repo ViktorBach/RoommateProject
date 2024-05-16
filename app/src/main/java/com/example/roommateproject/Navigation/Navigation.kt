@@ -1,5 +1,6 @@
 package com.example.roommateproject.Navigation
 
+import androidx.compose.material3.DrawerState
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -9,7 +10,7 @@ import com.example.roommateproject.Register.Register
 import com.example.roommateproject.RoomLogin.RoomLogin
 
 @Composable
-fun Navigation() {
+fun Navigation(drawerState: DrawerState) {
     val navController = rememberNavController()
 
     NavHost(navController = navController, startDestination = "FrontPage") {
@@ -20,7 +21,8 @@ fun Navigation() {
             RoomLogin(navigateFrontPage = { navController.navigate("FrontPage") })
         }
         composable("FrontPage"){
-            FrontPage(navigateRegisterPage = { navController.navigate("Register") }) {}
+            FrontPage(drawerState = drawerState, // Pass the drawerState parameter
+                navigateRegisterPage = { navController.navigate("Register") }) {}
         }
     }
 }
