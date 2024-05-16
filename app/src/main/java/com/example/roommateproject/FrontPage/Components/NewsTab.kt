@@ -41,8 +41,8 @@ import java.time.format.DateTimeFormatter
 
 @Composable
 fun NewsTab() {
-    val accountService: AccountService = AccountService();
 
+    val sortedEvents = AccountService.currentEvents.sortedByDescending { it.timeStamp }
 
     Box(
         modifier = Modifier
@@ -81,12 +81,13 @@ fun NewsTab() {
                         )
                     }
 
-                    val eventString = AccountService.currentEvents.joinToString("\n\n") { " ${it.eventType.eventText}      ${it.timeStamp}" }
-                    Text(text = eventString,
+                    val eventString = sortedEvents.joinToString("\n\n") { "${it.eventType.eventText}      ${it.timeStamp}" }
+                    Text(
+                        text = eventString,
                         fontFamily = jaldiFontFamily,
                         color = Color.DarkGray,
                         fontSize = 16.sp
-                        )
+                    )
                 }
             }
         }
