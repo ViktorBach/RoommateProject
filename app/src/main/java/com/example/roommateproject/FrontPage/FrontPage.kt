@@ -1,7 +1,8 @@
 package com.example.roommateproject.FrontPage
 
-import HomeButton
+import HomeToggleButton
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -103,10 +104,15 @@ fun FrontPage(
 
         Spacer(modifier = Modifier.height(25.dp))
 
-        Row {
-            HomeButton() // Calls the HomeButton file from Components
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight(),
+            horizontalArrangement = Arrangement.Center
+        ) {
+            HomeToggleButton() // Calls the HomeButton file from Components
+            Spacer(modifier = Modifier.width(16.dp))
             AddToListButton {} // Calls the AddToListButton file from Components
-            ChatButton() // Calls the ChatButton file from Components
         }
 
         Spacer(modifier = Modifier.height(16.dp))

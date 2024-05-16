@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -63,9 +64,8 @@ fun AddToListButton(onAddItem: (String) -> Unit) {
     Box(
         modifier = Modifier
             .background(Color.White)
-            .fillMaxWidth(0.63f)
-            .wrapContentHeight(),
-        contentAlignment = Alignment.TopCenter
+            .wrapContentWidth()
+            .wrapContentHeight()
     ) {
         Button(
             onClick = { showDialog = true },

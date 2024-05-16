@@ -41,7 +41,7 @@ fun CustomDrawer(
                 ) {
                     // Add your custom content here
                     Column {
-                        Text(text = "Insert To-Do List here")
+                        Text(text = "Insert List here")
                         // Add more content here
                         content()
                     }

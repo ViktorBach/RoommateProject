@@ -28,7 +28,8 @@ class AccountService {
     public enum class EventType(val eventText: String) {
         I_AM_HOME("I'am home"),
         I_AM_SLEEPING("I'am sleeping"),
-        I_AM_WORKING_LATE("I'm working late")
+        I_AM_WORKING_LATE("I'm working late"),
+        I_AM_LEAVING("I'm leaving"),
     }
 
     data class EventData(
