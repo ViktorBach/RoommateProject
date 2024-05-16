@@ -12,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.roommateproject.Register.RegisterViewModel
 import com.example.roommateproject.ui.theme.Typography
 import com.example.roommateproject.ui.theme.green
 import com.example.roommateproject.ui.theme.jaldiFontFamily
@@ -20,7 +21,7 @@ import com.example.roommateproject.ui.theme.lightYellow
 @Composable
  fun Login(navigateFrontPage: () -> Unit) {
 
-    val loginViewModel = viewModel<LoginViewModel>()
+    val registerViewModel = viewModel<RegisterViewModel>()
 
     Box(
         modifier = Modifier
@@ -30,7 +31,7 @@ import com.example.roommateproject.ui.theme.lightYellow
         contentAlignment = Alignment.Center
     ) {
         Button(
-            onClick = { loginViewModel.loginWithUser(navigateFrontPage) },
+            onClick = { registerViewModel.loginWithUser(navigateFrontPage) },
             colors = ButtonDefaults.buttonColors(
                 lightYellow // Set the text color to lightYellow
             )

@@ -6,14 +6,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import kotlin.coroutines.CoroutineContext
-import kotlin.coroutines.suspendCoroutine
 
 class AccountService {
 
@@ -36,9 +31,9 @@ class AccountService {
         I_AM_WORKING_LATE("I'm working late")
     }
 
-    data class EventData (
+    data class EventData(
         var eventType: EventType,
-        var timeStamp: LocalDateTime
+        var timeStamp: String
     )
 
     fun addEvent(eventType: EventType) {
@@ -53,18 +48,36 @@ class AccountService {
 
     }
 
-     suspend fun getEvents() {
-         println("AccountService.currentHomeId:  ${AccountService.currentHomeId}")
-        AccountService.currentEvents = eventsCollection.whereEqualTo("homeId", AccountService.currentHomeId).get().await().map { doc -> // map firebase data to internal event data
-                println("DOC: " + doc)
-                val timestamp = doc.data.get("timestamp")
+    suspend fun getEvents() {
+        println("AccountService.currentHomeId: ${AccountService.currentHomeId}")
+        AccountService.currentEvents = eventsCollection
+            .whereEqualTo("homeId", AccountService.currentHomeId)
+            .get().await()
+            .map { doc ->
+                println("DOC: $doc")
+                val timeStampData = doc.data["timeStamp"] as HashMap<String, Any>
+                val year = (timeStampData["year"] as Long).toInt()
+                val month = (timeStampData["monthValue"] as Long).toInt()
+                val dayOfMonth = (timeStampData["dayOfMonth"] as Long).toInt()
+                val hour = (timeStampData["hour"] as Long).toInt()
+                val minute = (timeStampData["minute"] as Long).toInt()
+                val second = (timeStampData["second"] as Long).toInt()
+
+                val dateTime = LocalDateTime.of(year, month, dayOfMonth, hour, minute, second)
+
+                val formatter = DateTimeFormatter.ofPattern("dd HH:mm") // Define your desired date format here
+                val formattedDate = dateTime.format(formatter)
+
                 EventData(
-                    EventType.valueOf(doc.data.get("eventName").toString()),
-                    LocalDateTime.now() //TODO - parse timestamp from firebase
+                    EventType.valueOf(doc.data["eventName"].toString()),
+                    formattedDate
                 )
-            }.toList();
-            println("DOC data: " + AccountService.currentEvents)
+            }.toList()
+
+        println("DOC data: ${AccountService.currentEvents}")
+
     }
+
 
     fun authenticate(email: String, password: String, username: String, onResult: (Boolean, String?) -> Unit) {
         Firebase.auth.createUserWithEmailAndPassword(email, password)
@@ -200,7 +213,7 @@ class AccountService {
 
                         homesCollection.add(homeData) // Add new household to Firestore
                             .addOnSuccessListener { newHomeDoc ->
-                                userDocs.forEach{doc ->
+                                userDocs.forEach{doc ->                 // sending the home id generated to the user document connected to the home id
                                     doc.reference.update("homeId", newHomeDoc.id)
                                 }
                                 onResult(true, null) // Household added successfully
