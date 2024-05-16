@@ -1,6 +1,7 @@
 package com.example.roommateproject.FrontPage
 
 import HomeToggleButton
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -29,6 +30,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.roommateproject.FrontPage.Components.AddToListButton
@@ -40,6 +42,7 @@ import com.example.roommateproject.FrontPage.Components.LogoutButton.LogoutButto
 import com.example.roommateproject.FrontPage.Components.NewsTab
 import com.example.roommateproject.FrontPage.Components.SleepingButton
 import com.example.roommateproject.FrontPage.Components.WorkingLateButton
+import com.example.roommateproject.R
 import com.example.roommateproject.ui.theme.Typography
 import com.example.roommateproject.ui.theme.karantinaFontFamily
 import com.example.roommateproject.ui.theme.katibehFontFamily
@@ -113,6 +116,7 @@ fun FrontPage(
             HomeToggleButton() // Calls the HomeButton file from Components
             Spacer(modifier = Modifier.width(16.dp))
             AddToListButton {} // Calls the AddToListButton file from Components
+            ChatButton() // Calls the ChatButton file from Components
         }
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -128,9 +132,9 @@ fun FrontPage(
                     drawerState.open()
                 }
             }) {
-                Icon(
-                    imageVector = Icons.Default.Menu,
-                    contentDescription = "To-do List"
+                Image(
+                    painter = painterResource(id = R.drawable.ic_grocery_logo), // Use your PNG here
+                    contentDescription = "Grocery Logo"
                 )
             }
             NewsTab() // Calls the NewsTab file from Components
