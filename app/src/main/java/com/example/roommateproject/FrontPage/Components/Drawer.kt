@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.example.roommateproject.FrontPage.Components.ListView.ListScreenStateful
 
 @Composable
 fun CustomDrawer(
@@ -43,7 +44,7 @@ fun CustomDrawer(
                     Column {
                         Text(text = "Insert To-Do List here")
                         // Add more content here
-                        content()
+                        ListScreenStateful()
                     }
                 }
             }
