@@ -9,11 +9,10 @@ class ListViewModel : ViewModel() {
     val tasks: SnapshotStateList<ShoppingList> = mutableStateListOf(*sampleTasks.toTypedArray())
 
     var inputState: MutableState<String?> = mutableStateOf(null)
-    private var input: String? by inputState
 
     fun createTask(taskTitle: String) {
         tasks.add(0, ShoppingList(taskTitle))
-        input = null
+        inputState.value = null
     }
 
     fun toggleTaskCompleted(taskId: String) {
@@ -23,7 +22,7 @@ class ListViewModel : ViewModel() {
     }
 
     fun onInputChange(input: String?) {
-        this.input = input
+        inputState.value = input
     }
 
     companion object {
@@ -36,5 +35,9 @@ class ListViewModel : ViewModel() {
             ShoppingList("Visit parents", completed = true),
             ShoppingList("Attend Shape Guest Lecture", completed = true)
         )
+    }
+
+    fun removeCompletedItems() {
+        tasks.removeAll { it.completed }
     }
 }

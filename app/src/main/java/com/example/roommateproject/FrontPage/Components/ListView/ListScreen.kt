@@ -16,6 +16,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.clickable
+import androidx.compose.material3.Button
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -24,15 +25,16 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
 fun ListScreenStateful(listViewModel: ListViewModel = viewModel()) {
-    val lists: List<ShoppingList> = remember { listViewModel.tasks }
-    val input: State<String?> = remember { listViewModel.inputState }
+    val lists: List<ShoppingList> = listViewModel.tasks
+    val input: State<String?> = listViewModel.inputState
 
     ListsScreen(
         lists = lists,
         input = input.value,
         onTaskClick = { listViewModel.toggleTaskCompleted(it.id) },
         onInputChange = { listViewModel.onInputChange(it) },
-        onSubmitInput = { listViewModel.createTask(it) }
+        onSubmitInput = { listViewModel.createTask(it) },
+        onRemoveCompleted = { listViewModel.removeCompletedItems() }
     )
 }
 
@@ -42,22 +44,39 @@ fun ListsScreen(
     input: String?,
     onTaskClick: (ShoppingList) -> Unit,
     onInputChange: (String) -> Unit,
-    onSubmitInput: (String) -> Unit
+    onSubmitInput: (String) -> Unit,
+    onRemoveCompleted: () -> Unit
 ) {
     Column(modifier = Modifier.padding(16.dp)) {
         BasicTextField(
             value = input ?: "",
-            onValueChange = onInputChange,
-            modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp)
+            onValueChange = {
+                onInputChange(it)
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 8.dp)
         )
-        Text("Add Task", modifier = Modifier.clickable { onSubmitInput(input ?: "") })
-        Spacer(modifier = Modifier.height(16.dp))
+        Text(
+            "Add Item",
+            modifier = Modifier
+                .clickable {
+                    if (!input.isNullOrBlank()) {
+                        onSubmitInput(input)
+                    }
+                }
+                .padding(bottom = 16.dp)
+        )
         lists.forEach { task ->
             Text(
                 text = if (task.completed) "✓ ${task.title}" else task.title,
-                modifier = Modifier.clickable { onTaskClick(task) }
+                modifier = Modifier
+                    .clickable { onTaskClick(task) }
+                    .padding(vertical = 8.dp)
             )
-            Spacer(modifier = Modifier.height(8.dp))
+        }
+        Button(onClick = onRemoveCompleted) {
+            Text("Remove Completed")
         }
     }
 }
@@ -70,6 +89,7 @@ fun PreviewTasksScreen() {
         input = null,
         onTaskClick = {},
         onInputChange = {},
-        onSubmitInput = {}
+        onSubmitInput = {},
+        onRemoveCompleted = {}
     )
 }
