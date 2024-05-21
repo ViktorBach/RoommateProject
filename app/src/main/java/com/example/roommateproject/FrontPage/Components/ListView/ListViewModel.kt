@@ -25,6 +25,10 @@ class ListViewModel : ViewModel() {
         inputState.value = input
     }
 
+    fun removeCompletedItems() {
+        tasks.removeAll { it.completed }
+    }
+
     companion object {
         val sampleTasks = listOf(
             ShoppingList("Sell my iPhone", completed = false),
@@ -35,9 +39,5 @@ class ListViewModel : ViewModel() {
             ShoppingList("Visit parents", completed = true),
             ShoppingList("Attend Shape Guest Lecture", completed = true)
         )
-    }
-
-    fun removeCompletedItems() {
-        tasks.removeAll { it.completed }
     }
 }
