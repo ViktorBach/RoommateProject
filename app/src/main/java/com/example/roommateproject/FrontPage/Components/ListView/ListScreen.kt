@@ -1,15 +1,30 @@
 package com.example.roommateproject.FrontPage.Components.ListView
 
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement.Absolute.Center
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material3.*
+import androidx.compose.material3.Typography
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.roommateproject.Services.AccountService
+import com.example.roommateproject.FrontPage.Components.ListAddButton
+import com.example.roommateproject.ui.theme.Shadow10
+import com.example.roommateproject.ui.theme.Typography
+import com.example.roommateproject.ui.theme.darkGreen
+import com.example.roommateproject.ui.theme.jaldiBoldFontFamily
+import com.example.roommateproject.ui.theme.jaldiFontFamily
+import com.example.roommateproject.ui.theme.playFairDisplayFontFamily
+import com.example.roommateproject.ui.theme.skyBlue
+import com.example.roommateproject.ui.theme.white
 
 @Composable
 fun ListScreenStateful(listViewModel: ListViewModel = viewModel()) {
@@ -32,7 +47,6 @@ fun ListsScreen(
     input: String?,
     onTaskClick: (ShoppingList) -> Unit,
     onInputChange: (String) -> Unit,
-    onSubmitInput: (String) -> Unit,
     onRemoveCompleted: () -> Unit,
     onAddItem: (String) -> Unit // Add this parameter
 ) {
@@ -47,12 +61,14 @@ fun ListsScreen(
         ) {
             Box(
                 modifier = Modifier
-                    .background(skyBlue)
-                    .padding(12.dp) // Add some padding around the text for better appearance
+                    .width(400.dp)
+                    .height(83.dp)
+                    .background(skyBlue),
+                contentAlignment = Alignment.Center
             ) {
                 Text(
                     text = "WE NEED",
-                    fontFamily = jaldiFontFamily,
+                    fontFamily = playFairDisplayFontFamily,
                     style = Typography.titleSmall,
                     color = darkGreen,
                 )
@@ -60,12 +76,16 @@ fun ListsScreen(
         }
             HorizontalDivider(
                 modifier = Modifier
-                    .fillMaxWidth(0.99f)
-                    .padding(top = 15.dp), // Adjust padding to move the line below the text
-                thickness = 2.dp,
+                    .fillMaxWidth(0.99f),
+                thickness = 3.dp,
                 color = Shadow10
             )
-
+        Box(
+            modifier = Modifier
+                .width(400.dp)
+                .height(5.dp)
+                .background(skyBlue),
+        )
             Row {
                 BasicTextField(
                     value = input ?: "",
@@ -119,7 +139,6 @@ fun PreviewTasksScreen() {
         input = null,
         onTaskClick = {},
         onInputChange = {},
-        onSubmitInput = {},
         onRemoveCompleted = {},
         onAddItem = {} // Add this parameter
     )

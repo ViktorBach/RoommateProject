@@ -77,7 +77,7 @@ fun AddToListButton(onAddItem: (String) -> Unit) {
             )
         ) {
             Text(
-                text = "Add",
+                text = "Add to List",
                 fontFamily = jaldiBoldFontFamily,
                 style = Typography.labelSmall,
                 color = white
