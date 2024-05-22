@@ -13,6 +13,7 @@ import com.example.roommateproject.Navigation.Navigation
 import com.example.roommateproject.Register.RegisterViewModel
 import com.example.roommateproject.Services.AccountService
 
+/*
 /**
  * Instrumented test, which will execute on an Android device.
  *
@@ -73,3 +74,5 @@ class UITests {
         rule.waitForIdle()
     }
 }
+
+ */

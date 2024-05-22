@@ -1,10 +1,6 @@
 package com.example.roommateproject.FrontPage.Components.CalendarData
 
-import java.time.DayOfWeek
 import java.time.LocalDate
-import java.time.temporal.ChronoUnit
-import java.time.temporal.WeekFields
-import java.util.stream.Stream
 
 class CalendarDataSource {
 
