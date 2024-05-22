@@ -1,11 +1,11 @@
 package com.example.roommateproject.FrontPage.Components
 
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.example.roommateproject.Services.AccountService
 
-class CalendarTapViewModel: ViewModel() {
+class CalendarTabViewModel : ViewModel() {
     private val accountService: AccountService = AccountService()
 
     private val liveEvents = MutableLiveData<List<AccountService.CalendarData>>()
@@ -20,5 +20,9 @@ class CalendarTapViewModel: ViewModel() {
                 liveEvents.value = emptyList()
             }
         }
+    }
+
+    fun addCalendarEvent(eventText: String) {
+        accountService.addCalendarEvent(eventText)
     }
 }
