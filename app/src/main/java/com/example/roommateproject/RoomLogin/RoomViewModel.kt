@@ -6,7 +6,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.ViewModel
-import com.example.roommateproject.RoomLogin.RoomLogin
 import com.example.roommateproject.Services.AccountService
 
 class RoomViewModel: ViewModel() {
