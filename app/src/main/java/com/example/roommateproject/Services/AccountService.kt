@@ -24,7 +24,6 @@ class AccountService {
     private val homesCollection = db.collection("homes")
     private val eventsCollection = db.collection("events")
     private val calendarCollection = db.collection("calendars")
-    private val shoppingListCollection = db.collection("shoppinglist")
 
     companion object  {
         var currentEvents: List<EventData> = listOf()
@@ -63,25 +62,6 @@ class AccountService {
         eventsCollection.add(eventData) // Adds new event to Firestore
 
     }
-
-    fun addShoppingListItem(itemTitle: String) {
-        val itemData = hashMapOf(
-            "title" to itemTitle,
-            "homeId" to currentHomeId,
-            "userId" to currentUserId,
-            "completed" to false,
-            "createdAt" to Timestamp.now()
-        )
-
-        shoppingListCollection.add(itemData)
-            .addOnSuccessListener {
-                println("Item added successfully")
-            }
-            .addOnFailureListener { e ->
-                println("Error adding item: ${e.message}")
-            }
-    }
-
 
     data class CalendarData(
         var eventText: String,

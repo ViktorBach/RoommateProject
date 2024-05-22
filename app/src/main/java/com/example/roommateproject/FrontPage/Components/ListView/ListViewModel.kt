@@ -3,11 +3,8 @@ package com.example.roommateproject.FrontPage.Components.ListView
 import androidx.compose.runtime.*
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.lifecycle.ViewModel
-import com.example.roommateproject.Services.AccountService
 
 class ListViewModel : ViewModel() {
-
-    private val accountService: AccountService = AccountService()
 
     val tasks: SnapshotStateList<ShoppingList> = mutableStateListOf(*sampleTasks.toTypedArray())
 
@@ -16,7 +13,6 @@ class ListViewModel : ViewModel() {
     fun createTask(taskTitle: String) {
         tasks.add(0, ShoppingList(taskTitle))
         inputState.value = null
-        accountService.addShoppingListItem(taskTitle) // Add to Firestore
     }
 
     fun toggleTaskCompleted(taskId: String) {
