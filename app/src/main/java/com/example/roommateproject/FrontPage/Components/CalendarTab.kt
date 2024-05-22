@@ -88,7 +88,7 @@ fun AddEventDialog(selectedDate: String, onClose: () -> Unit, onAddEvent: (Strin
         title = { Text(text = "Add Event") },
         text = {
             Column {
-                Text(text = "Date: $selectedDate")
+                Text(text = if (selectedDate.isEmpty()) "Select a date first" else "Date: $selectedDate")
                 Spacer(modifier = Modifier.height(8.dp))
                 OutlinedTextField(
                     value = eventText,
