@@ -10,7 +10,7 @@ fun EnterEmailInput (navigateRoomLogin: () -> Unit) {
 
     val registerViewModel = viewModel<RegisterViewModel>()
     BoxLayout(
-        value = registerViewModel.email,
+        value = "frank@gmail.com",
         onValueChange = { newValue -> registerViewModel.onEmailChange(newValue) },
         labelText = "Enter email",
         height = 0.17f
