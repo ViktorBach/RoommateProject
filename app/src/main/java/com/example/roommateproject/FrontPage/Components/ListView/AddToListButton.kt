@@ -1,4 +1,4 @@
-package com.example.roommateproject.FrontPage.Components
+package com.example.roommateproject.FrontPage.Components.ListView
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -15,9 +15,7 @@ import com.example.roommateproject.ui.theme.*
 
 @Composable
 fun AddToListButton(onAddItem: (String) -> Unit) {
-    val accountService: AccountService = AccountService();
     var showDialog by remember { mutableStateOf(false) }
-    val context = LocalContext.current
     var text by remember { mutableStateOf("") }  // Declare text here to use it both in TextField and Button
 
     if (showDialog) {
@@ -61,25 +59,14 @@ fun AddToListButton(onAddItem: (String) -> Unit) {
 
     Box(
         modifier = Modifier
-            .background(Color.White)
-            .fillMaxWidth(0.63f)
+            .fillMaxWidth()
             .wrapContentHeight(),
-        contentAlignment = Alignment.TopCenter
+        contentAlignment = Alignment.Center
     ) {
         Button(
-            onClick = { showDialog = true
-                accountService.addEvent(AccountService.EventType.ADD_TO_LIST)
-                      },
-            colors = ButtonDefaults.buttonColors(
-                lightYellow // Set the button background to lightYellow,
-            )
+            onClick = { showDialog = true }
         ) {
-            Text(
-                text = "Add to list",
-                fontFamily = jaldiBoldFontFamily,
-                style = Typography.labelSmall,
-                color = white
-            )
+            Text("Add to list")
         }
     }
 }
