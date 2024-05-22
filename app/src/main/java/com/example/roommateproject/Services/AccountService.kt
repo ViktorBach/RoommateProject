@@ -9,6 +9,11 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import com.google.firebase.Timestamp
+import java.time.ZoneId
+
+
+
 
 class AccountService {
 
@@ -17,19 +22,23 @@ class AccountService {
     private val usersCollection = db.collection("users")
     private val homesCollection = db.collection("homes")
     private val eventsCollection = db.collection("events")
+    private val calendarCollection = db.collection("calendars")
 
     companion object  {
         var currentEvents: List<EventData> = listOf()
-        var currentUser = ""
+        var currentUserId = ""
         var currentUserName = ""
         var currentHomeId = "udl6GrFbM5eMcgJc027j"
+        var currentCalendarEvents: List<CalendarData> = listOf()
+        var currentDate = ""
     }
 
+    // enum class that contains the internal name and value of the EventTypes we have predefined
     public enum class EventType(val eventText: String) {
-        I_AM_HOME("I'am home"),
-        I_AM_SLEEPING("I'am sleeping"),
-        I_AM_WORKING_LATE("I'm working late"),
-        I_AM_LEAVING("I'm leaving"),
+        I_AM_HOME("I'm home"),
+        I_AM_SLEEPING("I'm sleeping"),
+        I_AM_WORKING_LATE("I'm is working late"),
+        I_AM_LEAVING("I'm leaving")
     }
 
     data class EventData(
@@ -41,43 +50,72 @@ class AccountService {
         val eventData = hashMapOf(
             "eventName" to eventType,
             "homeId" to currentHomeId,
-            "timeStamp" to LocalDateTime.now(),
-            "userId" to currentUser
+            "timeStamp" to Timestamp.now(),
+            "userId" to currentUserId
         )
 
-        eventsCollection.add(eventData) // Add new event to Firestore
+        eventsCollection.add(eventData) // Adds new event to Firestore
 
     }
 
-    suspend fun getEvents() {
-        println("AccountService.currentHomeId: ${AccountService.currentHomeId}")
-        AccountService.currentEvents = eventsCollection
+    data class CalendarData(
+        var eventText: String,
+        var date: String
+    )
+
+    fun addCalendarEvent(event: String) {
+        val calendarData = hashMapOf(
+            "eventText" to event,
+            "homeId" to currentHomeId,
+            "date" to currentDate,
+        )
+
+        calendarCollection.add(calendarData) // Adds new event to Firestore
+
+    }
+
+    // Function that requests to get calendar event data from firestore collection
+    fun getCalendarEvents(onResult: (Boolean, List<CalendarData>) -> Unit)  {
+         calendarCollection
             .whereEqualTo("homeId", AccountService.currentHomeId)
+            .get().addOnSuccessListener { result ->
+                 val eventList = result.map { doc ->
+                 println("calendarDoc:" + doc)
+                 CalendarData(
+                     doc.data["eventText"].toString(),
+                     doc.data["date"].toString()
+                 )}.toList()
+                 onResult(true, eventList)
+             }
+    }
+
+    // Function that requests to get news event data from firestore collection
+    suspend fun getEvents() {
+        println("AccountService.currentHomeId: $currentHomeId")
+        currentEvents = eventsCollection
+            .whereEqualTo("homeId", currentHomeId)
             .get().await()
             .map { doc ->
                 println("DOC: $doc")
-                val timeStampData = doc.data["timeStamp"] as HashMap<String, Any>
-                val year = (timeStampData["year"] as Long).toInt()
-                val month = (timeStampData["monthValue"] as Long).toInt()
-                val dayOfMonth = (timeStampData["dayOfMonth"] as Long).toInt()
-                val hour = (timeStampData["hour"] as Long).toInt()
-                val minute = (timeStampData["minute"] as Long).toInt()
-                val second = (timeStampData["second"] as Long).toInt()
 
-                val dateTime = LocalDateTime.of(year, month, dayOfMonth, hour, minute, second)
+                val timeStamp = doc.get("timeStamp")
+                val dateTime = when (timeStamp) {
+                    is Timestamp -> timeStamp.toDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime()
+                    is String -> LocalDateTime.parse(timeStamp, DateTimeFormatter.ISO_DATE_TIME)
+                    else -> null
+                }
 
-                val formatter = DateTimeFormatter.ofPattern("dd HH:mm") // Define your desired date format here
-                val formattedDate = dateTime.format(formatter)
+                val formatter = DateTimeFormatter.ofPattern("EEEE HH:mm") // Define your desired date format here
+                val formattedDate = dateTime?.format(formatter) ?: "Unknown date"
 
                 EventData(
-                    EventType.valueOf(doc.data["eventName"].toString()),
+                    EventType.valueOf(doc.getString("eventName") ?: ""),
                     formattedDate
                 )
             }.toList()
-
-        println("DOC data: ${AccountService.currentEvents}")
-
     }
+
+
 
 
     fun authenticate(email: String, password: String, username: String, onResult: (Boolean, String?) -> Unit) {
@@ -107,29 +145,29 @@ class AccountService {
         // Attempt to sign in the user
         auth.signInWithEmailAndPassword(email, password)
             .addOnSuccessListener { authResult ->
-                // Login successful
-                val user = authResult.user
-                // Retrieve the username associated with the logged-in user
-                usersCollection.document(user!!.uid).get()
-                    .addOnSuccessListener { document ->
-                        val username = document.getString("username").toString()
-                        AccountService.currentUserName = document.getString("username").toString()
-                        AccountService.currentUser = user.uid
-                        AccountService.currentHomeId = document.getString("homeId").toString()
-                        // Pass the username along with the login result
-                        onResult(true, username)
-                    }
-                    .addOnFailureListener { exception ->
-                        onResult(false, exception.message)
-                    }
+            // Login successful
+            val user = authResult.user
+            // Retrieve the username associated with the logged-in user
+            usersCollection.document(user!!.uid).get()
+                .addOnSuccessListener { document ->
+                    val username = document.getString("username").toString()
+                    currentUserName = document.getString("username").toString()
+                    currentUserId = user.uid
+                    currentHomeId = document.getString("homeId").toString()
+                    println(currentHomeId)
 
-            }
+                    // Pass the username along with the login result
+                    onResult(true, username)
+                }
+                .addOnFailureListener { exception ->
+                    onResult(false, exception.message)
+                }
+        }
             .addOnFailureListener { exception ->
                 // Login failed
                 val errorMessage = exception.message
                 onResult(false, errorMessage)
             }
-
     }
 
     fun homeLogin(name: String, password: String, usernames: List<String>, onResult: (Boolean, String?) -> Unit) {
