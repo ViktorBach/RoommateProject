@@ -7,7 +7,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.roommateproject.Login.Login
 import com.example.roommateproject.Services.AccountService
 import kotlinx.coroutines.launch
 

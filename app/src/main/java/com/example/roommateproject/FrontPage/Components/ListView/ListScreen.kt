@@ -9,7 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.roommateproject.FrontPage.Components.AddToListButton
+import com.example.roommateproject.Services.AccountService
 
 @Composable
 fun ListScreenStateful(listViewModel: ListViewModel = viewModel()) {
@@ -21,7 +21,6 @@ fun ListScreenStateful(listViewModel: ListViewModel = viewModel()) {
         input = input.value,
         onTaskClick = { listViewModel.toggleTaskCompleted(it.id) },
         onInputChange = { listViewModel.onInputChange(it) },
-        onSubmitInput = { listViewModel.createTask(it) },
         onRemoveCompleted = { listViewModel.removeCompletedItems() },
         onAddItem = { listViewModel.createTask(it) } // Pass the add item function
     )
@@ -33,9 +32,8 @@ fun ListsScreen(
     input: String?,
     onTaskClick: (ShoppingList) -> Unit,
     onInputChange: (String) -> Unit,
-    onSubmitInput: (String) -> Unit,
     onRemoveCompleted: () -> Unit,
-    onAddItem: (String) -> Unit // Add this parameter
+    onAddItem: (String) -> Unit
 ) {
     Column(modifier = Modifier.padding(16.dp)) {
         BasicTextField(
@@ -71,7 +69,6 @@ fun PreviewTasksScreen() {
         input = null,
         onTaskClick = {},
         onInputChange = {},
-        onSubmitInput = {},
         onRemoveCompleted = {},
         onAddItem = {} // Add this parameter
     )
