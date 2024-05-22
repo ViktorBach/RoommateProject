@@ -23,6 +23,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -35,6 +36,7 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.roommateproject.Services.AccountService
 import com.example.roommateproject.ui.theme.boxLayerGrey
+import com.example.roommateproject.ui.theme.earthyBrown
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -42,14 +44,11 @@ import com.example.roommateproject.ui.theme.boxLayerGrey
 @Composable
 fun CalenderTab() {
     val calendarTapViewModel = viewModel<CalendarTapViewModel>()
-    var date by remember {
-        mutableStateOf("")
-    }
-    // State to control the visibility of the event adding interface
-    var isAddingEvent by remember { mutableStateOf(false) }
 
-    // TODO: remember state change on the showevents list
-    var currentCalendarEvents by remember { mutableStateOf(emptyList<AccountService.CalendarData>()) }
+    // ObserveAsState observes the ViewModels state and updates the UI so it fits the state
+    val events by calendarTapViewModel.events.observeAsState(emptyList())
+    var date by remember { mutableStateOf("") }
+    var isAddingEvent by remember { mutableStateOf(false) }
 
     Box(
         modifier = Modifier
@@ -61,41 +60,32 @@ fun CalenderTab() {
             .verticalScroll(ScrollState(1))
     ) {
         Column(
-            modifier = Modifier
-                .fillMaxSize(),
+            modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // IconButton should be placed within the Column scope
             IconButton(onClick = { isAddingEvent = true }) {
                 Icon(imageVector = Icons.Default.Add, contentDescription = "Add Event")
             }
-                AndroidView(factory = { context ->
-                    CalendarView(context).apply {
-                        setOnDateChangeListener { calendarView, year, month, day ->
-                            date = "$day - ${month + 1} - $year"
-                            AccountService.currentDate = date
-
-                            val eventList = calendarTapViewModel.getEvents() {
-                                eventList -> println("calendarEvents:${eventList}")
-                               // ShowEvents(eventList)
-                                currentCalendarEvents = eventList
-                            }
-
-                        }
+            AndroidView(factory = { context ->
+                CalendarView(context).apply {
+                    setOnDateChangeListener { _, year, month, day ->
+                        date = "$day - ${month + 1} - $year"
+                        AccountService.currentDate = date
+                        calendarTapViewModel.fetchEventsFilteredByDate(date)
                     }
-                })
-
-            // Show the event adding interface when isAddingEvent is true
+                }
+            })
             if (isAddingEvent) {
                 AddEventComponent(selectedDate = date, onClose = { isAddingEvent = false })
             } else {
                 Text(text = date)
             }
-            ShowEvents(currentCalendarEvents)
+            ShowEvents(events)
         }
     }
 }
+
 
 @Composable
 fun AddEventComponent(selectedDate: String, onClose: () -> Unit) {
@@ -143,7 +133,14 @@ fun ShowEvents(events : List<AccountService.CalendarData>) {
             .padding(5.dp),
         contentAlignment = Alignment.Center
     ) {
-        Text(text = events.toString())
+        Column(
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            events.forEach { event ->
+                Text(text = "${event.eventText}", color = earthyBrown)
+            }
+        }
     }
 }
 

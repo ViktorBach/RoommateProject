@@ -1,16 +1,24 @@
 package com.example.roommateproject.FrontPage.Components
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.roommateproject.Services.AccountService
 
 class CalendarTapViewModel: ViewModel() {
-    private val accountService: AccountService = AccountService();
+    private val accountService: AccountService = AccountService()
 
-    fun getEvents(onResult: (List<AccountService.CalendarData>) -> Unit) {
-        accountService.getCalendarEvents() { success, calendarEvents ->
-            println("CalendarTapViewModel-calendarEvents:${calendarEvents}")
-            onResult(calendarEvents)
+    private val liveEvents = MutableLiveData<List<AccountService.CalendarData>>()
+    val events: LiveData<List<AccountService.CalendarData>> get() = liveEvents
+
+    fun fetchEventsFilteredByDate(date: String) {
+        accountService.getCalendarEvents { success, calendarEvents ->
+            if (success) {
+                val filteredEvents = calendarEvents.filter { it.date == date }
+                liveEvents.value = filteredEvents
+            } else {
+                liveEvents.value = emptyList()
+            }
         }
     }
-
 }

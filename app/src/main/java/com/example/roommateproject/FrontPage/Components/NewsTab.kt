@@ -65,7 +65,7 @@ fun NewsTab() {
                             fontSize = 25.sp
                         )
                     }
-                    val eventString = sortedEvents.joinToString("\n\n") { "${it.eventType.eventText}     ${it.timeStamp}" }
+                    val eventString = sortedEvents.joinToString("\n\n") { "${it.eventType.eventText}    ${it.timeStamp}" }
                     Text(
                         text = eventString,
                         fontFamily = jaldiFontFamily,
