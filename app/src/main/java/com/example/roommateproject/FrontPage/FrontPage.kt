@@ -102,7 +102,7 @@ fun FrontPage(
             ChatButton() // Calls the ChatButton file from Components
         }
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(22.dp))
 
         Row(
             modifier = Modifier
@@ -122,12 +122,12 @@ fun FrontPage(
             }
             NewsTab() // Calls the NewsTab file from Components
         }
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(22.dp))
 
         Row {
             CalendarTab() // Calls the CalendarTab file from Components
         }
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(30.dp))
 
         Box(
             modifier = Modifier

@@ -5,10 +5,14 @@ import android.widget.CalendarView
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
@@ -21,6 +25,7 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.roommateproject.Services.AccountService
 import com.example.roommateproject.ui.theme.boxLayerGrey
+import org.intellij.lang.annotations.JdkConstants.VerticalScrollBarPolicy
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -33,35 +38,34 @@ fun CalendarTab() {
 
     Box(
         modifier = Modifier
-            .fillMaxHeight(0.6f)
-            .fillMaxWidth(0.9f)
-            .padding(start = 35.dp)
+            .fillMaxHeight(0.7f)
+            .fillMaxWidth(0.85f)
+            .padding(start = 60.dp)
             .clip(shape = RoundedCornerShape(20.dp))
             .background(color = boxLayerGrey)
             .verticalScroll(ScrollState(1))
     ) {
         Column(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.Top,
+            modifier = Modifier
+                .fillMaxHeight()
+                .fillMaxWidth(),
+            verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            IconButton(onClick = { isAddingEvent = true }) {
-                Icon(imageVector = Icons.Default.Add, contentDescription = "Add Event")
-            }
+                AndroidView(factory = { context ->
+                    CalendarView(context).apply {
+                        setOnDateChangeListener { _, year, month, day ->
+                            date = "$day - ${month + 1} - $year"
+                            AccountService.currentDate = date
 
-            AndroidView(factory = { context ->
-                CalendarView(context).apply {
-                    setOnDateChangeListener { _, year, month, day ->
-                        date = "$day - ${month + 1} - $year"
-                        AccountService.currentDate = date
-
-                        calendarTapViewModel.fetchEventsFilteredByDate(date)
+                            calendarTapViewModel.fetchEventsFilteredByDate(date)
+                        }
                     }
-                }
-            })
-
-            Text(text = date)
-            ShowEvents(events)
+                }, modifier = Modifier.fillMaxSize(0.9f).fillMaxWidth())
+            IconButton(onClick = {}) {
+                Icon(imageVector = Icons.Default.ArrowDropDown, contentDescription = "Add Event")
+            }
+                ShowEvents(events)
         }
     }
 
@@ -77,6 +81,10 @@ fun CalendarTab() {
             }
         )
     }
+    IconButton(onClick = { isAddingEvent = true }) {
+        Icon(imageVector = Icons.Default.Add, contentDescription = "Add Event")
+    }
+
 }
 
 @Composable
@@ -88,7 +96,7 @@ fun AddEventDialog(selectedDate: String, onClose: () -> Unit, onAddEvent: (Strin
         title = { Text(text = "Add Event") },
         text = {
             Column {
-                Text(text = "Date: $selectedDate")
+                Text(text = if (selectedDate.isEmpty()) "Select a date first" else "Date: $selectedDate")
                 Spacer(modifier = Modifier.height(8.dp))
                 OutlinedTextField(
                     value = eventText,
@@ -123,7 +131,7 @@ fun ShowEvents(events: List<AccountService.CalendarData>) {
             .fillMaxSize()
             .background(Color.White)
             .padding(5.dp),
-        contentAlignment = Alignment.Center
+        contentAlignment = Alignment.TopCenter
     ) {
         Column(
             verticalArrangement = Arrangement.Center,
