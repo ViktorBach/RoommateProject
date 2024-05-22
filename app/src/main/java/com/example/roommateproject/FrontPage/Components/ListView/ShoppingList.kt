@@ -7,5 +7,8 @@ data class ShoppingList(
 ) {
     val id: String = createdAt.toString()
 
+    /**
+     * Creates a copy of this task with the opposite completed state
+     */
     fun toggled(): ShoppingList = this.copy(completed = !this.completed)
 }

@@ -42,7 +42,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.roommateproject.FrontPage.Components.ListView.AddToListButton
+import com.example.roommateproject.FrontPage.Components.AddToListButton
 import com.example.roommateproject.FrontPage.Components.CalendarTab
 import com.example.roommateproject.FrontPage.Components.ChatButton
 import com.example.roommateproject.FrontPage.Components.EarlyMorningButton
@@ -139,7 +139,7 @@ fun FrontPage(
             AddToListButton {} // Calls the AddToListButton file from Components
         }
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(22.dp))
 
         Row(
             verticalAlignment = Alignment.Top // Align items to the top of the row
@@ -176,12 +176,12 @@ fun FrontPage(
             Spacer(modifier = Modifier.width(16.dp))
             NewsTab() // Calls the NewsTab file from Components
         }
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(22.dp))
 
         Row {
             CalendarTab() // Calls the CalendarTab file from Components
         }
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(30.dp))
 
         Box(
             modifier = Modifier

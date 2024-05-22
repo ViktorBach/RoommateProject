@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
@@ -47,7 +48,7 @@ fun NewsTab() {
                     .background(Color.White)
                     .fillMaxHeight(0.9f)
                     .verticalScroll(ScrollState(1), true)
-                    .fillMaxWidth(0.95f),
+                    .fillMaxWidth(0.92f),
                 contentAlignment = Alignment.TopCenter
             ) {
                 Column(modifier = Modifier,
@@ -56,7 +57,8 @@ fun NewsTab() {
                 ) {
                     Row(
                         modifier = Modifier
-                            .align(Alignment.CenterHorizontally),
+                            .align(Alignment.CenterHorizontally)
+                            .padding(bottom = 4.dp),
                     ) {
                         Text(
                             text = "News",
@@ -65,7 +67,7 @@ fun NewsTab() {
                             fontSize = 25.sp
                         )
                     }
-                    val eventString = sortedEvents.joinToString("\n\n") { "${it.eventType.eventText}    ${it.timeStamp}" }
+                    val eventString = sortedEvents.joinToString("\n\n") { "${it.timeStamp} \n  ${it.eventType.eventText}" }
                     Text(
                         text = eventString,
                         fontFamily = jaldiFontFamily,
