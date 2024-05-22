@@ -4,10 +4,8 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.layout.Arrangement.Absolute.Center
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material3.*
-import androidx.compose.material3.Typography
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -21,7 +19,6 @@ import com.example.roommateproject.ui.theme.Shadow10
 import com.example.roommateproject.ui.theme.Typography
 import com.example.roommateproject.ui.theme.darkGreen
 import com.example.roommateproject.ui.theme.jaldiBoldFontFamily
-import com.example.roommateproject.ui.theme.jaldiFontFamily
 import com.example.roommateproject.ui.theme.playFairDisplayFontFamily
 import com.example.roommateproject.ui.theme.skyBlue
 import com.example.roommateproject.ui.theme.white
