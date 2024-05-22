@@ -43,7 +43,7 @@ class MainActivity : ComponentActivity() {
                             onClose = { coroutineScope.launch { drawerState.close() } },
                             content = {
                                 // Your drawer content here
-                                Text(text = "Drawer Content")
+                                Text(text = "")
                             }
                         )
                     },

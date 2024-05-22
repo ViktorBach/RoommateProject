@@ -91,3 +91,6 @@ val boxLayerGrey = Color(0xFFF8F8F8)
 
 // news tap color
 val earthyBrown = Color(0xFF875F24)
+
+val darkGreen = Color(0xFF048474)
+val skyBlue = Color(0xFF7cb0e0)
