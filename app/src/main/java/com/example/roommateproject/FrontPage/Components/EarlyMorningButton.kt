@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import com.example.roommateproject.Services.AccountService
 import com.example.roommateproject.ui.theme.Typography
 import com.example.roommateproject.ui.theme.jaldiBoldFontFamily
 import com.example.roommateproject.ui.theme.lightYellow
@@ -22,6 +23,7 @@ import sendNotification
 
 @Composable
 fun EarlyMorningButton() {
+    val accountService: AccountService = AccountService();
     val context = LocalContext.current
 
     Box(
@@ -34,6 +36,8 @@ fun EarlyMorningButton() {
         Button(
             onClick = {
                 sendNotification("User is getting up early in the morning", context)
+
+                accountService.addEvent(AccountService.EventType.EARLY_MORNING)
             }, //Insert notification that user is getting up early in the morning
             colors = ButtonDefaults.buttonColors(
                 lightYellow // Set the text color to lightYellow

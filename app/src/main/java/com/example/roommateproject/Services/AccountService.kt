@@ -10,9 +10,10 @@ import kotlinx.coroutines.tasks.await
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import com.google.firebase.Timestamp
+import java.time.Instant
 import java.time.ZoneId
-
-
+import java.util.Date
+import kotlin.time.Duration
 
 
 class AccountService {
@@ -38,7 +39,11 @@ class AccountService {
         I_AM_HOME("I'm home"),
         I_AM_SLEEPING("I'm sleeping"),
         I_AM_WORKING_LATE("I'm is working late"),
-        I_AM_LEAVING("I'm leaving")
+        I_AM_LEAVING("I'm leaving"),
+        ADD_TO_LIST("Someone added grocery"),
+        GUEST_VISIT("have a guest over"),
+        EARLY_MORNING("I have an early morning"),
+        CALENDAR_EVENT("Someone added a calendar event")
     }
 
     data class EventData(
@@ -92,8 +97,10 @@ class AccountService {
     // Function that requests to get news event data from firestore collection
     suspend fun getEvents() {
         println("AccountService.currentHomeId: $currentHomeId")
+        val oneDay = Instant.now().minus(java.time.Duration.ofDays(1)) // 24 hours ago
         currentEvents = eventsCollection
             .whereEqualTo("homeId", currentHomeId)
+            .whereGreaterThan("timeStamp", Timestamp(Date.from(oneDay)))
             .get().await()
             .map { doc ->
                 println("DOC: $doc")

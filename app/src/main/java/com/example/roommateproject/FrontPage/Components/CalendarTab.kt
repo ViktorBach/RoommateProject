@@ -79,7 +79,7 @@ fun CalenderTab() {
             if (isAddingEvent) {
                 AddEventComponent(selectedDate = date, onClose = { isAddingEvent = false })
             } else {
-                Text(text = date)
+                Text(text = "No events yet")
             }
             ShowEvents(events)
         }
@@ -112,6 +112,7 @@ fun AddEventComponent(selectedDate: String, onClose: () -> Unit) {
             Button(onClick = {
                 // Call function to add event to selected date
                 accountService.addCalendarEvent(eventText)
+                accountService.addEvent(AccountService.EventType.CALENDAR_EVENT)
                 // Close the event adding interface
                 onClose()
             }) {

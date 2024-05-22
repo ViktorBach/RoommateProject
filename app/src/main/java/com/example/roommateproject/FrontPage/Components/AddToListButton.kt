@@ -10,10 +10,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import com.example.roommateproject.Services.AccountService
 import com.example.roommateproject.ui.theme.*
 
 @Composable
 fun AddToListButton(onAddItem: (String) -> Unit) {
+    val accountService: AccountService = AccountService();
     var showDialog by remember { mutableStateOf(false) }
     val context = LocalContext.current
     var text by remember { mutableStateOf("") }  // Declare text here to use it both in TextField and Button
@@ -65,7 +67,9 @@ fun AddToListButton(onAddItem: (String) -> Unit) {
         contentAlignment = Alignment.TopCenter
     ) {
         Button(
-            onClick = { showDialog = true },
+            onClick = { showDialog = true
+                accountService.addEvent(AccountService.EventType.ADD_TO_LIST)
+                      },
             colors = ButtonDefaults.buttonColors(
                 lightYellow // Set the button background to lightYellow,
             )
