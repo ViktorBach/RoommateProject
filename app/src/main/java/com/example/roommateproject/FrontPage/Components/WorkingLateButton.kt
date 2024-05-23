@@ -36,7 +36,7 @@ fun WorkingLateButton() {
     ) {
         Button(
             onClick = {
-                sendNotification("User is going to be home late", context)
+                sendNotification("${AccountService.currentUserName} is going to be home late", context)
                 accountService.addEvent(AccountService.EventType.I_AM_WORKING_LATE)
             }, //Insert notification that user is going to be home late
             colors = ButtonDefaults.buttonColors(
