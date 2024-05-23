@@ -2,7 +2,6 @@ package com.example.roommateproject.FrontPage.Components
 
 import android.annotation.SuppressLint
 import android.widget.CalendarView
-import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -22,9 +21,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.roommateproject.FrontPage.Components.CalendarTab.CalendarTabViewModel
 import com.example.roommateproject.Services.AccountService
 import com.example.roommateproject.ui.theme.boxLayerGrey
-import com.google.android.material.datepicker.DayViewDecorator
 import kotlinx.coroutines.launch
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -38,6 +37,7 @@ fun CalendarTab() {
     val scrollState = rememberScrollState()
     val coroutineScope = rememberCoroutineScope()
     var isScrolledToEvents by remember { mutableStateOf(false) }
+    val accountService = AccountService()  // Initialize AccountService
 
     Box(
         modifier = Modifier
@@ -100,7 +100,8 @@ fun CalendarTab() {
                 isAddingEvent = false
                 // Fetch updated events for the selected date after adding the new one
                 calendarTapViewModel.fetchEventsFilteredByDate(date)
-            }
+            },
+            accountService = accountService  // Pass AccountService instance to AddEventDialog
         )
     }
     IconButton(onClick = { isAddingEvent = true }) {
@@ -109,7 +110,9 @@ fun CalendarTab() {
 }
 
 @Composable
-fun AddEventDialog(selectedDate: String, onClose: () -> Unit, onAddEvent: (String) -> Unit) {
+fun AddEventDialog(selectedDate: String, onClose: () -> Unit, onAddEvent: (String) -> Unit,
+    accountService: AccountService // Accept AccountService instance
+) {
     var eventText by remember { mutableStateOf("") }
 
     AlertDialog(
@@ -132,6 +135,7 @@ fun AddEventDialog(selectedDate: String, onClose: () -> Unit, onAddEvent: (Strin
                 onClick = {
                     onAddEvent(eventText)
                     onClose()
+                    accountService.addEvent(AccountService.EventType.CALENDAR_EVENT)  // Log the event
                 }
             ) {
                 Text("Add Event")
@@ -165,4 +169,3 @@ fun ShowEvents(events: List<AccountService.CalendarData>) {
         }
     }
 }
-
