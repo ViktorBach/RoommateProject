@@ -35,7 +35,7 @@ fun GuestVisitButton() {
     ) {
         Button(
             onClick = {
-                sendNotification("User is having guests over", context)
+                sendNotification("${AccountService.currentUserName} is having guests over", context)
 
                 accountService.addEvent(AccountService.EventType.GUEST_VISIT)
             }, //insert notification that user is having guests over
