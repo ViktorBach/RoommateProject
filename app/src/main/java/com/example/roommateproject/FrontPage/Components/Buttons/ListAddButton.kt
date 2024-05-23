@@ -25,7 +25,6 @@ import com.example.roommateproject.ui.theme.white
 @Composable
 fun ListAddButton(onAddItem: (String) -> Unit) {
     var showDialog by remember { mutableStateOf(false) }
-    val context = LocalContext.current
     var text by remember { mutableStateOf("") }  // Declare text here to use it both in TextField and Button
 
     if (showDialog) {
