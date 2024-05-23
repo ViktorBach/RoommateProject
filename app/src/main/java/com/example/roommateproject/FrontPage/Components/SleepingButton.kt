@@ -19,6 +19,7 @@ import com.example.roommateproject.ui.theme.Typography
 import com.example.roommateproject.ui.theme.jaldiBoldFontFamily
 import com.example.roommateproject.ui.theme.lightYellow
 import com.example.roommateproject.ui.theme.white
+import com.google.firebase.auth.FirebaseAuth
 import sendNotification
 
 @Composable
@@ -35,7 +36,7 @@ fun SleepingButton() {
     ) {
         Button(
             onClick = {
-                sendNotification("User is going to bed", context)
+                sendNotification("${AccountService.currentUserName} is going to bed", context)
                 accountService.addEvent(AccountService.EventType.I_AM_SLEEPING)
             }, //insert notification that user is going to bed
             colors = ButtonDefaults.buttonColors(
