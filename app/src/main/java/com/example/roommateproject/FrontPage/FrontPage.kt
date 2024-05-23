@@ -37,7 +37,7 @@ import com.example.roommateproject.FrontPage.Components.EarlyMorningButton
 import com.example.roommateproject.FrontPage.Components.GuestVisitButton
 import com.example.roommateproject.FrontPage.Components.ListView.AddToListButton
 import com.example.roommateproject.FrontPage.Components.LogoutButton.LogoutButton
-import com.example.roommateproject.FrontPage.Components.NewsTab
+import com.example.roommateproject.FrontPage.Components.NewsTab.NewsTab
 import com.example.roommateproject.FrontPage.Components.RoundedCornerShape
 import com.example.roommateproject.FrontPage.Components.SleepingButton
 import com.example.roommateproject.FrontPage.Components.WorkingLateButton
