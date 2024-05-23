@@ -34,7 +34,7 @@ fun ListScreenStateful(listViewModel: ListViewModel = viewModel()) {
         onTaskClick = { listViewModel.toggleTaskCompleted(it.id) },
         onInputChange = { listViewModel.onInputChange(it) },
         onRemoveCompleted = { listViewModel.removeCompletedItems() },
-        onAddItem = { listViewModel.createTask(it) }
+        onAddItem = { listViewModel.createTask(it) } // Pass the add item function
     )
 }
 
