@@ -2,6 +2,7 @@ package com.example.roommateproject.FrontPage.Components.Buttons
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
@@ -30,8 +31,8 @@ fun WorkingLateButton() {
     Box(
         modifier = Modifier
             .background(Color.White)
-            .fillMaxWidth(1f)
-            .wrapContentHeight(),
+            .fillMaxWidth(0.7f)
+            .fillMaxHeight(0.38f),
         contentAlignment = Alignment.Center
     ) {
         Button(
@@ -39,12 +40,14 @@ fun WorkingLateButton() {
                 sendNotification("${AccountService.currentUserName} is going to be home late", context)
                 accountService.addEvent(AccountService.EventType.I_AM_WORKING_LATE)
             }, //Insert notification that user is going to be home late
+            shape = androidx.compose.foundation.shape.RoundedCornerShape(8.dp),
             colors = ButtonDefaults.buttonColors(
                 lightYellow // Set the text color to lightYellow
-            ), modifier = Modifier.padding(end = 25.dp)
+            ),
+            contentPadding = androidx.compose.foundation.layout.PaddingValues(5.dp), // Set content padding to zero
         ) {
             Text(
-                text = " Working late ",
+                text = " Working Late ",
                 fontFamily = jaldiBoldFontFamily,
                 style = Typography.labelSmall,
                 color = white

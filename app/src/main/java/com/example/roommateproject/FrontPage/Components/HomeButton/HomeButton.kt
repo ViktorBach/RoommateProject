@@ -32,15 +32,21 @@ fun HomeToggleButton(viewModel: HomeButtonViewModel = viewModel(factory = HomeBu
         modifier = Modifier
             .background(Color.White)
             .wrapContentWidth()
+            .wrapContentHeight()
     ) {
         Button(
             onClick = { viewModel.toggleHomeStatus(context) },
-            colors = ButtonDefaults.buttonColors(lightYellow)
+            shape = androidx.compose.foundation.shape.RoundedCornerShape(8.dp),
+            colors = ButtonDefaults.buttonColors(
+                lightYellow
+            ),
+            contentPadding = androidx.compose.foundation.layout.PaddingValues(start = 15.dp, top = 5.dp, bottom = 5.dp, end = 15.dp), // Set content padding to zero
+            modifier = Modifier
         ) {
             Text(
-                text = if (isHome) "I'm leaving" else "I'm home",
+                text = if (isHome) "I'm Leaving" else "I'm Home",
                 fontFamily = jaldiBoldFontFamily,
-                style = Typography.labelSmall,
+                style = Typography.labelMedium,
                 color = white
             )
         }

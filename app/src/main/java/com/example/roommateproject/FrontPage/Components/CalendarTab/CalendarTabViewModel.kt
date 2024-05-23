@@ -1,4 +1,4 @@
-package com.example.roommateproject.FrontPage.Components
+package com.example.roommateproject.FrontPage.Components.CalendarTab
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.LiveData

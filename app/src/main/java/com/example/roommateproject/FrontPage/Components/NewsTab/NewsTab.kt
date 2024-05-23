@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.roommateproject.ui.theme.boxLayerGrey
+import com.example.roommateproject.ui.theme.darkGreen
 import com.example.roommateproject.ui.theme.earthyBrown
 import com.example.roommateproject.ui.theme.jaldiFontFamily
 import java.text.SimpleDateFormat
@@ -65,8 +66,8 @@ fun NewsTab(newsViewModel: NewsViewModel = viewModel()) {
                             .padding(bottom = 4.dp),
                     ) {
                         Text(
-                            text = "News",
-                            color = earthyBrown,
+                            text = "NEWS",
+                            color = darkGreen,
                             fontFamily = jaldiFontFamily,
                             fontSize = 25.sp
                         )
