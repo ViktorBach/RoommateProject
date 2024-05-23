@@ -1,4 +1,4 @@
-package com.example.roommateproject.FrontPage.Components
+package com.example.roommateproject.FrontPage.Components.Buttons
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -19,32 +19,32 @@ import com.example.roommateproject.ui.theme.Typography
 import com.example.roommateproject.ui.theme.jaldiBoldFontFamily
 import com.example.roommateproject.ui.theme.lightYellow
 import com.example.roommateproject.ui.theme.white
+import com.google.firebase.auth.FirebaseAuth
 import sendNotification
 
 @Composable
-fun EarlyMorningButton() {
+fun SleepingButton() {
     val accountService: AccountService = AccountService();
-    val context = LocalContext.current
 
+    val context = LocalContext.current
     Box(
         modifier = Modifier
             .background(Color.White)
-            .fillMaxWidth(1f)
+            .fillMaxWidth(0.5f)
             .wrapContentHeight(),
         contentAlignment = Alignment.Center
     ) {
         Button(
             onClick = {
-                sendNotification("${AccountService.currentUserName} is getting up early in the morning", context)
-
-                accountService.addEvent(AccountService.EventType.EARLY_MORNING)
-            }, //Insert notification that user is getting up early in the morning
+                sendNotification("${AccountService.currentUserName} is going to bed", context)
+                accountService.addEvent(AccountService.EventType.I_AM_SLEEPING)
+            }, //insert notification that user is going to bed
             colors = ButtonDefaults.buttonColors(
-                lightYellow // Set the text color to lightYellow
-            ), modifier = Modifier.padding(end = 20.dp)
+                lightYellow
+            ), modifier = Modifier.padding(start = 25.dp)
         ) {
             Text(
-                text = "Early morning",
+                text = "I'm sleeping ",
                 fontFamily = jaldiBoldFontFamily,
                 style = Typography.labelSmall,
                 color = white

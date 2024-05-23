@@ -1,11 +1,8 @@
-package com.example.roommateproject.FrontPage.Components
+package com.example.roommateproject.FrontPage.Components.Buttons
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -21,11 +18,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import com.example.roommateproject.ui.theme.Neutral3
 import com.example.roommateproject.ui.theme.Typography
 import com.example.roommateproject.ui.theme.jaldiBoldFontFamily
-import com.example.roommateproject.ui.theme.lightBlue
-import com.example.roommateproject.ui.theme.lightYellow
 import com.example.roommateproject.ui.theme.white
 
 @Composable

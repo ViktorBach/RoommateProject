@@ -1,4 +1,4 @@
-package com.example.roommateproject.FrontPage.Components
+package com.example.roommateproject.FrontPage.Components.Buttons
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -22,32 +22,32 @@ import com.example.roommateproject.ui.theme.white
 import sendNotification
 
 @Composable
-fun WorkingLateButton() {
+fun GuestVisitButton() {
     val accountService: AccountService = AccountService();
-
     val context = LocalContext.current
 
     Box(
         modifier = Modifier
             .background(Color.White)
-            .fillMaxWidth(1f)
+            .fillMaxWidth(0.5f)
             .wrapContentHeight(),
         contentAlignment = Alignment.Center
     ) {
         Button(
             onClick = {
-                sendNotification("${AccountService.currentUserName} is going to be home late", context)
-                accountService.addEvent(AccountService.EventType.I_AM_WORKING_LATE)
-            }, //Insert notification that user is going to be home late
+                sendNotification("${AccountService.currentUserName} is having guests over", context)
+
+                accountService.addEvent(AccountService.EventType.GUEST_VISIT)
+            }, //insert notification that user is having guests over
             colors = ButtonDefaults.buttonColors(
-                lightYellow // Set the text color to lightYellow
-            ), modifier = Modifier.padding(end = 25.dp)
+                lightYellow
+            ), modifier = Modifier.padding(start = 25.dp)
         ) {
             Text(
-                text = " Working late ",
+                text = "  Guest visit  ",
                 fontFamily = jaldiBoldFontFamily,
                 style = Typography.labelSmall,
-                color = white
+                color = white,
             )
         }
     }

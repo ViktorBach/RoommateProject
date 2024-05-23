@@ -1,4 +1,4 @@
-package com.example.roommateproject.FrontPage.Components
+package com.example.roommateproject.FrontPage.Components.Buttons
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -19,32 +19,32 @@ import com.example.roommateproject.ui.theme.Typography
 import com.example.roommateproject.ui.theme.jaldiBoldFontFamily
 import com.example.roommateproject.ui.theme.lightYellow
 import com.example.roommateproject.ui.theme.white
-import com.google.firebase.auth.FirebaseAuth
 import sendNotification
 
 @Composable
-fun SleepingButton() {
+fun WorkingLateButton() {
     val accountService: AccountService = AccountService();
 
     val context = LocalContext.current
+
     Box(
         modifier = Modifier
             .background(Color.White)
-            .fillMaxWidth(0.5f)
+            .fillMaxWidth(1f)
             .wrapContentHeight(),
         contentAlignment = Alignment.Center
     ) {
         Button(
             onClick = {
-                sendNotification("${AccountService.currentUserName} is going to bed", context)
-                accountService.addEvent(AccountService.EventType.I_AM_SLEEPING)
-            }, //insert notification that user is going to bed
+                sendNotification("${AccountService.currentUserName} is going to be home late", context)
+                accountService.addEvent(AccountService.EventType.I_AM_WORKING_LATE)
+            }, //Insert notification that user is going to be home late
             colors = ButtonDefaults.buttonColors(
-                lightYellow
-            ), modifier = Modifier.padding(start = 25.dp)
+                lightYellow // Set the text color to lightYellow
+            ), modifier = Modifier.padding(end = 25.dp)
         ) {
             Text(
-                text = "I'm sleeping ",
+                text = " Working late ",
                 fontFamily = jaldiBoldFontFamily,
                 style = Typography.labelSmall,
                 color = white

@@ -1,4 +1,4 @@
-package com.example.roommateproject.FrontPage.Components
+package com.example.roommateproject.FrontPage.Components.UI
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -14,8 +14,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,13 +22,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.roommateproject.FrontPage.Components.ListView.ListScreenStateful
+import com.example.roommateproject.FrontPage.Components.UI.RoundedCornerShape
 import com.example.roommateproject.R
-import com.example.roommateproject.ui.theme.FunctionalRed
-import com.example.roommateproject.ui.theme.Typography
-import com.example.roommateproject.ui.theme.jaldiBoldFontFamily
-import com.example.roommateproject.ui.theme.jaldiFontFamily
 import com.example.roommateproject.ui.theme.lightBlue
-import com.example.roommateproject.ui.theme.white
 
 @Composable
 fun CustomDrawer(
