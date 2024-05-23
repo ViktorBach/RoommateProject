@@ -1,6 +1,7 @@
 package com.example.roommateproject.Services
 
 
+import com.example.roommateproject.FrontPage.Components.ListView.ShoppingList
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
@@ -23,6 +24,7 @@ class AccountService {
     private val homesCollection = db.collection("homes")
     private val eventsCollection = db.collection("events")
     private val calendarCollection = db.collection("calendars")
+    private val shoppingListCollection = db.collection("shoppinglist")
 
     companion object  {
         var currentEvents: List<EventData> = listOf()
@@ -60,6 +62,61 @@ class AccountService {
         )
 
         eventsCollection.add(eventData) // Adds new event to Firestore
+    }
+
+    fun addShoppingListItem(taskTitle: String) {
+        val itemData = hashMapOf(
+            "title" to taskTitle,
+            "completed" to false,
+            "createdAt" to Timestamp.now()
+        )
+
+        val documentReference = shoppingListCollection.document(currentHomeId)
+
+        documentReference.get()
+            .addOnSuccessListener { document ->
+                if (document.exists()) {
+                    documentReference.update(mapOf(taskTitle to itemData))
+                        .addOnSuccessListener {
+                            println("Item added successfully")
+                        }
+                        .addOnFailureListener { e ->
+                            println("Error adding item: ${e.message}")
+                        }
+                } else {
+                    documentReference.set(mapOf(taskTitle to itemData))
+                        .addOnSuccessListener {
+                            println("Item added successfully")
+                        }
+                        .addOnFailureListener { e ->
+                            println("Error adding item: ${e.message}")
+                        }
+                }
+            }
+            .addOnFailureListener { e ->
+                println("Error retrieving document: ${e.message}")
+            }
+    }
+
+    fun getShoppingListItems(onResult: (Boolean, List<ShoppingList>) -> Unit) {
+        shoppingListCollection.document(currentHomeId).get()
+            .addOnSuccessListener { document ->
+                if (document.exists()) {
+                    val items = document.data?.entries?.mapNotNull { entry ->
+                        val title = entry.key
+                        val data = entry.value as? Map<*, *> ?: return@mapNotNull null
+                        val completed = data["completed"] as? Boolean ?: false
+                        ShoppingList(title.toString(), completed)
+                    } ?: emptyList()
+                    onResult(true, items)
+                } else {
+                    onResult(true, emptyList())
+                }
+            }
+            .addOnFailureListener { e ->
+                println("Error retrieving shopping list items: ${e.message}")
+                onResult(false, emptyList())
+            }
     }
 
     data class CalendarData(

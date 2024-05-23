@@ -18,7 +18,6 @@ import com.example.roommateproject.ui.theme.*
 
 @Composable
 fun AddToListButton(onAddItem: (String) -> Unit) {
-    val accountService: AccountService = AccountService();
     var showDialog by remember { mutableStateOf(false) }
     var text by remember { mutableStateOf("") }  // Declare text here to use it both in TextField and Button
 
@@ -43,7 +42,7 @@ fun AddToListButton(onAddItem: (String) -> Unit) {
                         if (text.isNotBlank()) {
                             onAddItem(text)
                             showDialog = false
-                            text = ""  // Reset text after adding
+                            text = ""
                         }
                     }
                 ) {
@@ -53,7 +52,7 @@ fun AddToListButton(onAddItem: (String) -> Unit) {
             dismissButton = {
                 Button(onClick = {
                     showDialog = false
-                    text = ""  // Reset text when dismissing
+                    text = ""
                 }) {
                     Text("Cancel")
                 }
@@ -68,11 +67,9 @@ fun AddToListButton(onAddItem: (String) -> Unit) {
             .wrapContentHeight()
     ) {
         Button(
-            onClick = { showDialog = true
-                accountService.addEvent(AccountService.EventType.ADD_TO_LIST)
-                      },
+            onClick = { showDialog = true },
             colors = ButtonDefaults.buttonColors(
-                lightYellow // Set the button background to lightYellow,
+                lightYellow // Set the button background to lightYellow
             )
         ) {
             Text(
