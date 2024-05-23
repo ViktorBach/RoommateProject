@@ -24,6 +24,14 @@ import com.example.roommateproject.ui.theme.boxLayerGrey
 import com.example.roommateproject.ui.theme.earthyBrown
 import com.example.roommateproject.ui.theme.jaldiFontFamily
 /*
+
+/*
+                                          **********************
+                                             * News Tab MIS *
+                                          **********************
+ */
+
+
 @Composable
 fun NewsTab() {
     val accountService: AccountService = AccountService();
