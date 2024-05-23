@@ -74,6 +74,7 @@ fun ListAddButton(onAddItem: (String) -> Unit) {
         OutlinedButton(modifier = Modifier,
             onClick = { showDialog = true },
             border = BorderStroke(2.dp, Color.White),
+            shape = androidx.compose.foundation.shape.RoundedCornerShape(8.dp),
             colors = ButtonDefaults.buttonColors(
                 Color.Transparent // Set the button background to lightYellow,
             )

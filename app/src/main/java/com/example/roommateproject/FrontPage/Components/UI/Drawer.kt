@@ -39,9 +39,9 @@ fun CustomDrawer(
             Box(
                 modifier = Modifier
                     .fillMaxSize()
+                    .padding(top = 183.dp)
                     .background(Color.Transparent) // Set the background to transparent
                     .clickable(onClick = onClose),
-                contentAlignment = Alignment.CenterStart
             ) {
                 Row (
                     modifier = Modifier.wrapContentSize()

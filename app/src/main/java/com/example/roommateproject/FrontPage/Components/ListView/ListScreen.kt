@@ -112,6 +112,7 @@ fun ListsScreen(
                 OutlinedButton(
                     modifier = Modifier,
                     border = BorderStroke(2.dp, White),
+                    shape = androidx.compose.foundation.shape.RoundedCornerShape(8.dp),
                     colors = ButtonDefaults.buttonColors(
                         Color.Transparent // Set the button background to lightYellow,
                     ),

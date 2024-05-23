@@ -2,6 +2,7 @@ package com.example.roommateproject.FrontPage.Components.Buttons
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
@@ -29,8 +30,8 @@ fun GuestVisitButton() {
     Box(
         modifier = Modifier
             .background(Color.White)
-            .fillMaxWidth(0.5f)
-            .wrapContentHeight(),
+            .fillMaxWidth(0.483f)
+            .fillMaxHeight(0.75f),
         contentAlignment = Alignment.Center
     ) {
         Button(
@@ -39,12 +40,15 @@ fun GuestVisitButton() {
 
                 accountService.addEvent(AccountService.EventType.GUEST_VISIT)
             }, //insert notification that user is having guests over
+            shape = androidx.compose.foundation.shape.RoundedCornerShape(8.dp),
             colors = ButtonDefaults.buttonColors(
                 lightYellow
-            ), modifier = Modifier.padding(start = 25.dp)
+            ),
+            contentPadding = androidx.compose.foundation.layout.PaddingValues(5.dp), // Set content padding to zero
+            modifier = Modifier.padding(start = 60.dp)
         ) {
             Text(
-                text = "  Guest visit  ",
+                text = "  Guest Visit  ",
                 fontFamily = jaldiBoldFontFamily,
                 style = Typography.labelSmall,
                 color = white,

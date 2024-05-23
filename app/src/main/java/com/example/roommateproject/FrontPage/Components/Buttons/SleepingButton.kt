@@ -2,6 +2,7 @@ package com.example.roommateproject.FrontPage.Components.Buttons
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
@@ -30,8 +31,8 @@ fun SleepingButton() {
     Box(
         modifier = Modifier
             .background(Color.White)
-            .fillMaxWidth(0.5f)
-            .wrapContentHeight(),
+            .fillMaxWidth(0.483f)
+            .fillMaxHeight(0.38f),
         contentAlignment = Alignment.Center
     ) {
         Button(
@@ -39,12 +40,15 @@ fun SleepingButton() {
                 sendNotification("${AccountService.currentUserName} is going to bed", context)
                 accountService.addEvent(AccountService.EventType.I_AM_SLEEPING)
             }, //insert notification that user is going to bed
+            shape = androidx.compose.foundation.shape.RoundedCornerShape(8.dp),
             colors = ButtonDefaults.buttonColors(
                 lightYellow
-            ), modifier = Modifier.padding(start = 25.dp)
+            ),
+            contentPadding = androidx.compose.foundation.layout.PaddingValues(5.dp), // Set content padding to zero
+            modifier = Modifier.padding(start = 60.dp)
         ) {
             Text(
-                text = "I'm sleeping ",
+                text = "I'm Sleeping ",
                 fontFamily = jaldiBoldFontFamily,
                 style = Typography.labelSmall,
                 color = white

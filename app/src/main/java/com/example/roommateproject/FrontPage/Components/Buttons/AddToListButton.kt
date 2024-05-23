@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
 import com.example.roommateproject.Services.AccountService
 import com.example.roommateproject.ui.theme.*
 
@@ -68,14 +69,17 @@ fun AddToListButton(onAddItem: (String) -> Unit) {
     ) {
         Button(
             onClick = { showDialog = true },
+            shape = androidx.compose.foundation.shape.RoundedCornerShape(8.dp),
             colors = ButtonDefaults.buttonColors(
                 lightYellow // Set the button background to lightYellow
-            )
+            ),
+            contentPadding = androidx.compose.foundation.layout.PaddingValues(start = 15.dp, top = 5.dp, bottom = 5.dp, end = 15.dp), // Set content padding to zero
+            modifier = Modifier
         ) {
             Text(
                 text = "Add to List",
                 fontFamily = jaldiBoldFontFamily,
-                style = Typography.labelSmall,
+                style = Typography.labelMedium,
                 color = white
             )
         }

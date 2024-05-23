@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.roommateproject.Register.RegisterViewModel
 import com.example.roommateproject.ui.theme.Typography
+import com.example.roommateproject.ui.theme.darkGreen
 import com.example.roommateproject.ui.theme.green
 import com.example.roommateproject.ui.theme.jaldiFontFamily
 import com.example.roommateproject.ui.theme.lightYellow
@@ -47,7 +48,7 @@ fun LoginButton (navigateFrontPage: () -> Unit) {
             Text(text = "Login",
                 fontFamily = jaldiFontFamily,
                 style = Typography.labelSmall,
-                color = green)
+                color = darkGreen)
         }
     }
 }
