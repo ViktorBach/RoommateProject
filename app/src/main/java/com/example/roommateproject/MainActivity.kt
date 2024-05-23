@@ -18,7 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
-import com.example.roommateproject.FrontPage.Components.CustomDrawer
+import com.example.roommateproject.FrontPage.Components.UI.CustomDrawer
 import com.example.roommateproject.FrontPage.FrontPage
 import com.example.roommateproject.Navigation.Navigation
 import com.example.roommateproject.ui.theme.RoommateProjectTheme
