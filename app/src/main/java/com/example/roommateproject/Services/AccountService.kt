@@ -11,6 +11,7 @@ import kotlinx.coroutines.tasks.await
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import com.google.firebase.Timestamp
+import com.google.firebase.firestore.FieldValue
 import java.time.Instant
 import java.time.ZoneId
 import java.util.Date
@@ -118,6 +119,33 @@ class AccountService {
                 onResult(false, emptyList())
             }
     }
+
+    fun removeShoppingListItem(taskTitle: String, onResult: (Boolean) -> Unit) {
+        val documentReference = shoppingListCollection.document(currentHomeId)
+
+        documentReference.get()
+            .addOnSuccessListener { document ->
+                if (document.exists()) {
+                    val updates = mapOf<String, Any?>(taskTitle to FieldValue.delete()) // Use FieldValue.delete() to remove the field
+                    documentReference.update(updates)
+                        .addOnSuccessListener {
+                            println("Item removed successfully")
+                            onResult(true)
+                        }
+                        .addOnFailureListener { e ->
+                            println("Error removing item: ${e.message}")
+                            onResult(false)
+                        }
+                } else {
+                    onResult(false)
+                }
+            }
+            .addOnFailureListener { e ->
+                println("Error retrieving document: ${e.message}")
+                onResult(false)
+            }
+    }
+
 
     data class CalendarData(
         var eventText: String,

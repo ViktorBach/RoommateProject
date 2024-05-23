@@ -4,6 +4,9 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.lifecycle.ViewModel
 import com.example.roommateproject.Services.AccountService
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class ListViewModel : ViewModel() {
 
@@ -42,7 +45,20 @@ class ListViewModel : ViewModel() {
         inputState.value = input
     }
 
-    fun removeCompletedItems() {
+    /*fun removeCompletedItems() {
         tasks.removeAll { it.completed }
+    }*/
+
+    fun removeCompletedItems() {
+        val completedItems = tasks.filter { it.completed }
+        completedItems.forEach { item ->
+            CoroutineScope(Dispatchers.IO).launch {
+                accountService.removeShoppingListItem(item.title) { success ->
+                    if (success) {
+                        tasks.remove(item)
+                    }
+                }
+            }
+        }
     }
 }
