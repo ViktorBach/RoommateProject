@@ -13,7 +13,6 @@ import com.google.firebase.Timestamp
 import java.time.Instant
 import java.time.ZoneId
 import java.util.Date
-import kotlin.time.Duration
 
 
 class AccountService {
@@ -35,32 +34,32 @@ class AccountService {
     }
 
     // enum class that contains the internal name and value of the EventTypes we have predefined
-    public enum class EventType(val eventText: String) {
-        I_AM_HOME("I'm home"),
-        I_AM_SLEEPING("I'm sleeping"),
-        I_AM_WORKING_LATE("I'm is working late"),
-        I_AM_LEAVING("I'm leaving"),
-        ADD_TO_LIST("Someone added grocery"),
-        GUEST_VISIT("have a guest over"),
-        EARLY_MORNING("I have an early morning"),
-        CALENDAR_EVENT("Someone added a calendar event")
+    enum class EventType(val eventText: String) {
+        I_AM_HOME("${AccountService.currentUserName} is home"),
+        I_AM_SLEEPING("${AccountService.currentUserName} is sleeping"),
+        I_AM_WORKING_LATE("${AccountService.currentUserName} is working late"),
+        I_AM_LEAVING("${AccountService.currentUserName} is leaving"),
+        ADD_TO_LIST("${AccountService.currentUserName} added groceries"),
+        GUEST_VISIT("${AccountService.currentUserName} has a guest over"),
+        EARLY_MORNING("${AccountService.currentUserName} has an early morning"),
+        CALENDAR_EVENT("${AccountService.currentUserName} added a calendar event")
     }
 
     data class EventData(
-        var eventType: EventType,
+        var eventType: String,
         var timeStamp: String
     )
 
     fun addEvent(eventType: EventType) {
         val eventData = hashMapOf(
-            "eventName" to eventType,
+            "eventName" to eventType.name, // Store the name of the enum
+            "eventText" to eventType.eventText, // Store the event text
             "homeId" to currentHomeId,
             "timeStamp" to Timestamp.now(),
             "userId" to currentUserId
         )
 
         eventsCollection.add(eventData) // Adds new event to Firestore
-
     }
 
     data class CalendarData(
@@ -95,6 +94,7 @@ class AccountService {
     }
 
     // Function that requests to get news event data from firestore collection
+    // Function that requests to get news event data from firestore collection
     suspend fun getEvents() {
         println("AccountService.currentHomeId: $currentHomeId")
         val oneDay = Instant.now().minus(java.time.Duration.ofDays(1)) // 24 hours ago
@@ -116,8 +116,8 @@ class AccountService {
                 val formattedDate = dateTime?.format(formatter) ?: "Unknown date"
 
                 EventData(
-                    EventType.valueOf(doc.getString("eventName") ?: ""),
-                    formattedDate
+                    eventType = doc.getString("eventText") ?: "Unknown event", // Fetch the event text directly
+                    timeStamp = formattedDate
                 )
             }.toList()
     }
