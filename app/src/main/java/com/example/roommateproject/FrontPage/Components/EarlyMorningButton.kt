@@ -35,7 +35,7 @@ fun EarlyMorningButton() {
     ) {
         Button(
             onClick = {
-                sendNotification("User is getting up early in the morning", context)
+                sendNotification("${AccountService.currentUserName} is getting up early in the morning", context)
 
                 accountService.addEvent(AccountService.EventType.EARLY_MORNING)
             }, //Insert notification that user is getting up early in the morning
