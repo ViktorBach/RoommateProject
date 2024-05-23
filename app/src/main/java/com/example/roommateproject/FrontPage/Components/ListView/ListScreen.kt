@@ -34,7 +34,7 @@ fun ListScreenStateful(listViewModel: ListViewModel = viewModel()) {
         onTaskClick = { listViewModel.toggleTaskCompleted(it.id) },
         onInputChange = { listViewModel.onInputChange(it) },
         onRemoveCompleted = { listViewModel.removeCompletedItems() },
-        onAddItem = { listViewModel.createTask(it) } // Pass the add item function
+        onAddItem = { listViewModel.createTask(it) }
     )
 }
 
@@ -45,7 +45,7 @@ fun ListsScreen(
     onTaskClick: (ShoppingList) -> Unit,
     onInputChange: (String) -> Unit,
     onRemoveCompleted: () -> Unit,
-    onAddItem: (String) -> Unit // Add this parameter
+    onAddItem: (String) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -128,7 +128,7 @@ fun ListsScreen(
         }
     }
 
-@Preview(showBackground = true)
+/*@Preview(showBackground = true)
 @Composable
 fun PreviewTasksScreen() {
     ListsScreen(
@@ -137,6 +137,6 @@ fun PreviewTasksScreen() {
         onTaskClick = {},
         onInputChange = {},
         onRemoveCompleted = {},
-        onAddItem = {} // Add this parameter
+        onAddItem = {}
     )
-}
+}*/

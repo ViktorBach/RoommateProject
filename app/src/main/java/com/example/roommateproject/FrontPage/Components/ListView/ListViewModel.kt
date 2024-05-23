@@ -3,16 +3,33 @@ package com.example.roommateproject.FrontPage.Components.ListView
 import androidx.compose.runtime.*
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.lifecycle.ViewModel
+import com.example.roommateproject.Services.AccountService
 
 class ListViewModel : ViewModel() {
 
-    val tasks: SnapshotStateList<ShoppingList> = mutableStateListOf(*sampleTasks.toTypedArray())
+    private val accountService: AccountService = AccountService()
+
+    val tasks: SnapshotStateList<ShoppingList> = mutableStateListOf()
 
     var inputState: MutableState<String?> = mutableStateOf(null)
+
+    init {
+        fetchTasks() // Fetch tasks when ViewModel is initialized
+    }
 
     fun createTask(taskTitle: String) {
         tasks.add(0, ShoppingList(taskTitle))
         inputState.value = null
+        accountService.addShoppingListItem(taskTitle) // Add to Firestore
+    }
+
+    fun fetchTasks() {
+        accountService.getShoppingListItems { success, items ->
+            if (success) {
+                tasks.clear()
+                tasks.addAll(items)
+            }
+        }
     }
 
     fun toggleTaskCompleted(taskId: String) {
@@ -27,17 +44,5 @@ class ListViewModel : ViewModel() {
 
     fun removeCompletedItems() {
         tasks.removeAll { it.completed }
-    }
-
-    companion object {
-        val sampleTasks = listOf(
-            ShoppingList("Sell my iPhone", completed = false),
-            ShoppingList("Get hired at Shape", completed = false),
-            ShoppingList("Return library books", completed = false),
-            ShoppingList("Read “Best Interface is No Interface by Golden Krishna”", completed = false),
-            ShoppingList("Go to Sydhavnstippen", completed = true),
-            ShoppingList("Visit parents", completed = true),
-            ShoppingList("Attend Shape Guest Lecture", completed = true)
-        )
     }
 }
