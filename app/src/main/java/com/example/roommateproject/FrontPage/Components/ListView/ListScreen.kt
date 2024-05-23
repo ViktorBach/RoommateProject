@@ -15,10 +15,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.roommateproject.FrontPage.Components.ListAddButton
+import com.example.roommateproject.Services.AccountService
 import com.example.roommateproject.ui.theme.Shadow10
 import com.example.roommateproject.ui.theme.Typography
 import com.example.roommateproject.ui.theme.darkGreen
 import com.example.roommateproject.ui.theme.jaldiBoldFontFamily
+import com.example.roommateproject.ui.theme.jaldiFontFamily
 import com.example.roommateproject.ui.theme.playFairDisplayFontFamily
 import com.example.roommateproject.ui.theme.skyBlue
 import com.example.roommateproject.ui.theme.white
@@ -34,7 +36,7 @@ fun ListScreenStateful(listViewModel: ListViewModel = viewModel()) {
         onTaskClick = { listViewModel.toggleTaskCompleted(it.id) },
         onInputChange = { listViewModel.onInputChange(it) },
         onRemoveCompleted = { listViewModel.removeCompletedItems() },
-        onAddItem = { listViewModel.createTask(it) }
+        onAddItem = { listViewModel.createTask(it) } // Pass the add item function
     )
 }
 

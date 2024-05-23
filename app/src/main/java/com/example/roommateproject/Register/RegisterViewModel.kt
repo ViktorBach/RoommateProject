@@ -11,13 +11,13 @@ import kotlinx.coroutines.launch
 class RegisterViewModel: ViewModel() {
     private val accountService: AccountService = AccountService();
 
-    var email by mutableStateOf("frank@gmail.com")
+    var email by mutableStateOf("")
         private set;
 
-    var password by mutableStateOf("frank1234")
+    var password by mutableStateOf("")
         private set;
 
-    var username by mutableStateOf("frank1234")
+    var username by mutableStateOf("")
         private set
 
     fun onEmailChange(email: String) {
