@@ -23,7 +23,7 @@ import com.example.roommateproject.Services.AccountService
 import com.example.roommateproject.ui.theme.boxLayerGrey
 import com.example.roommateproject.ui.theme.earthyBrown
 import com.example.roommateproject.ui.theme.jaldiFontFamily
-
+/*
 @Composable
 fun NewsTab() {
     val accountService: AccountService = AccountService();
@@ -79,3 +79,5 @@ fun NewsTab() {
         }
     }
 }
+
+ */
