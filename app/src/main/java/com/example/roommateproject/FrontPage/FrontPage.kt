@@ -32,7 +32,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.roommateproject.FrontPage.Components.CalendarTab.CalendarTab
 import com.example.roommateproject.FrontPage.Components.Buttons.EarlyMorningButton
 import com.example.roommateproject.FrontPage.Components.Buttons.GuestVisitButton
 import com.example.roommateproject.FrontPage.Components.ListView.AddToListButton
@@ -41,6 +40,7 @@ import com.example.roommateproject.FrontPage.Components.NewsTab.NewsTab
 import com.example.roommateproject.FrontPage.Components.UI.RoundedCornerShape
 import com.example.roommateproject.FrontPage.Components.Buttons.SleepingButton
 import com.example.roommateproject.FrontPage.Components.Buttons.WorkingLateButton
+import com.example.roommateproject.FrontPage.Components.CalendarTab
 import com.example.roommateproject.R
 import com.example.roommateproject.ui.theme.Typography
 import com.example.roommateproject.ui.theme.karantinaFontFamily
