@@ -11,7 +11,7 @@ fun EnterPasswordInput (navigateRoomLogin: () -> Unit) {
     val registerViewModel = viewModel<RegisterViewModel>()
 
     BoxLayout(
-        value = registerViewModel.password,
+        value = "frank1234",// registerViewModel.password,
         onValueChange = { newValue -> registerViewModel.onPasswordChange(newValue) },
         labelText = "Enter password",
         height = 0.18f

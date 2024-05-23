@@ -10,9 +10,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.ArrowDropDown
-import androidx.compose.material.icons.filled.DateRange
-import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
@@ -25,7 +24,8 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.roommateproject.Services.AccountService
 import com.example.roommateproject.ui.theme.boxLayerGrey
-import org.intellij.lang.annotations.JdkConstants.VerticalScrollBarPolicy
+import com.google.android.material.datepicker.DayViewDecorator
+import kotlinx.coroutines.launch
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -35,6 +35,9 @@ fun CalendarTab() {
     var date by remember { mutableStateOf("") }
     var isAddingEvent by remember { mutableStateOf(false) }
     val events by calendarTapViewModel.events.observeAsState(emptyList())
+    val scrollState = rememberScrollState()
+    val coroutineScope = rememberCoroutineScope()
+    var isScrolledToEvents by remember { mutableStateOf(false) }
 
     Box(
         modifier = Modifier
@@ -43,29 +46,48 @@ fun CalendarTab() {
             .padding(start = 60.dp)
             .clip(shape = RoundedCornerShape(20.dp))
             .background(color = boxLayerGrey)
-            .verticalScroll(ScrollState(1))
+            .verticalScroll(scrollState)
     ) {
         Column(
             modifier = Modifier
                 .fillMaxHeight()
                 .fillMaxWidth(),
-            verticalArrangement = Arrangement.Center,
+            verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-                AndroidView(factory = { context ->
-                    CalendarView(context).apply {
-                        setOnDateChangeListener { _, year, month, day ->
-                            date = "$day - ${month + 1} - $year"
-                            AccountService.currentDate = date
+            AndroidView(factory = { context ->
+                CalendarView(context).apply {
+                    setOnDateChangeListener { _, year, month, day ->
+                        date = "$day - ${month + 1} - $year"
+                        AccountService.currentDate = date
 
-                            calendarTapViewModel.fetchEventsFilteredByDate(date)
-                        }
+                        calendarTapViewModel.fetchEventsFilteredByDate(date)
                     }
-                }, modifier = Modifier.fillMaxSize(0.9f).fillMaxWidth())
-            IconButton(onClick = {}) {
-                Icon(imageVector = Icons.Default.ArrowDropDown, contentDescription = "Add Event")
-            }
+                }
+            }, modifier = Modifier
+                .width(300.dp)  // Set desired width for the CalendarView
+                .height(300.dp)  // Set desired height for the CalendarView
+                .padding(bottom = if (events.isEmpty()) 0.dp else 8.dp))  // Add padding to move the arrow button closer
+
+            if (events.isNotEmpty()) {
+                IconButton(onClick = {
+                    coroutineScope.launch {
+                        if (isScrolledToEvents) {
+                            scrollState.animateScrollTo(0)
+                        } else {
+                            scrollState.animateScrollTo(scrollState.maxValue)
+                        }
+                        isScrolledToEvents = !isScrolledToEvents
+                    }
+                }) {
+                    Icon(
+                        imageVector = if (isScrolledToEvents) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
+                        contentDescription = "Toggle Events View"
+                    )
+                }
+
                 ShowEvents(events)
+            }
         }
     }
 
@@ -84,7 +106,6 @@ fun CalendarTab() {
     IconButton(onClick = { isAddingEvent = true }) {
         Icon(imageVector = Icons.Default.Add, contentDescription = "Add Event")
     }
-
 }
 
 @Composable
@@ -128,13 +149,14 @@ fun AddEventDialog(selectedDate: String, onClose: () -> Unit, onAddEvent: (Strin
 fun ShowEvents(events: List<AccountService.CalendarData>) {
     Box(
         modifier = Modifier
-            .fillMaxSize()
+            .fillMaxWidth()
+            .wrapContentHeight()
             .background(Color.White)
             .padding(5.dp),
         contentAlignment = Alignment.TopCenter
     ) {
         Column(
-            verticalArrangement = Arrangement.Center,
+            verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             events.forEach { event ->
@@ -143,3 +165,4 @@ fun ShowEvents(events: List<AccountService.CalendarData>) {
         }
     }
 }
+
