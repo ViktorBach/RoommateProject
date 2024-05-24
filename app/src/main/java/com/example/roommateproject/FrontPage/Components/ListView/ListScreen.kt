@@ -48,18 +48,18 @@ fun ListsScreen(
 ) {
     Column(
         modifier = Modifier
-            .fillMaxSize()
-            .padding(start = 16.dp, top = 16.dp, end = 16.dp, bottom = 16.dp),
+            .fillMaxSize(),
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.Center,
+            horizontalArrangement = Arrangement.Start,
         ) {
             Box(
                 modifier = Modifier
-                    .width(400.dp)
-                    .height(83.dp)
-                    .background(skyBlue),
+                    .width(500.dp)
+                    .height(100.dp)
+                    .background(skyBlue)
+                    .padding(bottom = 0.dp),
                 contentAlignment = Alignment.Center
             ) {
                 Text(
@@ -70,18 +70,25 @@ fun ListsScreen(
                 )
             }
         }
-            HorizontalDivider(
+        HorizontalDivider(
                 modifier = Modifier
-                    .fillMaxWidth(0.99f),
+                    .fillMaxWidth(0.98f)
+                    .padding(start = 16.dp, end = 16.dp),
                 thickness = 3.dp,
                 color = Shadow10
             )
-        Box(
+        Column(
             modifier = Modifier
-                .width(400.dp)
-                .height(5.dp)
-                .background(skyBlue),
-        )
+                .fillMaxSize()
+                .padding(16.dp),
+        ) {
+            Box(
+                modifier = Modifier
+                    .width(400.dp)
+                    .height(5.dp)
+                    .background(skyBlue)
+                    .padding(16.dp),
+            )
             Row {
                 BasicTextField(
                     value = input ?: "",
@@ -94,12 +101,19 @@ fun ListsScreen(
                 )
             }
             lists.forEach { task ->
-                Text(
-                    text = if (task.completed) "✓ ${task.title}" else task.title,
+                Row(
                     modifier = Modifier
+                        .fillMaxWidth()
                         .clickable { onTaskClick(task) }
                         .padding(vertical = 8.dp)
-                )
+                ) {
+                    Text(
+                        text = if (task.completed) "✓ ${task.title}" else task.title,
+                        modifier = Modifier
+                            .clickable { onTaskClick(task) }
+                            .padding(vertical = 8.dp)
+                    )
+                }
             }
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -113,7 +127,7 @@ fun ListsScreen(
                     border = BorderStroke(2.dp, White),
                     shape = androidx.compose.foundation.shape.RoundedCornerShape(8.dp),
                     colors = ButtonDefaults.buttonColors(
-                        Color.Transparent // Set the button background to lightYellow,
+                        Color.Transparent // Set the button background to transparent,
                     ),
                     onClick = onRemoveCompleted
                 ) {
@@ -127,6 +141,7 @@ fun ListsScreen(
             }
         }
     }
+}
 
 /*@Preview(showBackground = true)
 @Composable

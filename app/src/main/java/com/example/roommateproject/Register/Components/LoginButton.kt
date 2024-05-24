@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -19,7 +20,11 @@ import com.example.roommateproject.ui.theme.jaldiFontFamily
 import com.example.roommateproject.ui.theme.lightYellow
 
 @Composable
-fun LoginButton (navigateFrontPage: () -> Unit) {
+fun LoginButton(
+    isLoading: Boolean,
+    navigateFrontPage: () -> Unit,
+    onClick: () -> Unit
+) {
 
     val registerViewModel = viewModel<RegisterViewModel>()
 
@@ -32,12 +37,14 @@ fun LoginButton (navigateFrontPage: () -> Unit) {
     ) {
         Button(
             onClick = {
-                if (registerViewModel.email.isNotEmpty() &&
-                    registerViewModel.password.isNotEmpty()) {
-                    registerViewModel.loginWithUser(navigateFrontPage)
-                } else {
-                    println("Error: Email and password must be filled")
-                    // Show an appropriate error message to the user
+                if (!isLoading) {
+                    if (registerViewModel.email.isNotEmpty() &&
+                        registerViewModel.password.isNotEmpty()) {
+                        onClick()
+                    } else {
+                        println("Error: Email and password must be filled")
+                        // Show an appropriate error message to the user
+                    }
                 }
             },
             colors = ButtonDefaults.buttonColors(

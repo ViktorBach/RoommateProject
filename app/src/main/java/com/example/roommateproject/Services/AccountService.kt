@@ -146,6 +146,25 @@ class AccountService {
             }
     }
 
+    fun updateShoppingListItem(taskTitle: String, isCompleted: Boolean) {
+        val documentReference = shoppingListCollection.document(currentHomeId)
+
+        documentReference.get()
+            .addOnSuccessListener { document ->
+                if (document.exists()) {
+                    documentReference.update(mapOf("$taskTitle.completed" to isCompleted))
+                        .addOnSuccessListener {
+                            println("Item updated successfully")
+                        }
+                        .addOnFailureListener { e ->
+                            println("Error updating item: ${e.message}")
+                        }
+                }
+            }
+            .addOnFailureListener { e ->
+                println("Error retrieving document: ${e.message}")
+            }
+    }
 
     data class CalendarData(
         var eventText: String,

@@ -14,6 +14,10 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -26,6 +30,7 @@ import com.example.roommateproject.Register.Components.EnterUsernameInput
 import com.example.roommateproject.Register.Components.LoginButton
 import com.example.roommateproject.Register.Components.RegisterButton
 import com.example.roommateproject.Register.Components.WelcomeHomieTab
+import com.example.roommateproject.SharedComponents.CustomLoadingBar
 import com.example.roommateproject.SharedComponents.Header
 import com.example.roommateproject.ui.theme.Typography
 import com.example.roommateproject.ui.theme.jaldiFontFamily
@@ -36,6 +41,7 @@ import com.example.roommateproject.ui.theme.white
 fun Register (navigateRoomLogin: () -> Unit, navigateFrontPage: () -> Unit) {
 
     val registerViewModel = viewModel<RegisterViewModel>()
+    var isLoading by remember { mutableStateOf(false) }
 
     Column (
         modifier = Modifier
@@ -58,9 +64,32 @@ fun Register (navigateRoomLogin: () -> Unit, navigateFrontPage: () -> Unit) {
             EnterUsernameInput {}
         }
         Row {
-            RegisterButton (navigateRoomLogin = navigateRoomLogin)
-            LoginButton (navigateFrontPage = navigateFrontPage)
+            RegisterButton(
+                isLoading = isLoading,
+                navigateRoomLogin = navigateRoomLogin,
+                onClick = {
+                    isLoading = true
+                    registerViewModel.registerNewUser {
+                        isLoading = false
+                        navigateRoomLogin()
+                    }
+                }
+            )
+            LoginButton(
+                isLoading = isLoading,
+                navigateFrontPage = navigateFrontPage,
+                onClick = {
+                    isLoading = true
+                    registerViewModel.loginWithUser {
+                        isLoading = false
+                        navigateFrontPage()
+                    }
+                }
+            )
         }
+    }
+    if (isLoading) {
+        CustomLoadingBar()
     }
 }
 

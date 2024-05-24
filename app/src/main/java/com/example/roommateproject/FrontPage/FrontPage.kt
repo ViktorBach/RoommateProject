@@ -131,34 +131,25 @@ fun FrontPage(
         Row(
             verticalAlignment = Alignment.Top // Align items to the top of the row
         ) {
-            if (!isDrawerOpen) {
-                Box(
-                    modifier = Modifier
-                        .clip(shape = RoundedCornerShape(topRight = 20.dp, bottomRight = 20.dp))
-                        .background(
-                            if (isDrawerOpen) lightBlue.copy(alpha = 0f) else lightBlue.copy(alpha = 0.75f)
-                        ).height(100.dp) // Adjust the width to make it rectangular
-                        .width(40.dp)
-                        .wrapContentHeight()
-                        .clickable {
-                            coroutineScope.launch {
-                                drawerState.open()
-                            }
+            Box(
+                modifier = Modifier
+                    .clip(shape = RoundedCornerShape(topRight = 20.dp, bottomRight = 20.dp))
+                    .background(lightBlue.copy(alpha = 0.75f))
+                    .height(100.dp)
+                    .width(40.dp)
+                    .wrapContentHeight()
+                    .clickable {
+                        coroutineScope.launch {
+                            drawerState.open()
                         }
-                        .padding(
-                            start = 0.dp,
-                            top = 5.dp,
-                            end = 3.dp,
-                            bottom = 3.dp
-                        ) // Optional padding inside the box
-                ) {
-                    Image(
-                        modifier = Modifier
-                            .size(60.dp), // Adjust the size as needed
-                        painter = painterResource(id = R.drawable.ic_grocery_logo), // Use your PNG here
-                        contentDescription = "Grocery Logo"
-                    )
-                }
+                    }
+                    .padding(start = 0.dp, top = 5.dp, end = 3.dp, bottom = 3.dp)
+            ) {
+                Image(
+                    modifier = Modifier.size(60.dp),
+                    painter = painterResource(id = R.drawable.ic_grocery_logo),
+                    contentDescription = "Grocery Logo"
+                )
             }
             Spacer(modifier = Modifier.width(16.dp))
             NewsTab() // Calls the NewsTab file from Components

@@ -36,8 +36,13 @@ class ListViewModel : ViewModel() {
     }
 
     fun toggleTaskCompleted(taskId: String) {
-        tasks.firstOrNull { it.id == taskId }?.let {
-            tasks[tasks.indexOf(it)] = it.toggled()
+        tasks.firstOrNull { it.id == taskId }?.let { task ->
+            val toggledTask = task.toggled()
+            tasks[tasks.indexOf(task)] = toggledTask
+
+            CoroutineScope(Dispatchers.IO).launch {
+                accountService.updateShoppingListItem(task.title, toggledTask.completed)
+            }
         }
     }
 

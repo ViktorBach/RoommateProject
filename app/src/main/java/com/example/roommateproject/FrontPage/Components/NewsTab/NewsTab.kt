@@ -24,7 +24,6 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.roommateproject.ui.theme.boxLayerGrey
 import com.example.roommateproject.ui.theme.darkGreen
-import com.example.roommateproject.ui.theme.earthyBrown
 import com.example.roommateproject.ui.theme.jaldiFontFamily
 import java.text.SimpleDateFormat
 import java.util.Locale
