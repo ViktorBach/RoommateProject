@@ -4,19 +4,16 @@ import android.annotation.SuppressLint
 import android.widget.CalendarView
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.runtime.R
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -31,7 +28,6 @@ import com.example.roommateproject.FrontPage.Components.CalendarTab.CalendarTabV
 import com.example.roommateproject.Services.AccountService
 import com.example.roommateproject.ui.theme.boxLayerGrey
 import com.example.roommateproject.ui.theme.jaldiFontFamily
-import com.example.roommateproject.ui.theme.lightBlue
 import com.example.roommateproject.ui.theme.lightGrey
 import kotlinx.coroutines.launch
 
@@ -47,7 +43,6 @@ fun CalendarTab() {
     val coroutineScope = rememberCoroutineScope()
     var isScrolledToEvents by remember { mutableStateOf(false) }
     val accountService = AccountService()  // Initialize AccountService
-
 
     Box(
         modifier = Modifier
@@ -121,7 +116,7 @@ fun CalendarTab() {
 
 @Composable
 fun AddEventDialog(selectedDate: String, onClose: () -> Unit, onAddEvent: (String) -> Unit,
-    accountService: AccountService // Accept AccountService instance
+                   accountService: AccountService // Accept AccountService instance
 ) {
     var eventText by remember { mutableStateOf("") }
 
@@ -215,5 +210,3 @@ fun ShowEvents(events: List<AccountService.CalendarData>) {
         }
     }
 }
-
-
