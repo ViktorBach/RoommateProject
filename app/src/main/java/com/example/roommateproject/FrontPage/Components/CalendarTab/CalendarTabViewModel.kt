@@ -31,15 +31,16 @@ class CalendarTabViewModel : ViewModel() {
             // Optionally fetch updated events
         }
 
-        fun deleteEventByUid(uid: String) {
-            accountService.deleteCalendarEventByUid(uid,
-                onSuccess = {
-                    liveEvents.value = liveEvents.value?.filter { it.uid != uid }
-                },
-                onFailure = { exception ->
-                    println("Failed to delete calendar event: ${exception.message}")
-                }
-            )
-        }
+    fun deleteEventByUid(uid: String) {
+        accountService.deleteCalendarEventByUid(uid,
+            onSuccess = {
+                liveEvents.value = liveEvents.value?.filter { it.uid != uid }
+                println("Calendar event deleted successfully.")
+            },
+            onFailure = { exception ->
+                println("Failed to delete calendar event: ${exception.message}")
+            }
+        )
+    }
     }
 
