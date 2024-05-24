@@ -2,7 +2,9 @@ package com.example.roommateproject.FrontPage.Components
 
 import android.annotation.SuppressLint
 import android.widget.CalendarView
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -14,11 +16,13 @@ import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.R
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
@@ -26,6 +30,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.roommateproject.FrontPage.Components.CalendarTab.CalendarTabViewModel
 import com.example.roommateproject.Services.AccountService
 import com.example.roommateproject.ui.theme.boxLayerGrey
+import com.example.roommateproject.ui.theme.jaldiFontFamily
+import com.example.roommateproject.ui.theme.lightBlue
 import com.example.roommateproject.ui.theme.lightGrey
 import kotlinx.coroutines.launch
 
@@ -177,28 +183,31 @@ fun ShowEvents(events: List<AccountService.CalendarData>) {
                         .padding(vertical = 4.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
+                    Image(
+                        modifier = Modifier.fillMaxHeight(0.2f).fillMaxWidth(0.1f),
+                        painter = painterResource(id = com.example.roommateproject.R.drawable.blue_color),
+                        contentDescription = "Blue square"
+                    )
                     Text(
                         text = event.eventText,
-                        color = Color.Black,
-                        lineHeight = 35.sp,
+                        color = Color.DarkGray,
+                        lineHeight = 20.sp,
+                        fontFamily = jaldiFontFamily,
                         modifier = Modifier
                             .background(lightGrey)
                             .weight(1f) // This ensures the text takes up remaining space
                             .padding(8.dp)
+                            .alignByBaseline()
                     )
                     IconButton(
                         onClick = {
-                            calendarTapViewModel.deleteEvent(event.eventText)
+                            calendarTapViewModel.deleteEventByUid(event.uid)
                         }
                     ) {
-                        Icon(
-                            imageVector = Icons.Default.Delete, modifier = Modifier
-                                .background(
-                                    lightGrey
-                                )
-                                .fillMaxSize(0.37f)
-                                .align(Alignment.CenterVertically),
-                            contentDescription = "Delete calendar event"
+                        Image(
+                            modifier = Modifier.size(12.dp),
+                            painter = painterResource(id = com.example.roommateproject.R.drawable.delete_icon),
+                            contentDescription = "Delete icon"
                         )
                     }
                 }

@@ -1,6 +1,7 @@
 package com.example.roommateproject.Services
 
 
+import androidx.compose.ui.text.font.Typeface
 import com.example.roommateproject.FrontPage.Components.ListView.ShoppingList
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
@@ -168,18 +169,25 @@ class AccountService {
 
     data class CalendarData(
         var eventText: String,
-        var date: String
+        var date: String,
+        var uid: String = ""
     )
 
     fun addCalendarEvent(event: String) {
+        val newEventRef = calendarCollection.document()
         val calendarData = hashMapOf(
             "eventText" to event,
             "homeId" to currentHomeId,
             "date" to currentDate,
+            "uid" to newEventRef.id
         )
-
-        calendarCollection.add(calendarData) // Adds new event to Firestore
-
+        newEventRef.set(calendarData)
+            .addOnSuccessListener {
+                println("Calendar event added successfully")
+            }
+            .addOnFailureListener { exception ->
+                println("Error adding calendar event: ${exception.message}")
+            }
     }
 
     // Function that requests to get calendar event data from firestore collection
@@ -190,16 +198,16 @@ class AccountService {
                  val eventList = result.map { doc ->
                  println("calendarDoc:" + doc)
                  CalendarData(
-                     doc.data["eventText"].toString(),
-                     doc.data["date"].toString()
+                     uid = doc.id,  // Use the document ID as the uid
+                     eventText = doc.getString("eventText") ?: "",
+                     date = doc.getString("date") ?: ""
                  )}.toList()
                  onResult(true, eventList)
              }
     }
 
-    fun deleteCalendarEvent(event: String, onSuccess: () -> Unit, onFailure: (Exception) -> Unit) {
-        calendarCollection.document(event)
-            .delete()
+    fun deleteCalendarEventByUid(uid: String, onSuccess: () -> Unit, onFailure: (Exception) -> Unit) {
+        calendarCollection.document(uid).delete()
             .addOnSuccessListener {
                 onSuccess()
             }
@@ -207,6 +215,7 @@ class AccountService {
                 onFailure(exception)
             }
     }
+
 
     // Function that requests to get news event data from firestore collection
     // Function that requests to get news event data from firestore collection
