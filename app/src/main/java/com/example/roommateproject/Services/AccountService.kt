@@ -301,6 +301,17 @@ class AccountService {
             }
     }
 
+    // FOR RESETTING PASSWORD
+    fun sendPasswordResetEmail(email: String, onResult: (Boolean, String?) -> Unit) {
+        auth.sendPasswordResetEmail(email)
+            .addOnSuccessListener {
+                onResult(true, null)
+            }
+            .addOnFailureListener { exception ->
+                onResult(false, exception.message)
+            }
+    }
+
     fun homeLogin(name: String, password: String, usernames: List<String>, onResult: (Boolean, String?) -> Unit) {
         homesCollection.whereEqualTo("home", name).get()
             .addOnSuccessListener { querySnapshot ->
