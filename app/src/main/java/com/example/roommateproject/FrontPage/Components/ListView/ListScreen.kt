@@ -48,18 +48,18 @@ fun ListsScreen(
 ) {
     Column(
         modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
+            .fillMaxSize(),
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.Center,
+            horizontalArrangement = Arrangement.Start,
         ) {
             Box(
                 modifier = Modifier
-                    .width(400.dp)
-                    .height(83.dp)
-                    .background(skyBlue),
+                    .width(500.dp)
+                    .height(100.dp)
+                    .background(skyBlue)
+                    .padding(bottom = 0.dp),
                 contentAlignment = Alignment.Center
             ) {
                 Text(
@@ -70,18 +70,25 @@ fun ListsScreen(
                 )
             }
         }
-            HorizontalDivider(
+        HorizontalDivider(
                 modifier = Modifier
-                    .fillMaxWidth(0.99f),
+                    .fillMaxWidth(0.98f)
+                    .padding(start = 16.dp, end = 16.dp),
                 thickness = 3.dp,
                 color = Shadow10
             )
-        Box(
+        Column(
             modifier = Modifier
-                .width(400.dp)
-                .height(5.dp)
-                .background(skyBlue),
-        )
+                .fillMaxSize()
+                .padding(16.dp),
+        ) {
+            Box(
+                modifier = Modifier
+                    .width(400.dp)
+                    .height(5.dp)
+                    .background(skyBlue)
+                    .padding(16.dp),
+            )
             Row {
                 BasicTextField(
                     value = input ?: "",
@@ -134,6 +141,7 @@ fun ListsScreen(
             }
         }
     }
+}
 
 /*@Preview(showBackground = true)
 @Composable

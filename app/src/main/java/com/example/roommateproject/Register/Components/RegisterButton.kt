@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -19,7 +20,11 @@ import com.example.roommateproject.ui.theme.jaldiFontFamily
 import com.example.roommateproject.ui.theme.lightYellow
 
 @Composable
-fun RegisterButton (navigateRoomLogin: () -> Unit) {
+fun RegisterButton(
+    isLoading: Boolean,
+    navigateRoomLogin: () -> Unit,
+    onClick: () -> Unit
+) {
 
     val registerViewModel = viewModel<RegisterViewModel>()
 
@@ -32,14 +37,16 @@ fun RegisterButton (navigateRoomLogin: () -> Unit) {
     ) {
         Button(
             onClick = {
-                if (registerViewModel.email.isNotEmpty() &&
-                    registerViewModel.password.isNotEmpty() &&
-                    registerViewModel.username.isNotEmpty()
-                ) {
-                    registerViewModel.registerNewUser(navigateRoomLogin)
-                } else {
-                    println("Error: All fields must be filled")
-                    // Show an appropriate error message to the user (e.g., Toast)
+                if (!isLoading) {
+                    if (registerViewModel.email.isNotEmpty() &&
+                        registerViewModel.password.isNotEmpty() &&
+                        registerViewModel.username.isNotEmpty()
+                    ) {
+                        onClick()
+                    } else {
+                        println("Error: All fields must be filled")
+                        // Show an appropriate error message to the user (e.g., Toast)
+                    }
                 }
             },
             colors = ButtonDefaults.buttonColors(
