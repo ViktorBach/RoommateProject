@@ -22,7 +22,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.roommateproject.FrontPage.Components.ListView.ListScreenStateful
-import com.example.roommateproject.FrontPage.Components.UI.RoundedCornerShape
 import com.example.roommateproject.R
 import com.example.roommateproject.ui.theme.lightBlue
 
