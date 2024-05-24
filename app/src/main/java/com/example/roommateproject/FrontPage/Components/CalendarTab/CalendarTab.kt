@@ -9,6 +9,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.*
@@ -19,11 +20,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.roommateproject.FrontPage.Components.CalendarTab.CalendarTabViewModel
 import com.example.roommateproject.Services.AccountService
 import com.example.roommateproject.ui.theme.boxLayerGrey
+import com.example.roommateproject.ui.theme.lightGrey
 import kotlinx.coroutines.launch
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -38,6 +41,7 @@ fun CalendarTab() {
     val coroutineScope = rememberCoroutineScope()
     var isScrolledToEvents by remember { mutableStateOf(false) }
     val accountService = AccountService()  // Initialize AccountService
+
 
     Box(
         modifier = Modifier
@@ -151,6 +155,8 @@ fun AddEventDialog(selectedDate: String, onClose: () -> Unit, onAddEvent: (Strin
 
 @Composable
 fun ShowEvents(events: List<AccountService.CalendarData>) {
+    val calendarTapViewModel = viewModel<CalendarTabViewModel>()
+
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -164,8 +170,41 @@ fun ShowEvents(events: List<AccountService.CalendarData>) {
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             events.forEach { event ->
-                Text(text = event.eventText, color = Color.Black)
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(lightGrey)
+                        .padding(vertical = 4.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = event.eventText,
+                        color = Color.Black,
+                        lineHeight = 35.sp,
+                        modifier = Modifier
+                            .background(lightGrey)
+                            .weight(1f) // This ensures the text takes up remaining space
+                            .padding(8.dp)
+                    )
+                    IconButton(
+                        onClick = {
+                            calendarTapViewModel.deleteEvent(event.eventText)
+                        }
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Delete, modifier = Modifier
+                                .background(
+                                    lightGrey
+                                )
+                                .fillMaxSize(0.37f)
+                                .align(Alignment.CenterVertically),
+                            contentDescription = "Delete calendar event"
+                        )
+                    }
+                }
             }
         }
     }
 }
+
+

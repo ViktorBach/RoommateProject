@@ -178,6 +178,17 @@ class AccountService {
              }
     }
 
+    fun deleteCalendarEvent(event: String, onSuccess: () -> Unit, onFailure: (Exception) -> Unit) {
+        calendarCollection.document(event)
+            .delete()
+            .addOnSuccessListener {
+                onSuccess()
+            }
+            .addOnFailureListener { exception ->
+                onFailure(exception)
+            }
+    }
+
     // Function that requests to get news event data from firestore collection
     // Function that requests to get news event data from firestore collection
     suspend fun getEvents() {
