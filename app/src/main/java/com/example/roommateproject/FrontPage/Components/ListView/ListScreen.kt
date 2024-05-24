@@ -50,7 +50,7 @@ fun ListsScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(start = 16.dp, top = 16.dp, end = 16.dp, bottom = 16.dp),
+            .padding(16.dp),
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -95,12 +95,19 @@ fun ListsScreen(
                 )
             }
             lists.forEach { task ->
-                Text(
-                    text = if (task.completed) "✓ ${task.title}" else task.title,
+                Row(
                     modifier = Modifier
+                        .fillMaxWidth()
                         .clickable { onTaskClick(task) }
                         .padding(vertical = 8.dp)
-                )
+                ) {
+                    Text(
+                        text = if (task.completed) "✓ ${task.title}" else task.title,
+                        modifier = Modifier
+                            .clickable { onTaskClick(task) }
+                            .padding(vertical = 8.dp)
+                    )
+                }
             }
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -114,7 +121,7 @@ fun ListsScreen(
                     border = BorderStroke(2.dp, White),
                     shape = androidx.compose.foundation.shape.RoundedCornerShape(8.dp),
                     colors = ButtonDefaults.buttonColors(
-                        Color.Transparent // Set the button background to lightYellow,
+                        Color.Transparent // Set the button background to transparent,
                     ),
                     onClick = onRemoveCompleted
                 ) {

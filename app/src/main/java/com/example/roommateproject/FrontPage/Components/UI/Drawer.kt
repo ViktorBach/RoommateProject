@@ -36,6 +36,7 @@ fun CustomDrawer(
         Box(
             modifier = Modifier.fillMaxSize(),
         ) {
+            // Full screen background that captures clicks to close the drawer
             Box(
                 modifier = Modifier
                     .fillMaxSize()
@@ -43,19 +44,21 @@ fun CustomDrawer(
                     .background(Color.Transparent) // Set the background to transparent
                     .clickable(onClick = onClose),
             ) {
+                // Row that contains the drawer content and the non-clickable button
                 Row (
                     modifier = Modifier.wrapContentSize()
                 ){
+                    // Blue box content
                     Box(
                         modifier = Modifier
                             .fillMaxHeight(0.59f)
                             .fillMaxWidth(0.85f) // 80% of the screen width
-                            .background(lightBlue.copy(alpha = 0.75f)),
+                            .background(lightBlue.copy(alpha = 0.75f))
+                            // Capture clicks inside the blue box to prevent drawer from closing
+                            .clickable(onClick = { /* Do nothing */ }),
                         contentAlignment = Alignment.CenterStart
                     ) {
-                        // Add your custom content here
                         Column {
-                            // Add more content here
                             ListScreenStateful()
                         }
                     }
