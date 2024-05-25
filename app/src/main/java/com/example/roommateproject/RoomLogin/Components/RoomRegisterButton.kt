@@ -13,33 +13,44 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.roommateproject.RoomLogin.RoomViewModel
-import com.example.roommateproject.ui.theme.Typography
-import com.example.roommateproject.ui.theme.green
-import com.example.roommateproject.ui.theme.jaldiFontFamily
-import com.example.roommateproject.ui.theme.lightYellow
+import com.example.roommateproject.ui.theme.*
 
 @Composable
-fun LoginButton (navigateFrontPage: () -> Unit) {
-
+fun RoomRegisterButton(
+    isLoading: Boolean,
+    navigateFrontPage: () -> Unit,
+    onClick: () -> Unit
+) {
     val roomViewModel = viewModel<RoomViewModel>()
+
     Box(
         modifier = Modifier
             .background(Color.White)
             .fillMaxHeight(0.75f)
-            .fillMaxWidth(1f),
+            .fillMaxWidth(0.5f),
         contentAlignment = Alignment.Center
     ) {
         Button(
-            onClick = { roomViewModel.houseLogin(navigateFrontPage) },
+            onClick = {
+                if (roomViewModel.houseName.isNotEmpty() &&
+                    roomViewModel.password.isNotEmpty() &&
+                    roomViewModel.members.isNotEmpty()
+                ) {
+                    roomViewModel.registerNewHouse(navigateFrontPage)
+                } else {
+                    println("Error: All fields must be filled")
+                    // Show an appropriate error message to the user (e.g., Toast)
+                }
+            },
             colors = ButtonDefaults.buttonColors(
-                lightYellow // Set the text color to lightYellow
+                lightYellow
             )
         ) {
             Text(
-                text = "Login",
+                text = "Register",
                 fontFamily = jaldiFontFamily,
                 style = Typography.labelSmall,
-                color = green
+                color = darkGreen // Ensure this is the correct color from your theme
             )
         }
     }

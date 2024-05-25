@@ -13,38 +13,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.roommateproject.RoomLogin.BoxLayout
 import com.example.roommateproject.RoomLogin.RoomViewModel
 import com.example.roommateproject.ui.theme.Typography
 import com.example.roommateproject.ui.theme.jaldiFontFamily
 import com.example.roommateproject.ui.theme.lightBlue
 
 @Composable
-fun EnterUserNameInput (navigateFrontPage: () -> Unit) {
-
+fun EnterUserNameInput(navigateFrontPage: () -> Unit) {
     val roomViewModel = viewModel<RoomViewModel>()
-    Box(
-        modifier = Modifier
-            .background(Color.White)
-            .fillMaxHeight(0.23f)
-            .fillMaxWidth(),
-        contentAlignment = Alignment.Center
-    ) {
-        OutlinedTextField(
-            value = roomViewModel.members.joinToString(),
-            onValueChange = {
-                roomViewModel.onMembersChange(
-                    it.split(",").map { it.trim() })},
-            label = {
-                Text(
-                    "Enter members (comma-separated)",
-                    fontFamily = jaldiFontFamily,
-                    style = Typography.labelMedium,
-                    color = lightBlue
-                )
-            },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp)
-        )
-    }
+    BoxLayout(
+        value = roomViewModel.members.joinToString(),
+        onValueChange = { newValue ->
+            roomViewModel.onMembersChange(newValue.split(",").map { it.trim() })
+        },
+        labelText = "Enter Members (comma-separated)",
+        height = 0.23f
+    )
 }

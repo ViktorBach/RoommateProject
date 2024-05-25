@@ -23,7 +23,7 @@ fun SetUpYourHomeTab() {
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = "Set up your home",
+            text = "Set Up Your Home",
             fontFamily = playFairDisplayFontFamily,
             style = Typography.titleSmall,
             color = lightYellow

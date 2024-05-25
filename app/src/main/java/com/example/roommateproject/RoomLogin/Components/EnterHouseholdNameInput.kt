@@ -13,37 +13,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.roommateproject.RoomLogin.BoxLayout
 import com.example.roommateproject.RoomLogin.RoomViewModel
 import com.example.roommateproject.ui.theme.Typography
 import com.example.roommateproject.ui.theme.jaldiFontFamily
 import com.example.roommateproject.ui.theme.lightBlue
 
 @Composable
-fun EnterHouseholdNameTab (navigateFrontPage: () -> Unit) {
-
+fun EnterHouseholdNameTab(navigateFrontPage: () -> Unit) {
     val roomViewModel = viewModel<RoomViewModel>()
-    Box(
-        modifier = Modifier
-            .background(Color.White)
-            .fillMaxHeight(0.17f)
-            .fillMaxWidth(),
-        contentAlignment = Alignment.Center
-    ) {
-        OutlinedTextField(
-            value = roomViewModel.houseName,
-            onValueChange = {
-                roomViewModel.onHouseNameChange(it)},
-            label = {
-                Text(
-                    "Enter household name",
-                    fontFamily = jaldiFontFamily,
-                    style = Typography.labelMedium,
-                    color = lightBlue
-                )
-            },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp)
-        )
-    }
+    BoxLayout(
+        value = roomViewModel.houseName,
+        onValueChange = { newValue -> roomViewModel.onHouseNameChange(newValue) },
+        labelText = "Enter Household Name",
+        height = 0.17f
+    )
 }

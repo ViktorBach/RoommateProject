@@ -19,28 +19,39 @@ import com.example.roommateproject.ui.theme.jaldiFontFamily
 import com.example.roommateproject.ui.theme.lightYellow
 
 @Composable
-fun RegisterButton (navigateFrontPage: () -> Unit) {
-
+fun RoomLoginButton(
+    isLoading: Boolean,
+    navigateFrontPage: () -> Unit,
+    onClick: () -> Unit,
+) {
     val roomViewModel = viewModel<RoomViewModel>()
+
     Box(
         modifier = Modifier
             .background(Color.White)
             .fillMaxHeight(0.75f)
-            .fillMaxWidth(0.5f),
+            .fillMaxWidth(1f),
         contentAlignment = Alignment.Center
     ) {
         Button(
-            onClick = { roomViewModel.registerNewHouse(navigateFrontPage) },
+                onClick = {
+                    if (roomViewModel.houseName.isNotEmpty() && roomViewModel.password.isNotEmpty()) {
+                        roomViewModel.houseLogin(navigateFrontPage)
+                    } else {
+                        println("Error: House name and password must be filled")
+                        // Show an appropriate error message to the user
+                    }
+                },
             colors = ButtonDefaults.buttonColors(
                 lightYellow // Set the text color to lightYellow
-            )
-        ) {
-            Text(
-                text = "Register",
-                fontFamily = jaldiFontFamily,
-                style = Typography.labelSmall,
-                color = green
-            )
+                )
+            ) {
+                Text(
+                    text = "Login",
+                    fontFamily = jaldiFontFamily,
+                    style = Typography.labelSmall,
+                    color = green
+                )
+            }
         }
-    } // Add this closing parenthesis here
-}
+    }
