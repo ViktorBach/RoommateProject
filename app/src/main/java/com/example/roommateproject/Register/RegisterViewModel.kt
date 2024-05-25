@@ -8,14 +8,14 @@ import androidx.lifecycle.viewModelScope
 import com.example.roommateproject.Services.AccountService
 import kotlinx.coroutines.launch
 
-class RegisterViewModel: ViewModel() {
-    private val accountService: AccountService = AccountService();
+class RegisterViewModel : ViewModel() {
+    private val accountService: AccountService = AccountService()
 
     var email by mutableStateOf("frank@gmail.com")
-        private set;
+        private set
 
     var password by mutableStateOf("frank1234")
-        private set;
+        private set
 
     var username by mutableStateOf("frank1234")
         private set
@@ -25,7 +25,7 @@ class RegisterViewModel: ViewModel() {
     }
 
     fun onPasswordChange(password: String) {
-        this.password = password;
+        this.password = password
     }
 
     fun onUsernameChange(username: String) {
@@ -46,7 +46,7 @@ class RegisterViewModel: ViewModel() {
     fun loginWithUser(navigateFrontPage: () -> Unit) {
         viewModelScope.launch {
             accountService.login(email, password) { success, errorMessage ->
-                if (success as Boolean) {
+                if (success) {
                     println("Login successful!!!!")
                     navigateFrontPage() // Navigates user to the frontpage screen
                 } else {
@@ -54,6 +54,17 @@ class RegisterViewModel: ViewModel() {
                 }
             }
             accountService.getEvents()
+        }
+    }
+
+    // Function to send a password reset email
+    fun sendPasswordResetEmail(email: String) {
+        accountService.sendPasswordResetEmail(email) { success, errorMessage ->
+            if (success) {
+                println("Password reset email sent successfully!")
+            } else {
+                println("Failed to send password reset email: $errorMessage")
+            }
         }
     }
 }
