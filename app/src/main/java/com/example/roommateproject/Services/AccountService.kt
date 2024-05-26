@@ -218,7 +218,6 @@ class AccountService {
 
 
     // Function that requests to get news event data from firestore collection
-    // Function that requests to get news event data from firestore collection
     suspend fun getEvents() {
         println("AccountService.currentHomeId: $currentHomeId")
         val oneDay = Instant.now().minus(java.time.Duration.ofDays(1)) // 24 hours ago

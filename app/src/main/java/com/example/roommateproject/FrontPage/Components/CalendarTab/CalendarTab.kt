@@ -27,8 +27,12 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.roommateproject.FrontPage.Components.CalendarTab.CalendarTabViewModel
 import com.example.roommateproject.Services.AccountService
 import com.example.roommateproject.ui.theme.boxLayerGrey
+import com.example.roommateproject.ui.theme.darkGreen
 import com.example.roommateproject.ui.theme.jaldiFontFamily
+import com.example.roommateproject.ui.theme.lightBlue
 import com.example.roommateproject.ui.theme.lightGrey
+import com.example.roommateproject.ui.theme.lightYellow
+import com.example.roommateproject.ui.theme.orange
 import kotlinx.coroutines.launch
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -122,7 +126,7 @@ fun AddEventDialog(selectedDate: String, onClose: () -> Unit, onAddEvent: (Strin
 
     AlertDialog(
         onDismissRequest = { onClose() },
-        title = { Text(text = "Add Event") },
+        title = { Text(text = "Add Event", fontFamily = jaldiFontFamily, color = orange, fontSize = 34.sp) },
         text = {
             Column {
                 Text(text = if (selectedDate.isEmpty()) "Select a date first" else "Date: $selectedDate")
@@ -141,13 +145,20 @@ fun AddEventDialog(selectedDate: String, onClose: () -> Unit, onAddEvent: (Strin
                     onAddEvent(eventText)
                     onClose()
                     accountService.addEvent(AccountService.EventType.CALENDAR_EVENT)  // Log the event
-                }
+                },
+                colors = ButtonDefaults.buttonColors(
+                    lightYellow
+                )
             ) {
                 Text("Add Event")
             }
         },
         dismissButton = {
-            Button(onClick = { onClose() }) {
+            Button(onClick = { onClose() },
+                colors = ButtonDefaults.buttonColors(
+                    lightYellow
+                )
+            ) {
                 Text("Cancel")
             }
         }
@@ -179,7 +190,9 @@ fun ShowEvents(events: List<AccountService.CalendarData>) {
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Image(
-                        modifier = Modifier.fillMaxHeight(0.2f).fillMaxWidth(0.1f),
+                        modifier = Modifier
+                            .fillMaxHeight(0.2f)
+                            .fillMaxWidth(0.1f),
                         painter = painterResource(id = com.example.roommateproject.R.drawable.blue_color),
                         contentDescription = "Blue square"
                     )

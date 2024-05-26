@@ -10,7 +10,7 @@ fun EnterUsernameInput (navigateRoomLogin: () -> Unit) {
 
     val registerViewModel = viewModel<RegisterViewModel>()
     BoxLayout(
-        value = "frank1234",//registerViewModel.username,
+        value = registerViewModel.username,//registerViewModel.username,
         onValueChange = { newValue -> registerViewModel.onUsernameChange(newValue) },
         labelText = "Enter username",
         height = 0.23f

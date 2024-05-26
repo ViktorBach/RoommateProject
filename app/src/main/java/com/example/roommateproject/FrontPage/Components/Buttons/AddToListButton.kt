@@ -9,6 +9,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.roommateproject.ui.theme.*
 
 @Composable
@@ -22,7 +23,7 @@ fun AddToListButton(onAddItem: (String) -> Unit) {
                 showDialog = false
             },
             title = {
-                Text(text = "Add New Item")
+                Text(text = "Add New Item", color = orange, fontFamily = jaldiFontFamily, fontSize = 30.sp)
             },
             text = {
                 TextField(
@@ -39,16 +40,23 @@ fun AddToListButton(onAddItem: (String) -> Unit) {
                             showDialog = false
                             text = ""
                         }
-                    }
+                    },
+                    colors = ButtonDefaults.buttonColors(
+                        lightYellow
+                    )
                 ) {
                     Text("Add")
                 }
             },
             dismissButton = {
                 Button(onClick = {
-                    showDialog = false
-                    text = ""
-                }) {
+                        showDialog = false
+                     text = ""
+                    },
+                        colors = ButtonDefaults.buttonColors(
+                        lightYellow
+                    )
+                ) {
                     Text("Cancel")
                 }
             }
