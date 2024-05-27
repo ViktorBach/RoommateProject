@@ -6,7 +6,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.roommateproject.Services.AccountService
+import kotlinx.coroutines.launch
 
 class RoomViewModel: ViewModel() {
     private val accountService: AccountService = AccountService();
@@ -33,6 +35,7 @@ class RoomViewModel: ViewModel() {
 
 
     fun registerNewHouse(navigateFrontPage: () -> Unit) {
+        viewModelScope.launch {
         accountService.createNewHouse(houseName, password, members) { success, errorMessage ->
             if (success as Boolean) {
                 println("House registered successfully!")
@@ -41,9 +44,12 @@ class RoomViewModel: ViewModel() {
                 println("House registration failed: $errorMessage") // Registration failed
             }
         }
+            accountService.getEvents()
+        }
     }
 
     fun houseLogin(navigateFrontPage: () -> Unit) {
+        viewModelScope.launch {
         accountService.homeLogin(houseName, password, members) { success, errorMessage ->
             if (success as Boolean) {
                 println("House Login Successful!")
@@ -51,6 +57,8 @@ class RoomViewModel: ViewModel() {
             } else {
                 println("House login failed: $errorMessage") // Registration failed
             }
+        }
+            accountService.getEvents()
         }
     }
 }

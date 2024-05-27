@@ -33,13 +33,18 @@ class RegisterViewModel : ViewModel() {
     }
 
     fun registerNewUser(navigateRoomLogin: () -> Unit) {
+        viewModelScope.launch {
         accountService.authenticate(email, password, username) { success, errorMessage ->
             if (success as Boolean) {
                 println("User registered successfully!")
+                AccountService.currentUserName = username
+                println(AccountService.currentUserName)
                 navigateRoomLogin() // Navigates user to the RoomLogin screen
             } else {
                 println("Registration failed: $errorMessage") // Registration failed
             }
+        }
+            accountService.getEvents()
         }
     }
 

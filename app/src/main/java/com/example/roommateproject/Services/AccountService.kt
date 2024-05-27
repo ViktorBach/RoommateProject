@@ -2,6 +2,7 @@ package com.example.roommateproject.Services
 
 
 import androidx.compose.ui.text.font.Typeface
+import androidx.lifecycle.viewModelScope
 import com.example.roommateproject.FrontPage.Components.ListView.ShoppingList
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
@@ -13,9 +14,13 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FieldValue
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.newCoroutineContext
 import java.time.Instant
 import java.time.ZoneId
 import java.util.Date
+import kotlin.coroutines.coroutineContext
 
 
 class AccountService {
@@ -32,7 +37,7 @@ class AccountService {
         var currentEvents: List<EventData> = listOf()
         var currentUserId = ""
         var currentUserName = ""
-        var currentHomeId = "udl6GrFbM5eMcgJc027j"
+        var currentHomeId = ""
         var currentCalendarEvents: List<CalendarData> = listOf()
         var currentDate = ""
     }
@@ -219,10 +224,9 @@ class AccountService {
 
     // Function that requests to get news event data from firestore collection
     suspend fun getEvents() {
-        println("AccountService.currentHomeId: $currentHomeId")
         val oneDay = Instant.now().minus(java.time.Duration.ofDays(1)) // 24 hours ago
         currentEvents = eventsCollection
-            .whereEqualTo("homeId", currentHomeId)
+            .whereEqualTo("homeId", AccountService.currentHomeId)
             .whereGreaterThan("timeStamp", Timestamp(Date.from(oneDay)))
             .get().await()
             .map { doc ->
@@ -271,7 +275,7 @@ class AccountService {
             }
     }
 
-     suspend fun login(email: String, password: String, onResult: (Boolean, String?) -> Unit) {
+     fun login(email: String, password: String, onResult: (Boolean, String?) -> Unit) {
         // Attempt to sign in the user
         auth.signInWithEmailAndPassword(email, password)
             .addOnSuccessListener { authResult ->
@@ -393,7 +397,8 @@ class AccountService {
 
                         homesCollection.add(homeData) // Add new household to Firestore
                             .addOnSuccessListener { newHomeDoc ->
-                                userDocs.forEach{doc ->                 // sending the home id generated to the user document connected to the home id
+                                userDocs.forEach{doc ->
+                                    AccountService.currentHomeId = newHomeDoc.id// sending the home id generated to the user document connected to the home id
                                     doc.reference.update("homeId", newHomeDoc.id)
                                 }
                                 onResult(true, null) // Household added successfully

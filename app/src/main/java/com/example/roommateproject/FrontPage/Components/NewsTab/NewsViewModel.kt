@@ -1,11 +1,14 @@
 package com.example.roommateproject.FrontPage.Components.NewsTab
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.roommateproject.Services.AccountService
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.Timestamp
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 import java.time.Instant
 import java.util.Date
 import kotlin.time.Duration
@@ -15,6 +18,8 @@ data class Event(val eventType: String, val timeStamp: Long)
 class NewsViewModel : ViewModel() {
     private val _events = MutableStateFlow<List<Event>>(emptyList())
     val events: StateFlow<List<Event>> = _events
+
+    val accountService: AccountService = AccountService();
 
     private val db = FirebaseFirestore.getInstance()
     private var listenerRegistration: ListenerRegistration? = null
@@ -28,12 +33,13 @@ class NewsViewModel : ViewModel() {
 
         listenerRegistration = db.collection("events")
             .orderBy("timeStamp", com.google.firebase.firestore.Query.Direction.DESCENDING)
+            .whereEqualTo("homeId", AccountService.currentHomeId)
             .addSnapshotListener { snapshot, exception ->
                 if (exception != null) {
                     // Handle error
                     return@addSnapshotListener
                 }
-
+                println("Tim: ${AccountService.currentHomeId}")
                 val eventsList = snapshot?.documents?.mapNotNull { document ->
                     val timeStamp = document.getTimestamp("timeStamp")
                     // Filter out events older than 24 hours
