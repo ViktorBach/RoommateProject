@@ -20,6 +20,10 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '11'
+          cache: 'gradle'
+
+      - name: Check Node.js Version
+        run: node -v
 
       - name: Install Ktlint
         run: curl -sSLO https://github.com/pinterest/ktlint/releases/download/0.45.2/ktlint && chmod a+x ktlint
