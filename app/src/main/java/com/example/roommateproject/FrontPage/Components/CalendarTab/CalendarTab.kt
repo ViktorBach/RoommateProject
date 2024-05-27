@@ -112,7 +112,8 @@ fun CalendarTab() {
                     }
                 }) {
                     Icon(
-                        imageVector = if (isScrolledToEvents) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
+                        imageVector = if (isScrolledToEvents) Icons.Default.KeyboardArrowUp
+                        else Icons.Default.KeyboardArrowDown,
                         contentDescription = "Toggle Events View"
                     )
                 }

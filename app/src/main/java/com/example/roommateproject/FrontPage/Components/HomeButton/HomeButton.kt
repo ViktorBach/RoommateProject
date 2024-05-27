@@ -21,7 +21,8 @@ import com.example.roommateproject.ui.theme.lightYellow
 import com.example.roommateproject.ui.theme.white
 
 @Composable
-fun HomeToggleButton(viewModel: HomeButtonViewModel = viewModel(factory = HomeButtonViewModelFactory(AccountService()))) {
+fun HomeToggleButton(viewModel: HomeButtonViewModel = viewModel(
+    factory = HomeButtonViewModelFactory(AccountService()))) {
     val context = LocalContext.current
     val isHome by viewModel.isHome
 
@@ -37,7 +38,8 @@ fun HomeToggleButton(viewModel: HomeButtonViewModel = viewModel(factory = HomeBu
             colors = ButtonDefaults.buttonColors(
                 lightYellow
             ),
-            contentPadding = androidx.compose.foundation.layout.PaddingValues(start = 15.dp, top = 5.dp, bottom = 5.dp, end = 15.dp), // Set content padding to zero
+            contentPadding = androidx.compose.foundation.layout.PaddingValues(
+                start = 15.dp, top = 5.dp, bottom = 5.dp, end = 15.dp), // Set content padding to zero
             modifier = Modifier
         ) {
             Text(

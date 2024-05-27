@@ -75,7 +75,8 @@ fun NewsTab(newsViewModel: NewsViewModel = viewModel()) {
                         )
                     }
                     val sdf = SimpleDateFormat("EEEE HH:mm", Locale.getDefault())
-                    val eventString = sortedEvents.joinToString("\n\n") { "${sdf.format(it.timeStamp)} \n   ${it.eventType}" }
+                    val eventString = sortedEvents.joinToString("\n\n")
+                    { "${sdf.format(it.timeStamp)} \n   ${it.eventType}" }
                     Text(
                         text = eventString,
                         fontFamily = jaldiFontFamily,

@@ -127,7 +127,8 @@ fun FrontPage(
         ) {
             HomeToggleButton() // Calls the HomeButton file from Components
             Spacer(modifier = Modifier.width(16.dp))
-            AddToListButton { item -> frontPageViewModel.createTask(item) } // Calls the AddToListButton file from Components
+            // Calls the AddToListButton file from Components
+            AddToListButton { item -> frontPageViewModel.createTask(item) }
         }
 
         Spacer(modifier = Modifier.height(22.dp))

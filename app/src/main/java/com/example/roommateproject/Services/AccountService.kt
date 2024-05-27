@@ -135,7 +135,8 @@ class AccountService {
         documentReference.get()
             .addOnSuccessListener { document ->
                 if (document.exists()) {
-                    val updates = mapOf<String, Any?>(taskTitle to FieldValue.delete()) // Use FieldValue.delete() to remove the field
+                    // Use FieldValue.delete() to remove the field
+                    val updates = mapOf<String, Any?>(taskTitle to FieldValue.delete())
                     documentReference.update(updates)
                         .addOnSuccessListener {
                             println("Item removed successfully")
@@ -405,7 +406,8 @@ class AccountService {
                         homesCollection.add(homeData) // Add new household to Firestore
                             .addOnSuccessListener { newHomeDoc ->
                                 userDocs.forEach{doc ->
-                                    AccountService.currentHomeId = newHomeDoc.id// sending the home id generated to the user document connected to the home id
+                                    // sending the home id generated to the user document connected to the home id
+                                    AccountService.currentHomeId = newHomeDoc.id
                                     doc.reference.update("homeId", newHomeDoc.id)
                                 }
                                 onResult(true, null) // Household added successfully

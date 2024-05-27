@@ -88,7 +88,8 @@ fun AddToListButton(onAddItem: (String) -> Unit) {
             colors = ButtonDefaults.buttonColors(
                 lightYellow // Set the button background to lightYellow
             ),
-            contentPadding = androidx.compose.foundation.layout.PaddingValues(start = 15.dp, top = 5.dp, bottom = 5.dp, end = 15.dp), // Set content padding to zero
+            contentPadding = androidx.compose.foundation.layout.PaddingValues(
+                start = 15.dp, top = 5.dp, bottom = 5.dp, end = 15.dp), // Set content padding to zero
             modifier = Modifier
         ) {
             Text(

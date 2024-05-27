@@ -18,7 +18,8 @@ fun Navigation(drawerState: DrawerState) {
 
     NavHost(navController = navController, startDestination = "Register") {
         composable("Register"){
-            Register(navigateRoomLogin = { navController.navigate("RoomLogin") }, navigateFrontPage = {navController.navigate("FrontPage")})
+            Register(navigateRoomLogin = { navController.navigate("RoomLogin") },
+                navigateFrontPage = {navController.navigate("FrontPage")})
         }
         composable("RoomLogin"){
             RoomLogin(navigateFrontPage = { navController.navigate("FrontPage") })
