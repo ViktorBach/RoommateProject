@@ -28,6 +28,9 @@ import com.example.roommateproject.ui.theme.jaldiFontFamily
 import java.text.SimpleDateFormat
 import java.util.Locale
 
+/*****************************************************************************/
+                    // News Tab Screen Composable Function //
+/*****************************************************************************/
 @Composable
 fun NewsTab(newsViewModel: NewsViewModel = viewModel()) {
     val events by newsViewModel.events.collectAsState()

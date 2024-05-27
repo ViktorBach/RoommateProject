@@ -10,6 +10,9 @@ import androidx.lifecycle.viewModelScope
 import com.example.roommateproject.Services.AccountService
 import kotlinx.coroutines.launch
 
+/*****************************************************************************/
+                // LoginViewModel class for login screen UI //
+/*****************************************************************************/
 class LoginViewModel: ViewModel() {
         private val accountService: AccountService = AccountService();
 
@@ -31,6 +34,7 @@ class LoginViewModel: ViewModel() {
             this.username = username
         }
 
+    // Function to login with user credentials
     fun loginWithUser(navigateFrontPage: () -> Unit) {
         viewModelScope.launch {
             accountService.login(email, password) { success, errorMessage ->

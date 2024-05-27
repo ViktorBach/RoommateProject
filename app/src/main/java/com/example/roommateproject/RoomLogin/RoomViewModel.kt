@@ -10,6 +10,9 @@ import androidx.lifecycle.viewModelScope
 import com.example.roommateproject.Services.AccountService
 import kotlinx.coroutines.launch
 
+/*****************************************************************************/
+ // RoomViewModel class represents the ViewModel for the RoomLogin screen. //
+/*****************************************************************************/
 class RoomViewModel: ViewModel() {
     private val accountService: AccountService = AccountService();
 
@@ -33,7 +36,7 @@ class RoomViewModel: ViewModel() {
         this.members = members;
     }
 
-
+    // Function to register a new house
     fun registerNewHouse(navigateFrontPage: () -> Unit) {
         viewModelScope.launch {
         accountService.createNewHouse(houseName, password, members) { success, errorMessage ->
@@ -48,6 +51,7 @@ class RoomViewModel: ViewModel() {
         }
     }
 
+    // Function to login to an existing house
     fun houseLogin(navigateFrontPage: () -> Unit) {
         viewModelScope.launch {
         accountService.homeLogin(houseName, password, members) { success, errorMessage ->

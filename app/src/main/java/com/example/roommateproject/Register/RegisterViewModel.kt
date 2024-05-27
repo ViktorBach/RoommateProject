@@ -7,7 +7,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.roommateproject.Services.AccountService
 import kotlinx.coroutines.launch
-
+/*****************************************************************************/
+// RegisterViewModel class represents the ViewModel for the Register screen. //
+/*****************************************************************************/
 class RegisterViewModel : ViewModel() {
     private val accountService: AccountService = AccountService()
 
@@ -32,6 +34,7 @@ class RegisterViewModel : ViewModel() {
         this.username = username
     }
 
+    // Function to register a new user
     fun registerNewUser(navigateRoomLogin: () -> Unit) {
         viewModelScope.launch {
         accountService.authenticate(email, password, username) { success, errorMessage ->
@@ -48,6 +51,7 @@ class RegisterViewModel : ViewModel() {
         }
     }
 
+    // Function to login a user
     fun loginWithUser(navigateFrontPage: () -> Unit) {
         viewModelScope.launch {
             accountService.login(email, password) { success, errorMessage ->

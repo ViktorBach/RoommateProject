@@ -9,6 +9,9 @@ import com.example.roommateproject.FrontPage.FrontPage
 import com.example.roommateproject.Register.Register
 import com.example.roommateproject.RoomLogin.RoomLogin
 
+/*****************************************************************************/
+                        // Navigation Composable //
+/*****************************************************************************/
 @Composable
 fun Navigation(drawerState: DrawerState) {
     val navController = rememberNavController()

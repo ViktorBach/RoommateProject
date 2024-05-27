@@ -22,9 +22,13 @@ import java.time.ZoneId
 import java.util.Date
 import kotlin.coroutines.coroutineContext
 
+  /*****************************************************************************/
+// AccountService class is responsible for handling user authentication and data //
+  /*****************************************************************************/
 
 class AccountService {
 
+    // Initialize Firebase Auth
     private val auth = FirebaseAuth.getInstance()
     private val db = FirebaseFirestore.getInstance()
     private val usersCollection = db.collection("users")
@@ -54,11 +58,13 @@ class AccountService {
         CALENDAR_EVENT("${AccountService.currentUserName} added a calendar event")
     }
 
+      // Data class that represents an event in the application
     data class EventData(
         var eventType: String,
         var timeStamp: String
     )
 
+      // Function that adds an event to Firestore
     fun addEvent(eventType: EventType) {
         val eventData = hashMapOf(
             "eventName" to eventType.name, // Store the name of the enum
@@ -71,6 +77,7 @@ class AccountService {
         eventsCollection.add(eventData) // Adds new event to Firestore
     }
 
+      // Function that requests to get shopping list data from firestore collection
     fun addShoppingListItem(taskTitle: String) {
         val itemData = hashMapOf(
             "title" to taskTitle,
@@ -105,6 +112,7 @@ class AccountService {
             }
     }
 
+      // Function that requests to get shopping list data from firestore collection
     fun getShoppingListItems(onResult: (Boolean, List<ShoppingList>) -> Unit) {
         shoppingListCollection.document(currentHomeId).get()
             .addOnSuccessListener { document ->
@@ -126,6 +134,7 @@ class AccountService {
             }
     }
 
+      // Function that requests to get shopping list data from firestore collection
     fun removeShoppingListItem(taskTitle: String, onResult: (Boolean) -> Unit) {
         val documentReference = shoppingListCollection.document(currentHomeId)
 
@@ -152,6 +161,7 @@ class AccountService {
             }
     }
 
+      // Function that requests to get shopping list data from firestore collection
     fun updateShoppingListItem(taskTitle: String, isCompleted: Boolean) {
         val documentReference = shoppingListCollection.document(currentHomeId)
 
@@ -172,12 +182,14 @@ class AccountService {
             }
     }
 
+      // Data class that represents a calendar event in the application
     data class CalendarData(
         var eventText: String,
         var date: String,
         var uid: String = ""
     )
 
+      // Function that adds a calendar event to Firestore
     fun addCalendarEvent(event: String) {
         val newEventRef = calendarCollection.document()
         val calendarData = hashMapOf(
@@ -211,6 +223,7 @@ class AccountService {
              }
     }
 
+      // Function that deletes calendar event data from firestore collection
     fun deleteCalendarEventByUid(uid: String, onSuccess: () -> Unit, onFailure: (Exception) -> Unit) {
         calendarCollection.document(uid).delete()
             .addOnSuccessListener {
@@ -251,7 +264,7 @@ class AccountService {
 
 
 
-
+    // Function that registers a user with email and password
     fun authenticate(email: String, password: String, username: String, onResult: (Boolean, String?) -> Unit) {
         Firebase.auth.createUserWithEmailAndPassword(email, password)
             .addOnSuccessListener { authResult ->
@@ -274,7 +287,7 @@ class AccountService {
         onResult(false, exception.message)
             }
     }
-
+    // Function that logs in a user with email and password
      fun login(email: String, password: String, onResult: (Boolean, String?) -> Unit) {
         // Attempt to sign in the user
         auth.signInWithEmailAndPassword(email, password)
@@ -304,7 +317,7 @@ class AccountService {
             }
     }
 
-    // FOR RESETTING PASSWORD
+    // Function that sends a password reset email to the user
     fun sendPasswordResetEmail(email: String, onResult: (Boolean, String?) -> Unit) {
         auth.sendPasswordResetEmail(email)
             .addOnSuccessListener {
@@ -315,6 +328,7 @@ class AccountService {
             }
     }
 
+    // Function that logs in a home with name and password
     fun homeLogin(name: String, password: String, usernames: List<String>, onResult: (Boolean, String?) -> Unit) {
         homesCollection.whereEqualTo("home", name).get()
             .addOnSuccessListener { querySnapshot ->
@@ -368,6 +382,7 @@ class AccountService {
                 onResult(false, exception.message)
             }
     }
+    // Function that creates a new home
     fun createNewHouse(name: String, password: String, usernames: List<String>, onResult: (Boolean, String?) -> Unit) {
         val userIds = mutableListOf<String>()
         var completedTasks = 0

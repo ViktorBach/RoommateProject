@@ -49,7 +49,9 @@ import com.example.roommateproject.ui.theme.lightBlue
 import com.example.roommateproject.ui.theme.orange
 import com.example.roommateproject.ui.theme.white
 import kotlinx.coroutines.launch
-
+/*****************************************************************************/
+                                // FrontPage UI //
+/*****************************************************************************/
 @SuppressLint("Range")
 @Composable
 fun FrontPage(
@@ -106,6 +108,7 @@ fun FrontPage(
                     .fillMaxHeight(0.1f),
                 contentAlignment = Alignment.CenterEnd
             ) {
+                // Call the Logout Button file from Components
                 LogoutButton(
                     navigateRegisterPage = navigateRegisterPage,
                     onClick = { frontPageViewModel.logOut(navigateRegisterPage) }

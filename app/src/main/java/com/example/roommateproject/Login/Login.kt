@@ -18,7 +18,11 @@ import com.example.roommateproject.ui.theme.green
 import com.example.roommateproject.ui.theme.jaldiFontFamily
 import com.example.roommateproject.ui.theme.lightYellow
 
+/*****************************************************************************/
+                                // Login Screen //
+/*****************************************************************************/
 @Composable
+ // Login function
  fun Login(navigateFrontPage: () -> Unit) {
 
     val registerViewModel = viewModel<RegisterViewModel>()

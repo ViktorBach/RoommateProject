@@ -35,6 +35,9 @@ import com.example.roommateproject.ui.theme.white
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.sp
 
+/*****************************************************************************/
+                            // Register Screen //
+/*****************************************************************************/
 @Composable
 fun Register(navigateRoomLogin: () -> Unit, navigateFrontPage: () -> Unit) {
     val registerViewModel = viewModel<RegisterViewModel>()
@@ -73,6 +76,7 @@ fun Register(navigateRoomLogin: () -> Unit, navigateFrontPage: () -> Unit) {
             )
         }
         Row {
+            // Register Button
             RegisterButton(
                 isLoading = isLoading,
                 navigateRoomLogin = navigateRoomLogin,
@@ -84,6 +88,7 @@ fun Register(navigateRoomLogin: () -> Unit, navigateFrontPage: () -> Unit) {
                     }
                 }
             )
+            // Login Button
             LoginButton(
                 isLoading = isLoading,
                 navigateFrontPage = navigateFrontPage,
@@ -97,11 +102,11 @@ fun Register(navigateRoomLogin: () -> Unit, navigateFrontPage: () -> Unit) {
             )
         }
     }
-
+    // Loading Bar
     if (isLoading) {
         CustomLoadingBar()
     }
-
+    // Forgot Password Dialog
     if (isForgotPasswordDialogVisible) {
         ForgotPasswordDialog(
             onDismiss = { isForgotPasswordDialogVisible = false },
@@ -149,6 +154,7 @@ fun ForgotPasswordDialog(onDismiss: () -> Unit, onSend: (String) -> Unit) {
     )
 }
 
+// Box for input fields
 @Composable
 fun BoxLayout(value: String, onValueChange: (String) -> Unit, labelText: String, height: Float) {
     Box(

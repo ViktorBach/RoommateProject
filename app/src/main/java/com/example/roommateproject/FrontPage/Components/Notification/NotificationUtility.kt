@@ -11,9 +11,14 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import com.example.roommateproject.R
 
+/*****************************************************************************/
+                // Notification Channel Setup and Functions //
+/*****************************************************************************/
+
 const val MY_CHANNEL_ID = "my_channel_id"
 const val PERMISSION_REQUEST_CODE = 123
 
+// Function to create the notification channel
 fun createNotificationChannel(context: Context) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
         val name = context.getString(R.string.channel_name)
@@ -28,6 +33,7 @@ fun createNotificationChannel(context: Context) {
     }
 }
 
+// Function to send a notification
 fun sendNotification(message: String, context: Context) {
     val builder = NotificationCompat.Builder(context, MY_CHANNEL_ID)
         .setSmallIcon(R.drawable.ic_notification)

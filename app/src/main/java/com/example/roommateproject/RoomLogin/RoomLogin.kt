@@ -35,6 +35,9 @@ import com.example.roommateproject.ui.theme.Typography
 import com.example.roommateproject.ui.theme.jaldiFontFamily
 import com.example.roommateproject.ui.theme.white
 
+/*****************************************************************************/
+                // Room Login Screen Composable Functions //
+/*****************************************************************************/
 @Composable
 fun RoomLogin (navigateFrontPage: () -> Unit) {
 
@@ -47,20 +50,21 @@ fun RoomLogin (navigateFrontPage: () -> Unit) {
     ) {
         Spacer(modifier = Modifier.width(16.dp))
         Row {
-            Header()
+            Header() // Calls the Header Composable Function
         }
         Row {
-            SetUpYourHomeTab()
+            SetUpYourHomeTab() // Calls the SetUpYourHomeTab Composable Function
         }
         Row {
-            EnterHouseholdNameTab {}
+            EnterHouseholdNameTab {} // Calls the EnterHouseholdNameTab Composable Function
         }
         Row {
-            EnterPasswordInput {}
+            EnterPasswordInput {} // Calls the EnterPasswordInput Composable Function
         }
         Row {
-            EnterUserNameInput {}
+            EnterUserNameInput {} // Calls the EnterUserNameInput Composable Function
         }
+        // Buttons Row
         Row {
             RoomRegisterButton(
                 isLoading = isLoading,
@@ -85,13 +89,14 @@ fun RoomLogin (navigateFrontPage: () -> Unit) {
                 }
             )
         }
+        // Loading Bar
         if (isLoading) {
             CustomLoadingBar()
         }
     }
 }
 
-
+// Box Layout for Input Fields
 @Composable
 fun BoxLayout( value: String, onValueChange: (String) -> Unit, labelText: String, height: Float ) {
     Box(

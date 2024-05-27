@@ -13,6 +13,9 @@ import java.time.Instant
 import java.util.Date
 import kotlin.time.Duration
 
+/*****************************************************************************/
+                            // NewsViewModel class //
+/*****************************************************************************/
 data class Event(val eventType: String, val timeStamp: Long)
 
 class NewsViewModel : ViewModel() {
@@ -28,6 +31,7 @@ class NewsViewModel : ViewModel() {
         fetchEvents()
     }
 
+    // Function to fetch events from Firestore via document snapshots
     private fun fetchEvents() {
         val oneDayAgo = Timestamp(Date.from(Instant.now().minus(java.time.Duration.ofDays(1)))) // Calculate the timestamp for 24 hours ago
 
@@ -57,7 +61,7 @@ class NewsViewModel : ViewModel() {
             }
     }
 
-
+    // Clears the listener when the ViewModel is cleared
     override fun onCleared() {
         super.onCleared()
         listenerRegistration?.remove()
