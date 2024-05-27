@@ -13,7 +13,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.roommateproject.RoomLogin.RoomViewModel
-import com.example.roommateproject.ui.theme.*
+import com.example.roommateproject.ui.theme.Typography
+import com.example.roommateproject.ui.theme.darkGreen
+import com.example.roommateproject.ui.theme.jaldiFontFamily
+import com.example.roommateproject.ui.theme.lightYellow
 
 @Composable
 fun RoomRegisterButton(

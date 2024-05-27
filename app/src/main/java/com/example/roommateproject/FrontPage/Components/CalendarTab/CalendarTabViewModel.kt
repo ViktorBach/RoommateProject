@@ -1,12 +1,9 @@
 package com.example.roommateproject.FrontPage.Components.CalendarTab
 
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.snapshots.SnapshotStateList
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.example.roommateproject.Services.AccountService
-import com.google.firebase.firestore.FirebaseFirestore
 
 class CalendarTabViewModel : ViewModel() {
         private val accountService: AccountService = AccountService()

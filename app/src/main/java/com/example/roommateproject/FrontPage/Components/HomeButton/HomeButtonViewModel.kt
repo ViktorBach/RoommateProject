@@ -1,12 +1,12 @@
 package com.example.roommateproject.FrontPage.Components.HomeButton
 
+import android.content.Context
+import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.launch
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.State
-import android.content.Context
 import com.example.roommateproject.Services.AccountService
+import kotlinx.coroutines.launch
 import sendNotification
 
 class HomeButtonViewModel(

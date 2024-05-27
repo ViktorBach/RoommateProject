@@ -11,10 +11,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.example.roommateproject.ui.theme.orange
+import com.example.roommateproject.ui.theme.Typography
 import com.example.roommateproject.ui.theme.karantinaFontFamily
 import com.example.roommateproject.ui.theme.katibehFontFamily
-import com.example.roommateproject.ui.theme.Typography
+import com.example.roommateproject.ui.theme.orange
 
 @Composable
 fun Header() {

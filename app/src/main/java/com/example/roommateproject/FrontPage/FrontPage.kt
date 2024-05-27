@@ -21,10 +21,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -34,13 +34,13 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.roommateproject.FrontPage.Components.Buttons.EarlyMorningButton
 import com.example.roommateproject.FrontPage.Components.Buttons.GuestVisitButton
+import com.example.roommateproject.FrontPage.Components.Buttons.SleepingButton
+import com.example.roommateproject.FrontPage.Components.Buttons.WorkingLateButton
+import com.example.roommateproject.FrontPage.Components.CalendarTab
 import com.example.roommateproject.FrontPage.Components.ListView.AddToListButton
 import com.example.roommateproject.FrontPage.Components.LogoutButton.LogoutButton
 import com.example.roommateproject.FrontPage.Components.NewsTab.NewsTab
 import com.example.roommateproject.FrontPage.Components.UI.RoundedCornerShape
-import com.example.roommateproject.FrontPage.Components.Buttons.SleepingButton
-import com.example.roommateproject.FrontPage.Components.Buttons.WorkingLateButton
-import com.example.roommateproject.FrontPage.Components.CalendarTab
 import com.example.roommateproject.R
 import com.example.roommateproject.ui.theme.Typography
 import com.example.roommateproject.ui.theme.karantinaFontFamily
@@ -49,6 +49,7 @@ import com.example.roommateproject.ui.theme.lightBlue
 import com.example.roommateproject.ui.theme.orange
 import com.example.roommateproject.ui.theme.white
 import kotlinx.coroutines.launch
+
 /*****************************************************************************/
                                 // FrontPage UI //
 /*****************************************************************************/

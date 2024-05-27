@@ -1,17 +1,14 @@
 package com.example.roommateproject.FrontPage.Components.NewsTab
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.example.roommateproject.Services.AccountService
+import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
-import com.google.firebase.Timestamp
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.launch
 import java.time.Instant
 import java.util.Date
-import kotlin.time.Duration
 
 /*****************************************************************************/
                             // NewsViewModel class //

@@ -1,29 +1,22 @@
 package com.example.roommateproject.Services
 
 
-import android.widget.Toast
-import androidx.compose.ui.text.font.Typeface
-import androidx.lifecycle.viewModelScope
 import com.example.roommateproject.FrontPage.Components.ListView.ShoppingList
 import com.google.firebase.Firebase
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-import com.google.firebase.Timestamp
-import com.google.firebase.firestore.FieldValue
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.newCoroutineContext
 import java.time.Instant
+import java.time.LocalDateTime
 import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 import java.util.Date
-import kotlin.coroutines.coroutineContext
 
-  /*****************************************************************************/
+/*****************************************************************************/
 // AccountService class is responsible for handling user authentication and data //
   /*****************************************************************************/
 
