@@ -1,6 +1,7 @@
 package com.example.roommateproject.Services
 
 
+import android.widget.Toast
 import androidx.compose.ui.text.font.Typeface
 import androidx.lifecycle.viewModelScope
 import com.example.roommateproject.FrontPage.Components.ListView.ShoppingList
@@ -237,14 +238,14 @@ class AccountService {
 
     // Function that requests to get news event data from firestore collection
     suspend fun getEvents() {
+        // calculates the amount of days we would like to fetch events by timestamp
         val oneDay = Instant.now().minus(java.time.Duration.ofDays(1)) // 24 hours ago
+        // sets the currentEvent companion object to the firestore eventsCollection
         currentEvents = eventsCollection
             .whereEqualTo("homeId", AccountService.currentHomeId)
             .whereGreaterThan("timeStamp", Timestamp(Date.from(oneDay)))
             .get().await()
             .map { doc ->
-                println("DOC: $doc")
-
                 val timeStamp = doc.get("timeStamp")
                 val dateTime = when (timeStamp) {
                     is Timestamp -> timeStamp.toDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime()
@@ -252,11 +253,11 @@ class AccountService {
                     else -> null
                 }
 
-                val formatter = DateTimeFormatter.ofPattern("EEEE HH:mm") // Define your desired date format here
+                val formatter = DateTimeFormatter.ofPattern("EEEE HH:mm") // Defines the date format
                 val formattedDate = dateTime?.format(formatter) ?: "Unknown date"
 
                 EventData(
-                    eventType = doc.getString("eventText") ?: "Unknown event", // Fetch the event text directly
+                    eventType = doc.getString("eventText") ?: "Unknown event", // Fetching the event text directly
                     timeStamp = formattedDate
                 )
             }.toList()
@@ -273,15 +274,14 @@ class AccountService {
         val userData = hashMapOf(
             "email" to email,
             "username" to username
-            // You can add more fields as needed
         )
         usersCollection.document(user!!.uid).set(userData)
-            .addOnSuccessListener {
-                onResult(true, null)
-            }
-            .addOnFailureListener { exception ->
-                onResult(false, exception.message)
-            }
+                .addOnSuccessListener {
+                    onResult(true, null)
+                }
+                .addOnFailureListener { exception ->
+                    onResult(false, exception.message)
+                }
             }
             .addOnFailureListener { exception ->
         onResult(false, exception.message)
@@ -294,14 +294,13 @@ class AccountService {
             .addOnSuccessListener { authResult ->
             // Login successful
             val user = authResult.user
-            // Retrieve the username associated with the logged-in user
+            // Get and set the current features to the current logged in user:
             usersCollection.document(user!!.uid).get()
                 .addOnSuccessListener { document ->
                     val username = document.getString("username").toString()
                     currentUserName = document.getString("username").toString()
                     currentUserId = user.uid
                     currentHomeId = document.getString("homeId").toString()
-                    println(currentHomeId)
 
                     // Pass the username along with the login result
                     onResult(true, username)

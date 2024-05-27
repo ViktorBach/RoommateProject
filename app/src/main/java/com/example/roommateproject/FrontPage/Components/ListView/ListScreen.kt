@@ -1,10 +1,15 @@
 package com.example.roommateproject.FrontPage.Components.ListView
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.ScrollableState
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -80,7 +85,8 @@ fun ListsScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(16.dp),
+                .padding(16.dp)
+                .verticalScroll(ScrollState(1)),
         ) {
             Box(
                 modifier = Modifier
@@ -89,17 +95,6 @@ fun ListsScreen(
                     .background(skyBlue)
                     .padding(16.dp),
             )
-            Row {
-                BasicTextField(
-                    value = input ?: "",
-                    onValueChange = {
-                        onInputChange(it)
-                    },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(bottom = 8.dp)
-                )
-            }
             lists.forEach { task ->
                 Row(
                     modifier = Modifier

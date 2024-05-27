@@ -114,7 +114,8 @@ fun CalendarTab() {
         )
     }
     IconButton(onClick = { isAddingEvent = true }) {
-        Icon(imageVector = Icons.Default.Add, contentDescription = "Add Event")
+        Icon(imageVector = Icons.Default.Add, contentDescription = "Add Event", modifier = Modifier.background(
+            lightBlue))
     }
 }
 

@@ -33,7 +33,8 @@ class NewsViewModel : ViewModel() {
 
     // Function to fetch events from Firestore via document snapshots
     private fun fetchEvents() {
-        val oneDayAgo = Timestamp(Date.from(Instant.now().minus(java.time.Duration.ofDays(1)))) // Calculate the timestamp for 24 hours ago
+        // calculates the amount of days we would like to fetch events by timestamp
+        val oneDayAgo = Timestamp(Date.from(Instant.now().minus(java.time.Duration.ofDays(1))))
 
         listenerRegistration = db.collection("events")
             .orderBy("timeStamp", com.google.firebase.firestore.Query.Direction.DESCENDING)
@@ -41,9 +42,8 @@ class NewsViewModel : ViewModel() {
             .addSnapshotListener { snapshot, exception ->
                 if (exception != null) {
                     // Handle error
-                    return@addSnapshotListener
+                    return@addSnapshotListener  // keeps the view up to date
                 }
-                println("Tim: ${AccountService.currentHomeId}")
                 val eventsList = snapshot?.documents?.mapNotNull { document ->
                     val timeStamp = document.getTimestamp("timeStamp")
                     // Filter out events older than 24 hours
