@@ -14,14 +14,14 @@ import com.example.roommateproject.ui.theme.lightYellow
 import com.example.roommateproject.ui.theme.playFairDisplayFontFamily
 
 @Composable
-
 fun WelcomeHomieTab() {
     Box(
-        modifier = Modifier
-            .background(Color.White)
-            .fillMaxHeight(0.2f)
-            .fillMaxWidth(),
-        contentAlignment = Alignment.Center
+        modifier =
+            Modifier
+                .background(Color.White)
+                .fillMaxHeight(0.2f)
+                .fillMaxWidth(),
+        contentAlignment = Alignment.Center,
     ) {
         Text(
             text = "Welcome Homie!",

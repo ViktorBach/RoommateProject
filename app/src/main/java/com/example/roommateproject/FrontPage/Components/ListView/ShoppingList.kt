@@ -1,12 +1,13 @@
 package com.example.roommateproject.FrontPage.Components.ListView
 
 /*****************************************************************************/
-                            // ShoppingList class //
+// ShoppingList class //
+
 /*****************************************************************************/
 data class ShoppingList(
     val title: String,
     val completed: Boolean = false,
-    val createdAt: Long = System.nanoTime()
+    val createdAt: Long = System.nanoTime(),
 ) {
     val id: String = createdAt.toString()
 

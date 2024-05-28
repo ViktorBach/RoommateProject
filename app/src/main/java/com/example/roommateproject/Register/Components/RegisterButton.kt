@@ -22,17 +22,17 @@ import com.example.roommateproject.ui.theme.lightYellow
 fun RegisterButton(
     isLoading: Boolean,
     navigateRoomLogin: () -> Unit,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
-
     val registerViewModel = viewModel<RegisterViewModel>()
 
     Box(
-        modifier = Modifier
-            .background(Color.White)
-            .fillMaxHeight(0.75f)
-            .fillMaxWidth(0.5f),
-        contentAlignment = Alignment.Center
+        modifier =
+            Modifier
+                .background(Color.White)
+                .fillMaxHeight(0.75f)
+                .fillMaxWidth(0.5f),
+        contentAlignment = Alignment.Center,
     ) {
         Button(
             onClick = {
@@ -48,15 +48,16 @@ fun RegisterButton(
                     }
                 }
             },
-            colors = ButtonDefaults.buttonColors(
-                lightYellow
-            )
+            colors =
+                ButtonDefaults.buttonColors(
+                    lightYellow,
+                ),
         ) {
             Text(
                 text = "Register",
                 fontFamily = jaldiFontFamily,
                 style = Typography.labelSmall,
-                color = darkGreen
+                color = darkGreen,
             )
         }
     }

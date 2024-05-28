@@ -26,7 +26,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
     }
@@ -72,13 +72,13 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     androidTestImplementation(platform("androidx.compose:compose-bom:2024.05.00"))
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
-    androidTestImplementation ("androidx.test:runner:1.5.2")
+    androidTestImplementation("androidx.test:runner:1.5.2")
     // Mockito for unit tests
-    testImplementation ("org.mockito:mockito-core:4.0.0")
+    testImplementation("org.mockito:mockito-core:4.0.0")
     // Optional: Mockito inline for final classes
-    testImplementation ("org.mockito:mockito-inline:4.0.0")
+    testImplementation("org.mockito:mockito-inline:4.0.0")
     // Optional: Kotlin extensions for Mockito
-    testImplementation ("org.mockito.kotlin:mockito-kotlin:4.0.0")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:4.0.0")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
     implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
@@ -89,7 +89,6 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:2.7.7")
     // add dependency to implement coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
-    implementation ("androidx.compose.material3:material3:1.2.1")
-    implementation ("org.jetbrains.kotlin:kotlin-reflect")
-
+    implementation("androidx.compose.material3:material3:1.2.1")
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
 }

@@ -27,31 +27,33 @@ fun RoomLoginButton(
     val roomViewModel = viewModel<RoomViewModel>()
 
     Box(
-        modifier = Modifier
-            .background(Color.White)
-            .fillMaxHeight(0.75f)
-            .fillMaxWidth(1f),
-        contentAlignment = Alignment.Center
+        modifier =
+            Modifier
+                .background(Color.White)
+                .fillMaxHeight(0.75f)
+                .fillMaxWidth(1f),
+        contentAlignment = Alignment.Center,
     ) {
         Button(
-                onClick = {
-                    if (roomViewModel.houseName.isNotEmpty() && roomViewModel.password.isNotEmpty()) {
-                        roomViewModel.houseLogin(navigateFrontPage)
-                    } else {
-                        println("Error: House name and password must be filled")
-                        // Show an appropriate error message to the user
-                    }
-                },
-            colors = ButtonDefaults.buttonColors(
-                lightYellow // Set the text color to lightYellow
-                )
-            ) {
-                Text(
-                    text = "Login",
-                    fontFamily = jaldiFontFamily,
-                    style = Typography.labelSmall,
-                    color = green
-                )
-            }
+            onClick = {
+                if (roomViewModel.houseName.isNotEmpty() && roomViewModel.password.isNotEmpty()) {
+                    roomViewModel.houseLogin(navigateFrontPage)
+                } else {
+                    println("Error: House name and password must be filled")
+                    // Show an appropriate error message to the user
+                }
+            },
+            colors =
+                ButtonDefaults.buttonColors(
+                    lightYellow, // Set the text color to lightYellow
+                ),
+        ) {
+            Text(
+                text = "Login",
+                fontFamily = jaldiFontFamily,
+                style = Typography.labelSmall,
+                color = green,
+            )
         }
     }
+}

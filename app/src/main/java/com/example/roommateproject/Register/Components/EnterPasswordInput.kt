@@ -6,14 +6,13 @@ import com.example.roommateproject.Register.BoxLayout
 import com.example.roommateproject.Register.RegisterViewModel
 
 @Composable
-fun EnterPasswordInput (navigateRoomLogin: () -> Unit) {
-
+fun EnterPasswordInput(navigateRoomLogin: () -> Unit) {
     val registerViewModel = viewModel<RegisterViewModel>()
 
     BoxLayout(
         value = registerViewModel.password,
         onValueChange = { newValue -> registerViewModel.onPasswordChange(newValue) },
         labelText = "Enter password",
-        height = 0.18f
+        height = 0.18f,
     )
 }

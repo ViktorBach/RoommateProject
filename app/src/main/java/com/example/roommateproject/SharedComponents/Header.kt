@@ -18,32 +18,34 @@ import com.example.roommateproject.ui.theme.orange
 
 @Composable
 fun Header() {
-    Row{
+    Row {
         Box(
-            modifier = Modifier
-                .background(Color.White)
-                .fillMaxHeight(0.1f),
-            contentAlignment = Alignment.CenterStart
+            modifier =
+                Modifier
+                    .background(Color.White)
+                    .fillMaxHeight(0.1f),
+            contentAlignment = Alignment.CenterStart,
         ) {
             Text(
                 text = "H",
                 fontFamily = karantinaFontFamily,
                 style = Typography.titleLarge,
                 color = orange,
-                modifier = Modifier.padding(start = 2.dp)
+                modifier = Modifier.padding(start = 2.dp),
             )
         }
         Box(
-            modifier = Modifier
-                .background(Color.White)
-                .fillMaxHeight(0.165f),
-            contentAlignment = Alignment.CenterStart
+            modifier =
+                Modifier
+                    .background(Color.White)
+                    .fillMaxHeight(0.165f),
+            contentAlignment = Alignment.CenterStart,
         ) {
             Text(
                 text = "omie",
                 fontFamily = katibehFontFamily,
                 style = Typography.titleMedium,
-                color = orange
+                color = orange,
             )
         }
     }

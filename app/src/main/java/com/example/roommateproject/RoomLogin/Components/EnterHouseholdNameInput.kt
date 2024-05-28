@@ -12,6 +12,6 @@ fun EnterHouseholdNameTab(navigateFrontPage: () -> Unit) {
         value = roomViewModel.houseName,
         onValueChange = { newValue -> roomViewModel.onHouseNameChange(newValue) },
         labelText = "Enter Household Name",
-        height = 0.17f
+        height = 0.17f,
     )
 }

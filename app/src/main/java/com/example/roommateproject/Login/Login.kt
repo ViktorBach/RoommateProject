@@ -19,31 +19,34 @@ import com.example.roommateproject.ui.theme.jaldiFontFamily
 import com.example.roommateproject.ui.theme.lightYellow
 
 /*****************************************************************************/
-                                // Login Screen //
-/*****************************************************************************/
-@Composable
- // Login function
- fun Login(navigateFrontPage: () -> Unit) {
+// Login Screen //
 
+/*****************************************************************************/
+// Login function
+@Composable
+fun Login(navigateFrontPage: () -> Unit) {
     val registerViewModel = viewModel<RegisterViewModel>()
 
     Box(
-        modifier = Modifier
-            .background(Color.White)
-            .fillMaxHeight(0.75f)
-            .fillMaxWidth(1f),
-        contentAlignment = Alignment.Center
+        modifier =
+            Modifier
+                .background(Color.White)
+                .fillMaxHeight(0.75f)
+                .fillMaxWidth(1f),
+        contentAlignment = Alignment.Center,
     ) {
         Button(
             onClick = { registerViewModel.loginWithUser(navigateFrontPage) },
-            colors = ButtonDefaults.buttonColors(
-                lightYellow // Set the text color to lightYellow
-            )
+            colors =
+                ButtonDefaults.buttonColors(
+                    lightYellow, // Set the text color to lightYellow
+                ),
         ) {
-            Text(text = "Login",
+            Text(
+                text = "Login",
                 fontFamily = jaldiFontFamily,
                 style = Typography.labelSmall,
-                color = green
+                color = green,
             )
         }
     }

@@ -14,6 +14,6 @@ fun EnterUserNameInput(navigateFrontPage: () -> Unit) {
             roomViewModel.onMembersChange(newValue.split(",").map { it.trim() })
         },
         labelText = "Enter Members (comma-separated)",
-        height = 0.23f
+        height = 0.23f,
     )
 }

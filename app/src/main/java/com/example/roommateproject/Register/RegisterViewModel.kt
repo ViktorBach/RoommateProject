@@ -9,6 +9,7 @@ import com.example.roommateproject.Services.AccountService
 import kotlinx.coroutines.launch
 /*****************************************************************************/
 // RegisterViewModel class represents the ViewModel for the Register screen. //
+
 /*****************************************************************************/
 class RegisterViewModel : ViewModel() {
     private val accountService: AccountService = AccountService()
@@ -23,7 +24,7 @@ class RegisterViewModel : ViewModel() {
         private set
 
     fun onEmailChange(email: String) {
-        this.email = email;
+        this.email = email
     }
 
     fun onPasswordChange(password: String) {
@@ -37,16 +38,16 @@ class RegisterViewModel : ViewModel() {
     // Function to register a new user
     fun registerNewUser(navigateRoomLogin: () -> Unit) {
         viewModelScope.launch {
-        accountService.authenticate(email, password, username) { success, errorMessage ->
-            if (success as Boolean) {
-                println("User registered successfully!")
-                AccountService.currentUserName = username
-                println(AccountService.currentUserName)
-                navigateRoomLogin() // Navigates user to the RoomLogin screen
-            } else {
-                println("Registration failed: $errorMessage") // Registration failed
+            accountService.authenticate(email, password, username) { success, errorMessage ->
+                if (success as Boolean) {
+                    println("User registered successfully!")
+                    AccountService.currentUserName = username
+                    println(AccountService.currentUserName)
+                    navigateRoomLogin() // Navigates user to the RoomLogin screen
+                } else {
+                    println("Registration failed: $errorMessage") // Registration failed
+                }
             }
-        }
             accountService.getEvents()
         }
     }

@@ -22,32 +22,35 @@ import com.example.roommateproject.ui.theme.white
 import sendNotification
 
 /*****************************************************************************/
-                            // Guest Visit Button //
+// Guest Visit Button //
+
 /*****************************************************************************/
 @Composable
 fun GuestVisitButton() {
-    val accountService: AccountService = AccountService();
+    val accountService: AccountService = AccountService()
     val context = LocalContext.current
 
     Box(
-        modifier = Modifier
-            .background(Color.White)
-            .fillMaxWidth(0.483f)
-            .fillMaxHeight(0.75f),
-        contentAlignment = Alignment.Center
+        modifier =
+            Modifier
+                .background(Color.White)
+                .fillMaxWidth(0.483f)
+                .fillMaxHeight(0.75f),
+        contentAlignment = Alignment.Center,
     ) {
         Button(
             onClick = {
                 sendNotification("${AccountService.currentUserName} is having guests over", context)
 
                 accountService.addEvent(AccountService.EventType.GUEST_VISIT)
-            }, //insert notification that user is having guests over
+            }, // insert notification that user is having guests over
             shape = androidx.compose.foundation.shape.RoundedCornerShape(8.dp),
-            colors = ButtonDefaults.buttonColors(
-                lightYellow
-            ),
+            colors =
+                ButtonDefaults.buttonColors(
+                    lightYellow,
+                ),
             contentPadding = androidx.compose.foundation.layout.PaddingValues(5.dp), // Set content padding to zero
-            modifier = Modifier.padding(start = 60.dp)
+            modifier = Modifier.padding(start = 60.dp),
         ) {
             Text(
                 text = "  Guest Visit  ",

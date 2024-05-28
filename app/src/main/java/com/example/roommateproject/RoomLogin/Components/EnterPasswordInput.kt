@@ -12,6 +12,6 @@ fun EnterPasswordInput(navigateFrontPage: () -> Unit) {
         value = roomViewModel.password,
         onValueChange = { newValue -> roomViewModel.onPasswordChange(newValue) },
         labelText = "Enter Password",
-        height = 0.18f
+        height = 0.18f,
     )
 }

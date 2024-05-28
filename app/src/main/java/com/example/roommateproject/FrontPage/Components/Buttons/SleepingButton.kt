@@ -22,37 +22,40 @@ import com.example.roommateproject.ui.theme.white
 import sendNotification
 
 /*****************************************************************************/
-                            // Sleeping Button //
+// Sleeping Button //
+
 /*****************************************************************************/
 @Composable
 fun SleepingButton() {
-    val accountService: AccountService = AccountService();
+    val accountService: AccountService = AccountService()
 
     val context = LocalContext.current
     Box(
-        modifier = Modifier
-            .background(Color.White)
-            .fillMaxWidth(0.483f)
-            .fillMaxHeight(0.38f),
-        contentAlignment = Alignment.Center
+        modifier =
+            Modifier
+                .background(Color.White)
+                .fillMaxWidth(0.483f)
+                .fillMaxHeight(0.38f),
+        contentAlignment = Alignment.Center,
     ) {
         Button(
             onClick = {
                 sendNotification("${AccountService.currentUserName} is going to bed", context)
                 accountService.addEvent(AccountService.EventType.I_AM_SLEEPING)
-            }, //insert notification that user is going to bed
+            }, // insert notification that user is going to bed
             shape = androidx.compose.foundation.shape.RoundedCornerShape(8.dp),
-            colors = ButtonDefaults.buttonColors(
-                lightYellow
-            ),
+            colors =
+                ButtonDefaults.buttonColors(
+                    lightYellow,
+                ),
             contentPadding = androidx.compose.foundation.layout.PaddingValues(5.dp), // Set content padding to zero
-            modifier = Modifier.padding(start = 60.dp)
+            modifier = Modifier.padding(start = 60.dp),
         ) {
             Text(
                 text = "I'm Sleeping ",
                 fontFamily = jaldiBoldFontFamily,
                 style = Typography.labelSmall,
-                color = white
+                color = white,
             )
         }
     }

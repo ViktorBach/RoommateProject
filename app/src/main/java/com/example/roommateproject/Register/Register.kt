@@ -43,16 +43,20 @@ import com.example.roommateproject.ui.theme.jaldiFontFamily
 import com.example.roommateproject.ui.theme.white
 
 /*****************************************************************************/
-                            // Register Screen //
+// Register Screen //
+
 /*****************************************************************************/
 @Composable
-fun Register(navigateRoomLogin: () -> Unit, navigateFrontPage: () -> Unit) {
+fun Register(
+    navigateRoomLogin: () -> Unit,
+    navigateFrontPage: () -> Unit,
+) {
     val registerViewModel = viewModel<RegisterViewModel>()
     var isLoading by remember { mutableStateOf(false) }
     var isForgotPasswordDialogVisible by remember { mutableStateOf(false) }
 
     Column(
-        modifier = Modifier.background(white)
+        modifier = Modifier.background(white),
     ) {
         Spacer(modifier = Modifier.width(16.dp))
         Row {
@@ -72,14 +76,14 @@ fun Register(navigateRoomLogin: () -> Unit, navigateFrontPage: () -> Unit) {
         }
         // Forgot Password
         Row(
-            modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+            modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
         ) {
             Text(
                 text = "Forgot Password?",
                 color = Color.Blue,
                 fontSize = 14.sp,
                 textDecoration = TextDecoration.Underline,
-                modifier = Modifier.clickable { isForgotPasswordDialogVisible = true }
+                modifier = Modifier.clickable { isForgotPasswordDialogVisible = true },
             )
         }
         Row {
@@ -93,7 +97,7 @@ fun Register(navigateRoomLogin: () -> Unit, navigateFrontPage: () -> Unit) {
                         isLoading = false
                         navigateRoomLogin()
                     }
-                }
+                },
             )
             // Login Button
             LoginButton(
@@ -105,7 +109,7 @@ fun Register(navigateRoomLogin: () -> Unit, navigateFrontPage: () -> Unit) {
                         isLoading = false
                         navigateFrontPage()
                     }
-                }
+                },
             )
         }
     }
@@ -120,15 +124,17 @@ fun Register(navigateRoomLogin: () -> Unit, navigateFrontPage: () -> Unit) {
             onSend = { email ->
                 registerViewModel.sendPasswordResetEmail(email)
                 isForgotPasswordDialogVisible = false
-            }
+            },
         )
     }
 }
 
-
 // Dialog box for password reset
 @Composable
-fun ForgotPasswordDialog(onDismiss: () -> Unit, onSend: (String) -> Unit) {
+fun ForgotPasswordDialog(
+    onDismiss: () -> Unit,
+    onSend: (String) -> Unit,
+) {
     var email by remember { mutableStateOf("") }
 
     AlertDialog(
@@ -142,13 +148,13 @@ fun ForgotPasswordDialog(onDismiss: () -> Unit, onSend: (String) -> Unit) {
                     value = email,
                     onValueChange = { email = it },
                     label = { Text("Email") },
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
                 )
             }
         },
         confirmButton = {
             Button(
-                onClick = { onSend(email) }
+                onClick = { onSend(email) },
             ) {
                 Text("Send")
             }
@@ -157,19 +163,25 @@ fun ForgotPasswordDialog(onDismiss: () -> Unit, onSend: (String) -> Unit) {
             Button(onClick = { onDismiss() }) {
                 Text("Cancel")
             }
-        }
+        },
     )
 }
 
 // Box for input fields
 @Composable
-fun BoxLayout(value: String, onValueChange: (String) -> Unit, labelText: String, height: Float) {
+fun BoxLayout(
+    value: String,
+    onValueChange: (String) -> Unit,
+    labelText: String,
+    height: Float,
+) {
     Box(
-        modifier = Modifier
-            .background(Color.White)
-            .fillMaxHeight(height)
-            .fillMaxWidth(),
-        contentAlignment = Alignment.Center
+        modifier =
+            Modifier
+                .background(Color.White)
+                .fillMaxHeight(height)
+                .fillMaxWidth(),
+        contentAlignment = Alignment.Center,
     ) {
         OutlinedTextField(
             value = value,
@@ -179,17 +191,19 @@ fun BoxLayout(value: String, onValueChange: (String) -> Unit, labelText: String,
                     labelText,
                     fontFamily = jaldiFontFamily,
                     style = Typography.labelMedium,
-                    color = Color.DarkGray
+                    color = Color.DarkGray,
                 )
             },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp),
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp),
             shape = RoundedCornerShape(20.dp),
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedBorderColor = Color.Gray,
-                unfocusedBorderColor = Color.LightGray
-            )
+            colors =
+                OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = Color.Gray,
+                    unfocusedBorderColor = Color.LightGray,
+                ),
         )
     }
 }

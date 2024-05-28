@@ -26,12 +26,13 @@ import com.example.roommateproject.ui.theme.orange
 import com.example.roommateproject.ui.theme.white
 
 /*****************************************************************************/
-                            // Add to list button //
+// Add to list button //
+
 /*****************************************************************************/
 @Composable
 fun AddToListButton(onAddItem: (String) -> Unit) {
     var showDialog by remember { mutableStateOf(false) }
-    var text by remember { mutableStateOf("") }  // Declare text here to use it both in TextField and Button
+    var text by remember { mutableStateOf("") } // Declare text here to use it both in TextField and Button
 
     if (showDialog) {
         AlertDialog(
@@ -45,7 +46,7 @@ fun AddToListButton(onAddItem: (String) -> Unit) {
                 TextField(
                     value = text,
                     onValueChange = { text = it },
-                    label = { Text("Item Name") }
+                    label = { Text("Item Name") },
                 )
             },
             confirmButton = {
@@ -57,49 +58,60 @@ fun AddToListButton(onAddItem: (String) -> Unit) {
                             text = ""
                         }
                     },
-                    colors = ButtonDefaults.buttonColors(
-                        lightYellow
-                    )
+                    colors =
+                        ButtonDefaults.buttonColors(
+                            lightYellow,
+                        ),
                 ) {
                     Text("Add")
                 }
             },
             dismissButton = {
-                Button(onClick = {
+                Button(
+                    onClick = {
                         showDialog = false
-                     text = ""
+                        text = ""
                     },
-                        colors = ButtonDefaults.buttonColors(
-                        lightYellow
-                    )
+                    colors =
+                        ButtonDefaults.buttonColors(
+                            lightYellow,
+                        ),
                 ) {
                     Text("Cancel")
                 }
-            }
+            },
         )
     }
 
     Box(
-        modifier = Modifier
-            .background(Color.White)
-            .wrapContentWidth()
-            .wrapContentHeight()
+        modifier =
+            Modifier
+                .background(Color.White)
+                .wrapContentWidth()
+                .wrapContentHeight(),
     ) {
         Button(
             onClick = { showDialog = true },
             shape = androidx.compose.foundation.shape.RoundedCornerShape(8.dp),
-            colors = ButtonDefaults.buttonColors(
-                lightYellow // Set the button background to lightYellow
-            ),
-            contentPadding = androidx.compose.foundation.layout.PaddingValues(
-                start = 15.dp, top = 5.dp, bottom = 5.dp, end = 15.dp), // Set content padding to zero
-            modifier = Modifier
+            colors =
+                ButtonDefaults.buttonColors(
+                    lightYellow, // Set the button background to lightYellow
+                ),
+            contentPadding =
+                androidx.compose.foundation.layout.PaddingValues(
+                    start = 15.dp,
+                    top = 5.dp,
+                    bottom = 5.dp,
+                    end = 15.dp,
+                ),
+            // Set content padding to zero
+            modifier = Modifier,
         ) {
             Text(
                 text = "Add to List",
                 fontFamily = jaldiBoldFontFamily,
                 style = Typography.labelMedium,
-                color = white
+                color = white,
             )
         }
     }

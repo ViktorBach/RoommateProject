@@ -16,17 +16,18 @@ import com.example.roommateproject.ui.theme.playFairDisplayFontFamily
 @Composable
 fun SetUpYourHomeTab() {
     Box(
-        modifier = Modifier
-            .background(Color.White)
-            .fillMaxHeight(0.2f)
-            .fillMaxWidth(),
-        contentAlignment = Alignment.Center
+        modifier =
+            Modifier
+                .background(Color.White)
+                .fillMaxHeight(0.2f)
+                .fillMaxWidth(),
+        contentAlignment = Alignment.Center,
     ) {
         Text(
             text = "Set Up Your Home",
             fontFamily = playFairDisplayFontFamily,
             style = Typography.titleSmall,
-            color = lightYellow
+            color = lightYellow,
         )
     }
 }

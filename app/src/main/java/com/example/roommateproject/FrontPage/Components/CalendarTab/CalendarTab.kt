@@ -58,7 +58,8 @@ import com.example.roommateproject.ui.theme.orange
 import kotlinx.coroutines.launch
 
 /*****************************************************************************/
-                        // Calendar Tab Screen //
+// Calendar Tab Screen //
+
 /*****************************************************************************/
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -71,37 +72,43 @@ fun CalendarTab() {
     val scrollState = rememberScrollState()
     val coroutineScope = rememberCoroutineScope()
     var isScrolledToEvents by remember { mutableStateOf(false) }
-    val accountService = AccountService()  // Initialize AccountService
+    val accountService = AccountService() // Initialize AccountService
 
     Box(
-        modifier = Modifier
-            .fillMaxHeight(0.7f)
-            .fillMaxWidth(0.85f)
-            .padding(start = 60.dp)
-            .clip(shape = RoundedCornerShape(20.dp))
-            .background(color = boxLayerGrey)
-            .verticalScroll(scrollState)
+        modifier =
+            Modifier
+                .fillMaxHeight(0.7f)
+                .fillMaxWidth(0.85f)
+                .padding(start = 60.dp)
+                .clip(shape = RoundedCornerShape(20.dp))
+                .background(color = boxLayerGrey)
+                .verticalScroll(scrollState),
     ) {
         Column(
-            modifier = Modifier
-                .fillMaxHeight()
-                .fillMaxWidth(),
+            modifier =
+                Modifier
+                    .fillMaxHeight()
+                    .fillMaxWidth(),
             verticalArrangement = Arrangement.Top,
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            AndroidView(factory = { context ->
-                CalendarView(context).apply {
-                    setOnDateChangeListener { _, year, month, day ->
-                        date = "$day - ${month + 1} - $year"
-                        AccountService.currentDate = date
+            AndroidView(
+                factory = { context ->
+                    CalendarView(context).apply {
+                        setOnDateChangeListener { _, year, month, day ->
+                            date = "$day - ${month + 1} - $year"
+                            AccountService.currentDate = date
 
-                        calendarTapViewModel.fetchEventsFilteredByDate(date)
+                            calendarTapViewModel.fetchEventsFilteredByDate(date)
+                        }
                     }
-                }
-            }, modifier = Modifier
-                .width(300.dp)  // Set desired width for the CalendarView
-                .height(300.dp)  // Set desired height for the CalendarView
-                .padding(bottom = if (events.isEmpty()) 0.dp else 8.dp))  // Add padding to move the arrow button closer
+                },
+                modifier =
+                    Modifier
+                        .width(300.dp) // Set desired width for the CalendarView
+                        .height(300.dp) // Set desired height for the CalendarView
+                        .padding(bottom = if (events.isEmpty()) 0.dp else 8.dp),
+            ) // Add padding to move the arrow button closer
 
             if (events.isNotEmpty()) {
                 IconButton(onClick = {
@@ -115,9 +122,13 @@ fun CalendarTab() {
                     }
                 }) {
                     Icon(
-                        imageVector = if (isScrolledToEvents) Icons.Default.KeyboardArrowUp
-                        else Icons.Default.KeyboardArrowDown,
-                        contentDescription = "Toggle Events View"
+                        imageVector =
+                            if (isScrolledToEvents) {
+                                Icons.Default.KeyboardArrowUp
+                            } else {
+                                Icons.Default.KeyboardArrowDown
+                            },
+                        contentDescription = "Toggle Events View",
                     )
                 }
 
@@ -136,18 +147,27 @@ fun CalendarTab() {
                 // Fetch updated events for the selected date after adding the new one
                 calendarTapViewModel.fetchEventsFilteredByDate(date)
             },
-            accountService = accountService  // Pass AccountService instance to AddEventDialog
+            accountService = accountService, // Pass AccountService instance to AddEventDialog
         )
     }
     IconButton(onClick = { isAddingEvent = true }) {
-        Icon(imageVector = Icons.Default.Add, contentDescription = "Add Event", modifier = Modifier.background(
-            lightBlue))
+        Icon(
+            imageVector = Icons.Default.Add,
+            contentDescription = "Add Event",
+            modifier =
+                Modifier.background(
+                    lightBlue,
+                ),
+        )
     }
 }
 
 @Composable
-fun AddEventDialog(selectedDate: String, onClose: () -> Unit, onAddEvent: (String) -> Unit,
-                   accountService: AccountService // Accept AccountService instance
+fun AddEventDialog(
+    selectedDate: String,
+    onClose: () -> Unit,
+    onAddEvent: (String) -> Unit,
+    accountService: AccountService, // Accept AccountService instance
 ) {
     var eventText by remember { mutableStateOf("") }
 
@@ -162,7 +182,7 @@ fun AddEventDialog(selectedDate: String, onClose: () -> Unit, onAddEvent: (Strin
                     value = eventText,
                     onValueChange = { eventText = it },
                     label = { Text("Event Description") },
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
                 )
             }
         },
@@ -171,24 +191,27 @@ fun AddEventDialog(selectedDate: String, onClose: () -> Unit, onAddEvent: (Strin
                 onClick = {
                     onAddEvent(eventText)
                     onClose()
-                    accountService.addEvent(AccountService.EventType.CALENDAR_EVENT)  // Log the event
+                    accountService.addEvent(AccountService.EventType.CALENDAR_EVENT) // Log the event
                 },
-                colors = ButtonDefaults.buttonColors(
-                    lightYellow
-                )
+                colors =
+                    ButtonDefaults.buttonColors(
+                        lightYellow,
+                    ),
             ) {
                 Text("Add Event")
             }
         },
         dismissButton = {
-            Button(onClick = { onClose() },
-                colors = ButtonDefaults.buttonColors(
-                    lightYellow
-                )
+            Button(
+                onClick = { onClose() },
+                colors =
+                    ButtonDefaults.buttonColors(
+                        lightYellow,
+                    ),
             ) {
                 Text("Cancel")
             }
-        }
+        },
     )
 }
 
@@ -197,12 +220,13 @@ fun ShowEvents(events: List<AccountService.CalendarData>) {
     val calendarTapViewModel = viewModel<CalendarTabViewModel>()
 
     Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .wrapContentHeight()
-            .background(Color.White)
-            .padding(5.dp),
-        contentAlignment = Alignment.TopCenter
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .background(Color.White)
+                .padding(5.dp),
+        contentAlignment = Alignment.TopCenter,
     ) {
         Column(
             verticalArrangement = Arrangement.Top,
@@ -210,39 +234,42 @@ fun ShowEvents(events: List<AccountService.CalendarData>) {
         ) {
             events.forEach { event ->
                 Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .background(lightGrey)
-                        .padding(vertical = 4.dp),
-                    verticalAlignment = Alignment.CenterVertically
+                    modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .background(lightGrey)
+                            .padding(vertical = 4.dp),
+                    verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Image(
-                        modifier = Modifier
-                            .fillMaxHeight(0.2f)
-                            .fillMaxWidth(0.1f),
+                        modifier =
+                            Modifier
+                                .fillMaxHeight(0.2f)
+                                .fillMaxWidth(0.1f),
                         painter = painterResource(id = com.example.roommateproject.R.drawable.blue_color),
-                        contentDescription = "Blue square"
+                        contentDescription = "Blue square",
                     )
                     Text(
                         text = event.eventText,
                         color = Color.DarkGray,
                         lineHeight = 20.sp,
                         fontFamily = jaldiFontFamily,
-                        modifier = Modifier
-                            .background(lightGrey)
-                            .weight(1f) // This ensures the text takes up remaining space
-                            .padding(8.dp)
-                            .alignByBaseline()
+                        modifier =
+                            Modifier
+                                .background(lightGrey)
+                                .weight(1f) // This ensures the text takes up remaining space
+                                .padding(8.dp)
+                                .alignByBaseline(),
                     )
                     IconButton(
                         onClick = {
                             calendarTapViewModel.deleteEventByUid(event.uid)
-                        }
+                        },
                     ) {
                         Image(
                             modifier = Modifier.size(12.dp),
                             painter = painterResource(id = com.example.roommateproject.R.drawable.delete_icon),
-                            contentDescription = "Delete icon"
+                            contentDescription = "Delete icon",
                         )
                     }
                 }

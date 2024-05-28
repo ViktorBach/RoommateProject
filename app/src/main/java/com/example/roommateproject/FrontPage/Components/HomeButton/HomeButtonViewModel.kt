@@ -10,12 +10,12 @@ import kotlinx.coroutines.launch
 import sendNotification
 
 /*****************************************************************************/
-                        // HomeButtonViewModel class //
+// HomeButtonViewModel class //
+
 /*****************************************************************************/
 class HomeButtonViewModel(
-    private val accountService: AccountService
+    private val accountService: AccountService,
 ) : ViewModel() {
-
     private var _isHome = mutableStateOf(false)
     val isHome: State<Boolean> get() = _isHome
 

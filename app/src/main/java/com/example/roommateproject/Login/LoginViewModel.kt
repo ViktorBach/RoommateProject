@@ -11,10 +11,11 @@ import com.example.roommateproject.Services.AccountService
 import kotlinx.coroutines.launch
 
 /*****************************************************************************/
-                // LoginViewModel class for login screen UI //
+// LoginViewModel class for login screen UI //
+
 /*****************************************************************************/
-class LoginViewModel: ViewModel() {
-        private val accountService: AccountService = AccountService();
+class LoginViewModel : ViewModel() {
+    private val accountService: AccountService = AccountService()
 
     private var email by mutableStateOf("")
 
@@ -22,17 +23,17 @@ class LoginViewModel: ViewModel() {
 
     private var username by mutableStateOf("")
 
-        fun onEmailChange(email: String) {
-            this.email = email;
-        }
+    fun onEmailChange(email: String) {
+        this.email = email
+    }
 
-        fun onPasswordChange(password: String) {
-            this.password = password;
-        }
+    fun onPasswordChange(password: String) {
+        this.password = password
+    }
 
-        fun onUsernameChange(username: String) {
-            this.username = username
-        }
+    fun onUsernameChange(username: String) {
+        this.username = username
+    }
 
     // Function to login with user credentials
     fun loginWithUser(navigateFrontPage: () -> Unit) {
@@ -54,6 +55,6 @@ class LoginViewModel: ViewModel() {
 
 @Preview
 @Composable
-fun LoginPreview () {
+fun LoginPreview() {
     Login(navigateFrontPage = {})
 }

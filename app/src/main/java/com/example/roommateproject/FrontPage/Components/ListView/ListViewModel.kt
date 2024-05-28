@@ -12,9 +12,9 @@ import kotlinx.coroutines.launch
 
 /*****************************************************************************/
 // ListViewModel.kt - ViewModel for the shopping list screen //
+
 /*****************************************************************************/
 class ListViewModel : ViewModel() {
-
     private val accountService: AccountService = AccountService()
 
     val tasks: SnapshotStateList<ShoppingList> = mutableStateListOf()

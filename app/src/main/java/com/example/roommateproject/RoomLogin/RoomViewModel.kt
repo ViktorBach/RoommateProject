@@ -11,42 +11,43 @@ import com.example.roommateproject.Services.AccountService
 import kotlinx.coroutines.launch
 
 /*****************************************************************************/
- // RoomViewModel class represents the ViewModel for the RoomLogin screen. //
+// RoomViewModel class represents the ViewModel for the RoomLogin screen. //
+
 /*****************************************************************************/
-class RoomViewModel: ViewModel() {
-    private val accountService: AccountService = AccountService();
+class RoomViewModel : ViewModel() {
+    private val accountService: AccountService = AccountService()
 
     var houseName by mutableStateOf("")
-        private set;
+        private set
     var password by mutableStateOf("")
-        private set;
+        private set
 
     var members by mutableStateOf<List<String>>(emptyList())
         private set
 
     fun onHouseNameChange(name: String) {
-        this.houseName = name;
+        this.houseName = name
     }
 
     fun onPasswordChange(password: String) {
-        this.password = password;
+        this.password = password
     }
 
     fun onMembersChange(members: List<String>) {
-        this.members = members;
+        this.members = members
     }
 
     // Function to register a new house
     fun registerNewHouse(navigateFrontPage: () -> Unit) {
         viewModelScope.launch {
-        accountService.createNewHouse(houseName, password, members) { success, errorMessage ->
-            if (success as Boolean) {
-                println("House registered successfully!")
-                navigateFrontPage() // Navigates user to the RoomLogin screen
-            } else {
-                println("House registration failed: $errorMessage") // Registration failed
+            accountService.createNewHouse(houseName, password, members) { success, errorMessage ->
+                if (success as Boolean) {
+                    println("House registered successfully!")
+                    navigateFrontPage() // Navigates user to the RoomLogin screen
+                } else {
+                    println("House registration failed: $errorMessage") // Registration failed
+                }
             }
-        }
             accountService.getEvents()
         }
     }
@@ -54,14 +55,14 @@ class RoomViewModel: ViewModel() {
     // Function to login to an existing house
     fun houseLogin(navigateFrontPage: () -> Unit) {
         viewModelScope.launch {
-        accountService.homeLogin(houseName, password, members) { success, errorMessage ->
-            if (success as Boolean) {
-                println("House Login Successful!")
-                navigateFrontPage() // Navigates user to the RoomLogin screen
-            } else {
-                println("House login failed: $errorMessage") // Registration failed
+            accountService.homeLogin(houseName, password, members) { success, errorMessage ->
+                if (success as Boolean) {
+                    println("House Login Successful!")
+                    navigateFrontPage() // Navigates user to the RoomLogin screen
+                } else {
+                    println("House login failed: $errorMessage") // Registration failed
+                }
             }
-        }
             accountService.getEvents()
         }
     }
@@ -69,6 +70,6 @@ class RoomViewModel: ViewModel() {
 
 @Preview
 @Composable
-fun HousePreview () {
+fun HousePreview() {
     RoomLogin(navigateFrontPage = {})
 }

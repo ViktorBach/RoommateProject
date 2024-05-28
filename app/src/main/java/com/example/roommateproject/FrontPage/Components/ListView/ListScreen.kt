@@ -37,7 +37,8 @@ import com.example.roommateproject.ui.theme.skyBlue
 import com.example.roommateproject.ui.theme.white
 
 /*****************************************************************************/
-                            // ListScreen.kt file //
+// ListScreen.kt file //
+
 /*****************************************************************************/
 @Composable
 fun ListScreenStateful(listViewModel: ListViewModel = viewModel()) {
@@ -50,7 +51,7 @@ fun ListScreenStateful(listViewModel: ListViewModel = viewModel()) {
         onTaskClick = { listViewModel.toggleTaskCompleted(it.id) },
         onInputChange = { listViewModel.onInputChange(it) },
         onRemoveCompleted = { listViewModel.removeCompletedItems() },
-        onAddItem = { listViewModel.createTask(it) } // Pass the add item function
+        onAddItem = { listViewModel.createTask(it) }, // Pass the add item function
     )
 }
 
@@ -61,23 +62,25 @@ fun ListsScreen(
     onTaskClick: (ShoppingList) -> Unit,
     onInputChange: (String) -> Unit,
     onRemoveCompleted: () -> Unit,
-    onAddItem: (String) -> Unit
+    onAddItem: (String) -> Unit,
 ) {
     Column(
-        modifier = Modifier
-            .fillMaxSize(),
+        modifier =
+            Modifier
+                .fillMaxSize(),
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.Start,
         ) {
             Box(
-                modifier = Modifier
-                    .width(500.dp)
-                    .height(100.dp)
-                    .background(skyBlue)
-                    .padding(bottom = 0.dp),
-                contentAlignment = Alignment.Center
+                modifier =
+                    Modifier
+                        .width(500.dp)
+                        .height(100.dp)
+                        .background(skyBlue)
+                        .padding(bottom = 0.dp),
+                contentAlignment = Alignment.Center,
             ) {
                 Text(
                     text = "WE NEED",
@@ -88,37 +91,42 @@ fun ListsScreen(
             }
         }
         HorizontalDivider(
-                modifier = Modifier
+            modifier =
+                Modifier
                     .fillMaxWidth(0.98f)
                     .padding(start = 16.dp, end = 16.dp),
-                thickness = 3.dp,
-                color = Shadow10
-            )
+            thickness = 3.dp,
+            color = Shadow10,
+        )
         Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp)
-                .verticalScroll(ScrollState(1)),
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .padding(16.dp)
+                    .verticalScroll(ScrollState(1)),
         ) {
             Box(
-                modifier = Modifier
-                    .width(400.dp)
-                    .height(5.dp)
-                    .background(skyBlue)
-                    .padding(16.dp),
+                modifier =
+                    Modifier
+                        .width(400.dp)
+                        .height(5.dp)
+                        .background(skyBlue)
+                        .padding(16.dp),
             )
             lists.forEach { task ->
                 Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clickable { onTaskClick(task) }
-                        .padding(vertical = 8.dp)
+                    modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .clickable { onTaskClick(task) }
+                            .padding(vertical = 8.dp),
                 ) {
                     Text(
                         text = if (task.completed) "✓ ${task.title}" else task.title,
-                        modifier = Modifier
-                            .clickable { onTaskClick(task) }
-                            .padding(vertical = 8.dp)
+                        modifier =
+                            Modifier
+                                .clickable { onTaskClick(task) }
+                                .padding(vertical = 8.dp),
                     )
                 }
             }
@@ -133,16 +141,17 @@ fun ListsScreen(
                     modifier = Modifier,
                     border = BorderStroke(2.dp, White),
                     shape = androidx.compose.foundation.shape.RoundedCornerShape(8.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        Color.Transparent // Set the button background to transparent,
-                    ),
-                    onClick = onRemoveCompleted
+                    colors =
+                        ButtonDefaults.buttonColors(
+                            Color.Transparent, // Set the button background to transparent,
+                        ),
+                    onClick = onRemoveCompleted,
                 ) {
                     Text(
                         "Remove Completed",
                         fontFamily = jaldiBoldFontFamily,
                         style = Typography.bodyLarge,
-                        color = white
+                        color = white,
                     )
                 }
             }

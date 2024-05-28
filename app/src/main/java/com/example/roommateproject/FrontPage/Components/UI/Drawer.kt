@@ -29,7 +29,7 @@ import com.example.roommateproject.ui.theme.lightBlue
 fun CustomDrawer(
     isOpen: Boolean,
     onClose: () -> Unit,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     if (isOpen) {
         Box(
@@ -37,25 +37,27 @@ fun CustomDrawer(
         ) {
             // Full screen background that captures clicks to close the drawer
             Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(top = 183.dp)
-                    .background(Color.Transparent) // Set the background to transparent
-                    .clickable(onClick = onClose),
+                modifier =
+                    Modifier
+                        .fillMaxSize()
+                        .padding(top = 183.dp)
+                        .background(Color.Transparent) // Set the background to transparent
+                        .clickable(onClick = onClose),
             ) {
                 // Row that contains the drawer content and the non-clickable button
-                Row (
-                    modifier = Modifier.wrapContentSize()
-                ){
+                Row(
+                    modifier = Modifier.wrapContentSize(),
+                ) {
                     // Blue box content
                     Box(
-                        modifier = Modifier
-                            .fillMaxHeight(0.59f)
-                            .fillMaxWidth(0.85f) // 80% of the screen width
-                            .background(lightBlue.copy(alpha = 0.75f))
-                            // Capture clicks inside the blue box to prevent drawer from closing
-                            .clickable(onClick = { /* Do nothing */ }),
-                        contentAlignment = Alignment.CenterStart
+                        modifier =
+                            Modifier
+                                .fillMaxHeight(0.59f)
+                                .fillMaxWidth(0.85f) // 80% of the screen width
+                                .background(lightBlue.copy(alpha = 0.75f))
+                                // Capture clicks inside the blue box to prevent drawer from closing
+                                .clickable(onClick = { /* Do nothing */ }),
+                        contentAlignment = Alignment.CenterStart,
                     ) {
                         Column {
                             ListScreenStateful()
@@ -64,24 +66,28 @@ fun CustomDrawer(
                     // Box representing the drawer button (non-clickable)
                     Box {
                         Box(
-                            modifier = Modifier
-                                .clip(
-                                    shape = RoundedCornerShape(
-                                        topRight = 20.dp,
-                                        bottomRight = 20.dp
+                            modifier =
+                                Modifier
+                                    .clip(
+                                        shape =
+                                            RoundedCornerShape(
+                                                topRight = 20.dp,
+                                                bottomRight = 20.dp,
+                                            ),
                                     )
-                                )
-                                .background(lightBlue.copy(alpha = 0.75f))
-                                .height(100.dp) // Adjust the width to make it rectangular
-                                .width(40.dp)
-                                .padding(start = 0. dp, top = 5.dp, end = 3.dp, bottom = 3.dp),
-                            contentAlignment = Alignment.Center
+                                    .background(lightBlue.copy(alpha = 0.75f))
+                                    .height(100.dp) // Adjust the width to make it rectangular
+                                    .width(40.dp)
+                                    .padding(start = 0.dp, top = 5.dp, end = 3.dp, bottom = 3.dp),
+                            contentAlignment = Alignment.Center,
                         ) {
                             Image(
-                                modifier = Modifier
-                                    .size(60.dp), // Adjust the size as needed
+                                modifier =
+                                    Modifier
+                                        .size(60.dp),
+                                // Adjust the size as needed
                                 painter = painterResource(id = R.drawable.ic_grocery_logo), // Use your PNG here
-                                contentDescription = "Grocery Logo"
+                                contentDescription = "Grocery Logo",
                             )
                         }
                     }

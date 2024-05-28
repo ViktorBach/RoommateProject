@@ -17,15 +17,17 @@ import com.example.roommateproject.ui.theme.lightBlue
 fun CustomLoadingBar() {
     Box(
         contentAlignment = Alignment.Center,
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color(0x80000000)) // Semi-transparent background
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .background(Color(0x80000000)), // Semi-transparent background
     ) {
         Box(
             contentAlignment = Alignment.Center,
-            modifier = Modifier
-                .size(100.dp)
-                .background(Color.White, shape = RoundedCornerShape(16.dp))
+            modifier =
+                Modifier
+                    .size(100.dp)
+                    .background(Color.White, shape = RoundedCornerShape(16.dp)),
         ) {
             CircularProgressIndicator(color = lightBlue)
         }

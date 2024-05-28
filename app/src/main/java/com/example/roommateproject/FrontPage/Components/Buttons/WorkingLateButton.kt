@@ -21,37 +21,40 @@ import com.example.roommateproject.ui.theme.white
 import sendNotification
 
 /*****************************************************************************/
-                            // Working Late Button //
+// Working Late Button //
+
 /*****************************************************************************/
 @Composable
 fun WorkingLateButton() {
-    val accountService: AccountService = AccountService();
+    val accountService: AccountService = AccountService()
 
     val context = LocalContext.current
 
     Box(
-        modifier = Modifier
-            .background(Color.White)
-            .fillMaxWidth(0.7f)
-            .fillMaxHeight(0.38f),
-        contentAlignment = Alignment.Center
+        modifier =
+            Modifier
+                .background(Color.White)
+                .fillMaxWidth(0.7f)
+                .fillMaxHeight(0.38f),
+        contentAlignment = Alignment.Center,
     ) {
         Button(
             onClick = {
                 sendNotification("${AccountService.currentUserName} is going to be home late", context)
                 accountService.addEvent(AccountService.EventType.I_AM_WORKING_LATE)
-            }, //Insert notification that user is going to be home late
+            }, // Insert notification that user is going to be home late
             shape = androidx.compose.foundation.shape.RoundedCornerShape(8.dp),
-            colors = ButtonDefaults.buttonColors(
-                lightYellow // Set the text color to lightYellow
-            ),
+            colors =
+                ButtonDefaults.buttonColors(
+                    lightYellow, // Set the text color to lightYellow
+                ),
             contentPadding = androidx.compose.foundation.layout.PaddingValues(5.dp), // Set content padding to zero
         ) {
             Text(
                 text = " Working Late ",
                 fontFamily = jaldiBoldFontFamily,
                 style = Typography.labelSmall,
-                color = white
+                color = white,
             )
         }
     }

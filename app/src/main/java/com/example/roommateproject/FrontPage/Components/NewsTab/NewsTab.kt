@@ -29,7 +29,8 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 
 /*****************************************************************************/
-                    // News Tab Screen Composable Function //
+// News Tab Screen Composable Function //
+
 /*****************************************************************************/
 @Composable
 fun NewsTab(newsViewModel: NewsViewModel = viewModel()) {
@@ -37,25 +38,28 @@ fun NewsTab(newsViewModel: NewsViewModel = viewModel()) {
     val sortedEvents = events.sortedByDescending { it.timeStamp }
 
     Box(
-        modifier = Modifier
-            .clip(shape = RoundedCornerShape(30.dp)),
+        modifier =
+            Modifier
+                .clip(shape = RoundedCornerShape(30.dp)),
         contentAlignment = Alignment.TopCenter,
     ) {
         Box(
-            modifier = Modifier
-                .background(boxLayerGrey)
-                .fillMaxHeight(0.25f)
-                .fillMaxWidth(0.85f)
-                .clip(shape = RoundedCornerShape(52.dp)),
+            modifier =
+                Modifier
+                    .background(boxLayerGrey)
+                    .fillMaxHeight(0.25f)
+                    .fillMaxWidth(0.85f)
+                    .clip(shape = RoundedCornerShape(52.dp)),
             contentAlignment = Alignment.Center,
         ) {
             Box(
-                modifier = Modifier
-                    .background(Color.White)
-                    .fillMaxHeight(0.9f)
-                    .verticalScroll(ScrollState(1), true)
-                    .fillMaxWidth(0.92f),
-                contentAlignment = Alignment.TopCenter
+                modifier =
+                    Modifier
+                        .background(Color.White)
+                        .fillMaxHeight(0.9f)
+                        .verticalScroll(ScrollState(1), true)
+                        .fillMaxWidth(0.92f),
+                contentAlignment = Alignment.TopCenter,
             ) {
                 Column(
                     modifier = Modifier,
@@ -63,32 +67,33 @@ fun NewsTab(newsViewModel: NewsViewModel = viewModel()) {
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     Row(
-                        modifier = Modifier
-                            .align(Alignment.CenterHorizontally)
-                            .padding(bottom = 4.dp),
+                        modifier =
+                            Modifier
+                                .align(Alignment.CenterHorizontally)
+                                .padding(bottom = 4.dp),
                     ) {
                         Text(
                             text = "NEWS",
                             color = darkGreen,
                             fontFamily = jaldiFontFamily,
-                            fontSize = 25.sp
+                            fontSize = 25.sp,
                         )
                     }
                     val sdf = SimpleDateFormat("EEEE HH:mm", Locale.getDefault())
 
-                    val eventString = sortedEvents.joinToString(separator = "\n\n") { event ->
-                        val formattedDate = sdf.format(event.timeStamp)
-                        val eventType = event.eventType
-                        "$formattedDate \n   $eventType"
-                    }
+                    val eventString =
+                        sortedEvents.joinToString(separator = "\n\n") { event ->
+                            val formattedDate = sdf.format(event.timeStamp)
+                            val eventType = event.eventType
+                            "$formattedDate \n   $eventType"
+                        }
 
                     Text(
                         text = eventString,
                         fontFamily = jaldiFontFamily,
                         color = Color.DarkGray,
-                        fontSize = 16.sp
+                        fontSize = 16.sp,
                     )
-
                 }
             }
         }

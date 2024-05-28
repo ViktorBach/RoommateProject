@@ -51,14 +51,16 @@ import com.example.roommateproject.ui.theme.white
 import kotlinx.coroutines.launch
 
 /*****************************************************************************/
-                                // FrontPage UI //
+// FrontPage UI //
+
 /*****************************************************************************/
 @SuppressLint("Range")
 @Composable
 fun FrontPage(
     drawerState: androidx.compose.material3.DrawerState,
-    navigateRegisterPage: () -> Unit, function: () -> Unit) {
-
+    navigateRegisterPage: () -> Unit,
+    function: () -> Unit,
+) {
     var isDrawerOpen by remember { mutableStateOf(false) } // Track whether the drawer is open or closed
 
     val frontPageViewModel = viewModel<FrontPageViewModel>()
@@ -70,49 +72,53 @@ fun FrontPage(
     }
 
     Column(
-        modifier = Modifier
-            .background(white)
+        modifier =
+            Modifier
+                .background(white),
     ) {
         Row {
             Box(
-                modifier = Modifier
-                    .background(Color.White)
-                    .fillMaxHeight(0.1f),
-                contentAlignment = Alignment.CenterStart
+                modifier =
+                    Modifier
+                        .background(Color.White)
+                        .fillMaxHeight(0.1f),
+                contentAlignment = Alignment.CenterStart,
             ) {
                 Text(
                     text = "H",
                     fontFamily = karantinaFontFamily,
                     style = Typography.titleLarge,
                     color = orange,
-                    modifier = Modifier.padding(start = 5.dp)
+                    modifier = Modifier.padding(start = 5.dp),
                 )
             }
             Box(
-                modifier = Modifier
-                    .background(Color.White)
-                    .fillMaxHeight(0.1f),
-                contentAlignment = Alignment.CenterStart
+                modifier =
+                    Modifier
+                        .background(Color.White)
+                        .fillMaxHeight(0.1f),
+                contentAlignment = Alignment.CenterStart,
             ) {
                 Text(
                     text = "omie",
                     fontFamily = katibehFontFamily,
                     style = Typography.titleMedium,
                     color = orange,
-                    modifier = Modifier.padding(top = 47.dp)
+                    modifier = Modifier.padding(top = 47.dp),
                 )
             }
             Box(
-                modifier = Modifier
-                    .background(Color.White)
-                    .padding(start = 240.dp)
-                    .fillMaxHeight(0.1f),
-                contentAlignment = Alignment.CenterEnd
+                modifier =
+                    Modifier
+                        .background(Color.White)
+                        .padding(start = 240.dp)
+                        .fillMaxHeight(0.1f),
+                contentAlignment = Alignment.CenterEnd,
             ) {
                 // Call the Logout Button file from Components
                 LogoutButton(
                     navigateRegisterPage = navigateRegisterPage,
-                    onClick = { frontPageViewModel.logOut(navigateRegisterPage) }
+                    onClick = { frontPageViewModel.logOut(navigateRegisterPage) },
                 )
             }
         }
@@ -120,10 +126,11 @@ fun FrontPage(
         Spacer(modifier = Modifier.height(25.dp))
 
         Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .wrapContentHeight(),
-            horizontalArrangement = Arrangement.Center
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight(),
+            horizontalArrangement = Arrangement.Center,
         ) {
             HomeToggleButton() // Calls the HomeButton file from Components
             Spacer(modifier = Modifier.width(16.dp))
@@ -134,26 +141,27 @@ fun FrontPage(
         Spacer(modifier = Modifier.height(22.dp))
 
         Row(
-            verticalAlignment = Alignment.Top // Align items to the top of the row
+            verticalAlignment = Alignment.Top, // Align items to the top of the row
         ) {
             Box(
-                modifier = Modifier
-                    .clip(shape = RoundedCornerShape(topRight = 20.dp, bottomRight = 20.dp))
-                    .background(lightBlue.copy(alpha = 0.75f))
-                    .height(100.dp)
-                    .width(40.dp)
-                    .wrapContentHeight()
-                    .clickable {
-                        coroutineScope.launch {
-                            drawerState.open()
+                modifier =
+                    Modifier
+                        .clip(shape = RoundedCornerShape(topRight = 20.dp, bottomRight = 20.dp))
+                        .background(lightBlue.copy(alpha = 0.75f))
+                        .height(100.dp)
+                        .width(40.dp)
+                        .wrapContentHeight()
+                        .clickable {
+                            coroutineScope.launch {
+                                drawerState.open()
+                            }
                         }
-                    }
-                    .padding(start = 0.dp, top = 5.dp, end = 3.dp, bottom = 3.dp)
+                        .padding(start = 0.dp, top = 5.dp, end = 3.dp, bottom = 3.dp),
             ) {
                 Image(
                     modifier = Modifier.size(60.dp),
                     painter = painterResource(id = R.drawable.ic_grocery_logo),
-                    contentDescription = "Grocery Logo"
+                    contentDescription = "Grocery Logo",
                 )
             }
             Spacer(modifier = Modifier.width(16.dp))
@@ -167,8 +175,9 @@ fun FrontPage(
         Spacer(modifier = Modifier.height(30.dp))
 
         Box(
-            modifier = Modifier
-                .wrapContentHeight()
+            modifier =
+                Modifier
+                    .wrapContentHeight(),
         ) {
             Row {
                 SleepingButton() // Calls the SleepingButton file from Components
@@ -179,8 +188,9 @@ fun FrontPage(
         Spacer(modifier = Modifier.height(16.dp))
 
         Box(
-            modifier = Modifier
-                .wrapContentHeight()
+            modifier =
+                Modifier
+                    .wrapContentHeight(),
         ) {
             Row {
                 GuestVisitButton() // Calls the GuestVisitButton file from Components

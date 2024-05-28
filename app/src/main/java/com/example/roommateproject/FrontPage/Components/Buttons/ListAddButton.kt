@@ -22,12 +22,13 @@ import com.example.roommateproject.ui.theme.jaldiBoldFontFamily
 import com.example.roommateproject.ui.theme.white
 
 /*****************************************************************************/
-                            // List Add Button //
+// List Add Button //
+
 /*****************************************************************************/
 @Composable
 fun ListAddButton(onAddItem: (String) -> Unit) {
     var showDialog by remember { mutableStateOf(false) }
-    var text by remember { mutableStateOf("") }  // Declare text here to use it both in TextField and Button
+    var text by remember { mutableStateOf("") } // Declare text here to use it both in TextField and Button
 
     if (showDialog) {
         AlertDialog(
@@ -41,7 +42,7 @@ fun ListAddButton(onAddItem: (String) -> Unit) {
                 TextField(
                     value = text,
                     onValueChange = { text = it },
-                    label = { Text("Item Name") }
+                    label = { Text("Item Name") },
                 )
             },
             confirmButton = {
@@ -50,9 +51,9 @@ fun ListAddButton(onAddItem: (String) -> Unit) {
                         if (text.isNotBlank()) {
                             onAddItem(text)
                             showDialog = false
-                            text = ""  // Reset text after adding
+                            text = "" // Reset text after adding
                         }
-                    }
+                    },
                 ) {
                     Text("Add")
                 }
@@ -60,31 +61,34 @@ fun ListAddButton(onAddItem: (String) -> Unit) {
             dismissButton = {
                 Button(onClick = {
                     showDialog = false
-                    text = ""  // Reset text when dismissing
+                    text = "" // Reset text when dismissing
                 }) {
                     Text("Cancel")
                 }
-            }
+            },
         )
     }
 
     Box(
-        modifier = Modifier
-            .background(Color.Transparent)
+        modifier =
+            Modifier
+                .background(Color.Transparent),
     ) {
-        OutlinedButton(modifier = Modifier,
+        OutlinedButton(
+            modifier = Modifier,
             onClick = { showDialog = true },
             border = BorderStroke(2.dp, Color.White),
             shape = androidx.compose.foundation.shape.RoundedCornerShape(8.dp),
-            colors = ButtonDefaults.buttonColors(
-                Color.Transparent // Set the button background to lightYellow,
-            )
+            colors =
+                ButtonDefaults.buttonColors(
+                    Color.Transparent, // Set the button background to lightYellow,
+                ),
         ) {
             Text(
                 text = "Add",
                 fontFamily = jaldiBoldFontFamily,
                 style = Typography.bodyLarge,
-                color = white
+                color = white,
             )
         }
     }

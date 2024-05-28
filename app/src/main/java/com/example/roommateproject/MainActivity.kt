@@ -27,10 +27,9 @@ import kotlinx.coroutines.launch
 import sendNotification
 
 class MainActivity : ComponentActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        createNotificationChannel(this)  // Call to setup notification channel
+        createNotificationChannel(this) // Call to setup notification channel
         setContent {
             RoommateProjectTheme {
                 val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed) // Initialize drawer state
@@ -44,19 +43,20 @@ class MainActivity : ComponentActivity() {
                             content = {
                                 // Your drawer content here
                                 Text(text = "")
-                            }
+                            },
                         )
                     },
-                    drawerState = drawerState
+                    drawerState = drawerState,
                 ) {
                     Surface(
                         modifier = Modifier.fillMaxSize(),
-                        color = MaterialTheme.colorScheme.background
+                        color = MaterialTheme.colorScheme.background,
                     ) {
                         FrontPage(
                             drawerState = drawerState,
                             navigateRegisterPage = {},
-                            function = {})
+                            function = {},
+                        )
                         Navigation(drawerState = drawerState)
                     }
                 }
@@ -64,15 +64,14 @@ class MainActivity : ComponentActivity() {
         }
 
         checkNotificationPermission()
-
     }
 
-
     private val PERMISSION_REQUEST_CODE = 123
+
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<String>, // Change to Array<String>
-        grantResults: IntArray
+        grantResults: IntArray,
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
@@ -91,23 +90,17 @@ class MainActivity : ComponentActivity() {
             Log.d("MainActivity", "Notifications are not enabled")
         } else if (ContextCompat.checkSelfPermission(
                 this,
-                Manifest.permission.POST_NOTIFICATIONS
+                Manifest.permission.POST_NOTIFICATIONS,
             ) != PackageManager.PERMISSION_GRANTED
         ) {
             // Permission is not granted, request the permission
             ActivityCompat.requestPermissions(
                 this,
                 arrayOf(Manifest.permission.POST_NOTIFICATIONS),
-                PERMISSION_REQUEST_CODE
+                PERMISSION_REQUEST_CODE,
             )
         } else {
             Log.d("MainActivity", "Notifications are enabled")
         }
     }
 }
-
-
-
-
-
-

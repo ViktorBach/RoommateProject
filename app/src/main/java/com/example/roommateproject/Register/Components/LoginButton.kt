@@ -22,23 +22,24 @@ import com.example.roommateproject.ui.theme.lightYellow
 fun LoginButton(
     isLoading: Boolean,
     navigateFrontPage: () -> Unit,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
-
     val registerViewModel = viewModel<RegisterViewModel>()
 
     Box(
-        modifier = Modifier
-            .background(Color.White)
-            .fillMaxHeight(0.75f)
-            .fillMaxWidth(1f),
-        contentAlignment = Alignment.Center
+        modifier =
+            Modifier
+                .background(Color.White)
+                .fillMaxHeight(0.75f)
+                .fillMaxWidth(1f),
+        contentAlignment = Alignment.Center,
     ) {
         Button(
             onClick = {
                 if (!isLoading) {
                     if (registerViewModel.email.isNotEmpty() &&
-                        registerViewModel.password.isNotEmpty()) {
+                        registerViewModel.password.isNotEmpty()
+                    ) {
                         onClick()
                     } else {
                         println("Error: Email and password must be filled")
@@ -46,14 +47,17 @@ fun LoginButton(
                     }
                 }
             },
-            colors = ButtonDefaults.buttonColors(
-                lightYellow // Set the text color to lightYellow
-            )
+            colors =
+                ButtonDefaults.buttonColors(
+                    lightYellow, // Set the text color to lightYellow
+                ),
         ) {
-            Text(text = "Login",
+            Text(
+                text = "Login",
                 fontFamily = jaldiFontFamily,
                 style = Typography.labelSmall,
-                color = darkGreen)
+                color = darkGreen,
+            )
         }
     }
 }

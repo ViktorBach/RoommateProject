@@ -85,7 +85,8 @@ val orange = Color(0xFFFFAB07)
 val lightYellow = Color(0xFFFAD58C)
 val lightBlue = Color(0xFF6CB1F1)
 val green = Color(0xFF36A324)
-    // border and bow coloring
+
+// border and bow coloring
 val lightGrey = Color(0xFFF5F5F5)
 val boxLayerGrey = Color(0xFFF8F8F8)
 

@@ -21,38 +21,41 @@ import com.example.roommateproject.ui.theme.white
 import sendNotification
 
 /*****************************************************************************/
-                            // Early Morning Button //
+// Early Morning Button //
+
 /*****************************************************************************/
 @Composable
 fun EarlyMorningButton() {
-    val accountService: AccountService = AccountService();
+    val accountService: AccountService = AccountService()
     val context = LocalContext.current
 
     Box(
-        modifier = Modifier
-            .background(Color.White)
-            .fillMaxWidth(0.7f)
-            .fillMaxHeight(0.75f),
-        contentAlignment = Alignment.Center
+        modifier =
+            Modifier
+                .background(Color.White)
+                .fillMaxWidth(0.7f)
+                .fillMaxHeight(0.75f),
+        contentAlignment = Alignment.Center,
     ) {
         Button(
             onClick = {
                 sendNotification("${AccountService.currentUserName} is getting up early in the morning", context)
 
                 accountService.addEvent(AccountService.EventType.EARLY_MORNING)
-            }, //Insert notification that user is getting up early in the morning
+            }, // Insert notification that user is getting up early in the morning
             shape = androidx.compose.foundation.shape.RoundedCornerShape(8.dp),
-            colors = ButtonDefaults.buttonColors(
-                lightYellow // Set the text color to lightYellow
-            ),
+            colors =
+                ButtonDefaults.buttonColors(
+                    lightYellow, // Set the text color to lightYellow
+                ),
             contentPadding = androidx.compose.foundation.layout.PaddingValues(5.dp), // Set content padding to zero
-            modifier = Modifier
-        )
-            { Text(
+            modifier = Modifier,
+        ) {
+            Text(
                 text = "Early Morning",
                 fontFamily = jaldiBoldFontFamily,
                 style = Typography.labelSmall,
-                color = white
+                color = white,
             )
         }
     }

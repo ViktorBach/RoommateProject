@@ -10,23 +10,27 @@ import com.example.roommateproject.Register.Register
 import com.example.roommateproject.RoomLogin.RoomLogin
 
 /*****************************************************************************/
-                        // Navigation Composable //
+// Navigation Composable //
 /*****************************************************************************/
 @Composable
 fun Navigation(drawerState: DrawerState) {
     val navController = rememberNavController()
 
     NavHost(navController = navController, startDestination = "Register") {
-        composable("Register"){
-            Register(navigateRoomLogin = { navController.navigate("RoomLogin") },
-                navigateFrontPage = {navController.navigate("FrontPage")})
+        composable("Register") {
+            Register(
+                navigateRoomLogin = { navController.navigate("RoomLogin") },
+                navigateFrontPage = { navController.navigate("FrontPage") },
+            )
         }
-        composable("RoomLogin"){
+        composable("RoomLogin") {
             RoomLogin(navigateFrontPage = { navController.navigate("FrontPage") })
         }
-        composable("FrontPage"){
-            FrontPage(drawerState = drawerState, // Pass the drawerState parameter
-                navigateRegisterPage = { navController.navigate("Register") }) {}
+        composable("FrontPage") {
+            FrontPage(
+                drawerState = drawerState, // Pass the drawerState parameter
+                navigateRegisterPage = { navController.navigate("Register") },
+            ) {}
         }
     }
 }

@@ -2,13 +2,13 @@ package com.example.roommateproject
 
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
-import org.junit.Rule
-import org.junit.Test
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTextInput
 import com.example.roommateproject.Navigation.Navigation
+import org.junit.Rule
+import org.junit.Test
 
 fun generateRandomString(length: Int): String {
     val allowedChars = ('A'..'Z') + ('a'..'z') + ('0'..'9')
@@ -16,6 +16,7 @@ fun generateRandomString(length: Int): String {
         .map { allowedChars.random() }
         .joinToString("")
 }
+
 val randomString = generateRandomString(10)
 
 class UITests {
@@ -44,6 +45,5 @@ class UITests {
 
         // Wait for navigation to complete
         Thread.sleep(2000)
-
     }
 }

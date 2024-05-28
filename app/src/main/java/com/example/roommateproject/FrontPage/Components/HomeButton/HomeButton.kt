@@ -21,38 +21,49 @@ import com.example.roommateproject.ui.theme.lightYellow
 import com.example.roommateproject.ui.theme.white
 
 /*****************************************************************************/
-                            //  Home Button Toggle //
+//  Home Button Toggle //
+
 /*****************************************************************************/
 @Composable
-fun HomeToggleButton(viewModel: HomeButtonViewModel = viewModel(
-    factory = HomeButtonViewModelFactory(AccountService()))) {
+fun HomeToggleButton(
+    viewModel: HomeButtonViewModel =
+        viewModel(
+            factory = HomeButtonViewModelFactory(AccountService()),
+        ),
+) {
     val context = LocalContext.current
     val isHome by viewModel.isHome
 
     Box(
-        modifier = Modifier
-            .background(Color.White)
-            .wrapContentWidth()
-            .wrapContentHeight()
+        modifier =
+            Modifier
+                .background(Color.White)
+                .wrapContentWidth()
+                .wrapContentHeight(),
     ) {
         Button(
             onClick = { viewModel.toggleHomeStatus(context) },
             shape = androidx.compose.foundation.shape.RoundedCornerShape(8.dp),
-            colors = ButtonDefaults.buttonColors(
-                lightYellow
-            ),
-            contentPadding = androidx.compose.foundation.layout.PaddingValues(
-                start = 15.dp, top = 5.dp, bottom = 5.dp, end = 15.dp), // Set content padding to zero
-            modifier = Modifier
+            colors =
+                ButtonDefaults.buttonColors(
+                    lightYellow,
+                ),
+            contentPadding =
+                androidx.compose.foundation.layout.PaddingValues(
+                    start = 15.dp,
+                    top = 5.dp,
+                    bottom = 5.dp,
+                    end = 15.dp,
+                ),
+            // Set content padding to zero
+            modifier = Modifier,
         ) {
             Text(
                 text = if (isHome) "I'm Leaving" else "I'm Home",
                 fontFamily = jaldiBoldFontFamily,
                 style = Typography.labelMedium,
-                color = white
+                color = white,
             )
         }
     }
 }
-
-

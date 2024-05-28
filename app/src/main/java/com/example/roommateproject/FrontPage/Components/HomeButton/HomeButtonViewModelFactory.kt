@@ -5,10 +5,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.roommateproject.Services.AccountService
 
 /*****************************************************************************/
-                        // HomeButtonViewModelFactory class //
+// HomeButtonViewModelFactory class //
+
 /*****************************************************************************/
 class HomeButtonViewModelFactory(
-    private val accountService: AccountService
+    private val accountService: AccountService,
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(HomeButtonViewModel::class.java)) {

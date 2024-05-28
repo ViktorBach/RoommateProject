@@ -1,6 +1,5 @@
 package com.example.roommateproject.Services
 
-
 import com.example.roommateproject.FrontPage.Components.ListView.ShoppingList
 import com.google.firebase.Firebase
 import com.google.firebase.Timestamp
@@ -18,10 +17,10 @@ import java.util.Date
 
 /*****************************************************************************/
 // AccountService class is responsible for handling user authentication and data //
-  /*****************************************************************************/
+
+/*****************************************************************************/
 
 class AccountService {
-
     // Initialize Firebase Auth
     private val auth = FirebaseAuth.getInstance()
     private val db = FirebaseFirestore.getInstance()
@@ -31,7 +30,7 @@ class AccountService {
     private val calendarCollection = db.collection("calendars")
     private val shoppingListCollection = db.collection("shoppinglist")
 
-    companion object  {
+    companion object {
         var currentEvents: List<EventData> = listOf()
         var currentUserId = ""
         var currentUserName = ""
@@ -49,35 +48,37 @@ class AccountService {
         ADD_TO_LIST("${AccountService.currentUserName} added groceries"),
         GUEST_VISIT("${AccountService.currentUserName} has a guest over"),
         EARLY_MORNING("${AccountService.currentUserName} has an early morning"),
-        CALENDAR_EVENT("${AccountService.currentUserName} added a calendar event")
+        CALENDAR_EVENT("${AccountService.currentUserName} added a calendar event"),
     }
 
-      // Data class that represents an event in the application
+    // Data class that represents an event in the application
     data class EventData(
         var eventType: String,
-        var timeStamp: String
+        var timeStamp: String,
     )
 
-      // Function that adds an event to Firestore
+    // Function that adds an event to Firestore
     fun addEvent(eventType: EventType) {
-        val eventData = hashMapOf(
-            "eventName" to eventType.name, // Store the name of the enum
-            "eventText" to eventType.eventText, // Store the event text
-            "homeId" to currentHomeId,
-            "timeStamp" to Timestamp.now(),
-            "userId" to currentUserId
-        )
+        val eventData =
+            hashMapOf(
+                "eventName" to eventType.name, // Store the name of the enum
+                "eventText" to eventType.eventText, // Store the event text
+                "homeId" to currentHomeId,
+                "timeStamp" to Timestamp.now(),
+                "userId" to currentUserId,
+            )
 
         eventsCollection.add(eventData) // Adds new event to Firestore
     }
 
-      // Function that requests to get shopping list data from firestore collection
+    // Function that requests to get shopping list data from firestore collection
     fun addShoppingListItem(taskTitle: String) {
-        val itemData = hashMapOf(
-            "title" to taskTitle,
-            "completed" to false,
-            "createdAt" to Timestamp.now()
-        )
+        val itemData =
+            hashMapOf(
+                "title" to taskTitle,
+                "completed" to false,
+                "createdAt" to Timestamp.now(),
+            )
 
         val documentReference = shoppingListCollection.document(currentHomeId)
 
@@ -106,17 +107,18 @@ class AccountService {
             }
     }
 
-      // Function that requests to get shopping list data from firestore collection
+    // Function that requests to get shopping list data from firestore collection
     fun getShoppingListItems(onResult: (Boolean, List<ShoppingList>) -> Unit) {
         shoppingListCollection.document(currentHomeId).get()
             .addOnSuccessListener { document ->
                 if (document.exists()) {
-                    val items = document.data?.entries?.mapNotNull { entry ->
-                        val title = entry.key
-                        val data = entry.value as? Map<*, *> ?: return@mapNotNull null
-                        val completed = data["completed"] as? Boolean ?: false
-                        ShoppingList(title.toString(), completed)
-                    } ?: emptyList()
+                    val items =
+                        document.data?.entries?.mapNotNull { entry ->
+                            val title = entry.key
+                            val data = entry.value as? Map<*, *> ?: return@mapNotNull null
+                            val completed = data["completed"] as? Boolean ?: false
+                            ShoppingList(title.toString(), completed)
+                        } ?: emptyList()
                     onResult(true, items)
                 } else {
                     onResult(true, emptyList())
@@ -128,8 +130,11 @@ class AccountService {
             }
     }
 
-      // Function that requests to get shopping list data from firestore collection
-    fun removeShoppingListItem(taskTitle: String, onResult: (Boolean) -> Unit) {
+    // Function that requests to get shopping list data from firestore collection
+    fun removeShoppingListItem(
+        taskTitle: String,
+        onResult: (Boolean) -> Unit,
+    ) {
         val documentReference = shoppingListCollection.document(currentHomeId)
 
         documentReference.get()
@@ -156,8 +161,11 @@ class AccountService {
             }
     }
 
-      // Function that requests to get shopping list data from firestore collection
-    fun updateShoppingListItem(taskTitle: String, isCompleted: Boolean) {
+    // Function that requests to get shopping list data from firestore collection
+    fun updateShoppingListItem(
+        taskTitle: String,
+        isCompleted: Boolean,
+    ) {
         val documentReference = shoppingListCollection.document(currentHomeId)
 
         documentReference.get()
@@ -177,22 +185,23 @@ class AccountService {
             }
     }
 
-      // Data class that represents a calendar event in the application
+    // Data class that represents a calendar event in the application
     data class CalendarData(
         var eventText: String,
         var date: String,
-        var uid: String = ""
+        var uid: String = "",
     )
 
-      // Function that adds a calendar event to Firestore
+    // Function that adds a calendar event to Firestore
     fun addCalendarEvent(event: String) {
         val newEventRef = calendarCollection.document()
-        val calendarData = hashMapOf(
-            "eventText" to event,
-            "homeId" to currentHomeId,
-            "date" to currentDate,
-            "uid" to newEventRef.id
-        )
+        val calendarData =
+            hashMapOf(
+                "eventText" to event,
+                "homeId" to currentHomeId,
+                "date" to currentDate,
+                "uid" to newEventRef.id,
+            )
         newEventRef.set(calendarData)
             .addOnSuccessListener {
                 println("Calendar event added successfully")
@@ -203,23 +212,29 @@ class AccountService {
     }
 
     // Function that requests to get calendar event data from firestore collection
-    fun getCalendarEvents(onResult: (Boolean, List<CalendarData>) -> Unit)  {
-         calendarCollection
+    fun getCalendarEvents(onResult: (Boolean, List<CalendarData>) -> Unit) {
+        calendarCollection
             .whereEqualTo("homeId", AccountService.currentHomeId)
             .get().addOnSuccessListener { result ->
-                 val eventList = result.map { doc ->
-                 println("calendarDoc:" + doc)
-                 CalendarData(
-                     uid = doc.id,  // Use the document ID as the uid
-                     eventText = doc.getString("eventText") ?: "",
-                     date = doc.getString("date") ?: ""
-                 )}.toList()
-                 onResult(true, eventList)
-             }
+                val eventList =
+                    result.map { doc ->
+                        println("calendarDoc:" + doc)
+                        CalendarData(
+                            uid = doc.id, // Use the document ID as the uid
+                            eventText = doc.getString("eventText") ?: "",
+                            date = doc.getString("date") ?: "",
+                        )
+                    }.toList()
+                onResult(true, eventList)
+            }
     }
 
-      // Function that deletes calendar event data from firestore collection
-    fun deleteCalendarEventByUid(uid: String, onSuccess: () -> Unit, onFailure: (Exception) -> Unit) {
+    // Function that deletes calendar event data from firestore collection
+    fun deleteCalendarEventByUid(
+        uid: String,
+        onSuccess: () -> Unit,
+        onFailure: (Exception) -> Unit,
+    ) {
         calendarCollection.document(uid).delete()
             .addOnSuccessListener {
                 onSuccess()
@@ -229,80 +244,93 @@ class AccountService {
             }
     }
 
-
     // Function that requests to get news event data from firestore collection
     suspend fun getEvents() {
         // calculates the amount of days we would like to fetch events by timestamp
         val oneDay = Instant.now().minus(java.time.Duration.ofDays(1)) // 24 hours ago
         // sets the currentEvent companion object to the firestore eventsCollection
-        currentEvents = eventsCollection
-            .whereEqualTo("homeId", AccountService.currentHomeId)
-            .whereGreaterThan("timeStamp", Timestamp(Date.from(oneDay)))
-            .get().await()
-            .map { doc ->
-                val timeStamp = doc.get("timeStamp")
-                val dateTime = when (timeStamp) {
-                    is Timestamp -> timeStamp.toDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime()
-                    is String -> LocalDateTime.parse(timeStamp, DateTimeFormatter.ISO_DATE_TIME)
-                    else -> null
-                }
+        currentEvents =
+            eventsCollection
+                .whereEqualTo("homeId", AccountService.currentHomeId)
+                .whereGreaterThan("timeStamp", Timestamp(Date.from(oneDay)))
+                .get().await()
+                .map { doc ->
+                    val timeStamp = doc.get("timeStamp")
+                    val dateTime =
+                        when (timeStamp) {
+                            is Timestamp ->
+                                timeStamp.toDate().toInstant().atZone(
+                                    ZoneId.systemDefault(),
+                                ).toLocalDateTime()
+                            is String -> LocalDateTime.parse(timeStamp, DateTimeFormatter.ISO_DATE_TIME)
+                            else -> null
+                        }
 
-                val formatter = DateTimeFormatter.ofPattern("EEEE HH:mm") // Defines the date format
-                val formattedDate = dateTime?.format(formatter) ?: "Unknown date"
+                    val formatter = DateTimeFormatter.ofPattern("EEEE HH:mm") // Defines the date format
+                    val formattedDate = dateTime?.format(formatter) ?: "Unknown date"
 
-                EventData(
-                    eventType = doc.getString("eventText") ?: "Unknown event", // Fetching the event text directly
-                    timeStamp = formattedDate
-                )
-            }.toList()
+                    EventData(
+                        eventType = doc.getString("eventText") ?: "Unknown event", // Fetching the event text directly
+                        timeStamp = formattedDate,
+                    )
+                }.toList()
     }
-
-
 
     // Function that registers a user with email and password
-    fun authenticate(email: String, password: String, username: String, onResult: (Boolean, String?) -> Unit) {
+    fun authenticate(
+        email: String,
+        password: String,
+        username: String,
+        onResult: (Boolean, String?) -> Unit,
+    ) {
         Firebase.auth.createUserWithEmailAndPassword(email, password)
             .addOnSuccessListener { authResult ->
-        val user = authResult.user
-        // Save user data to Fire store
-        val userData = hashMapOf(
-            "email" to email,
-            "username" to username
-        )
-        usersCollection.document(user!!.uid).set(userData)
-                .addOnSuccessListener {
-                    onResult(true, null)
-                }
-                .addOnFailureListener { exception ->
-                    onResult(false, exception.message)
-                }
+                val user = authResult.user
+                // Save user data to Fire store
+                val userData =
+                    hashMapOf(
+                        "email" to email,
+                        "username" to username,
+                    )
+                usersCollection.document(user!!.uid).set(userData)
+                    .addOnSuccessListener {
+                        onResult(true, null)
+                    }
+                    .addOnFailureListener { exception ->
+                        onResult(false, exception.message)
+                    }
             }
             .addOnFailureListener { exception ->
-        onResult(false, exception.message)
+                onResult(false, exception.message)
             }
     }
+
     // Function that logs in a user with email and password
-     fun login(email: String, password: String, onResult: (Boolean, String?) -> Unit) {
+    fun login(
+        email: String,
+        password: String,
+        onResult: (Boolean, String?) -> Unit,
+    ) {
         // Attempt to sign in the user
         auth.signInWithEmailAndPassword(email, password)
             .addOnSuccessListener { authResult ->
-            // Login successful
-            val user = authResult.user
-            // Get and set the current features to the current logged in user:
-            usersCollection.document(user!!.uid).get()
-                .addOnSuccessListener { document ->
-                    val username = document.getString("username").toString()
-                    currentUserName = document.getString("username").toString()
-                    currentUserId = user.uid
-                    currentHomeId = document.getString("homeId").toString()
+                // Login successful
+                val user = authResult.user
+                // Get and set the current features to the current logged in user:
+                usersCollection.document(user!!.uid).get()
+                    .addOnSuccessListener { document ->
+                        val username = document.getString("username").toString()
+                        currentUserName = document.getString("username").toString()
+                        currentUserId = user.uid
+                        currentHomeId = document.getString("homeId").toString()
 
-                    // Pass the username along with the login result
-                    onResult(true, username)
-                }
-                .addOnFailureListener { exception ->
-                    onResult(false, exception.message)
-                }
-        }
+                        // Pass the username along with the login result
+                        onResult(true, username)
+                    }
+                    .addOnFailureListener { exception ->
+                        onResult(false, exception.message)
+                    }
+            }
             .addOnFailureListener { exception ->
                 // Login failed
                 val errorMessage = exception.message
@@ -311,7 +339,10 @@ class AccountService {
     }
 
     // Function that sends a password reset email to the user
-    fun sendPasswordResetEmail(email: String, onResult: (Boolean, String?) -> Unit) {
+    fun sendPasswordResetEmail(
+        email: String,
+        onResult: (Boolean, String?) -> Unit,
+    ) {
         auth.sendPasswordResetEmail(email)
             .addOnSuccessListener {
                 onResult(true, null)
@@ -322,7 +353,12 @@ class AccountService {
     }
 
     // Function that logs in a home with name and password
-    fun homeLogin(name: String, password: String, usernames: List<String>, onResult: (Boolean, String?) -> Unit) {
+    fun homeLogin(
+        name: String,
+        password: String,
+        usernames: List<String>,
+        onResult: (Boolean, String?) -> Unit,
+    ) {
         homesCollection.whereEqualTo("home", name).get()
             .addOnSuccessListener { querySnapshot ->
                 if (querySnapshot.isEmpty) {
@@ -348,11 +384,12 @@ class AccountService {
                                     completedTasks++
                                     if (completedTasks == totalTasks) {
                                         // All tasks completed, update the home document
-                                        val homeData = hashMapOf(
-                                            "name" to name,
-                                            "members" to userIDs,
-                                            "password" to password
-                                        )
+                                        val homeData =
+                                            hashMapOf(
+                                                "name" to name,
+                                                "members" to userIDs,
+                                                "password" to password,
+                                            )
                                         homeDocument.reference.set(homeData)
                                             .addOnSuccessListener {
                                                 onResult(true, null)
@@ -375,8 +412,14 @@ class AccountService {
                 onResult(false, exception.message)
             }
     }
+
     // Function that creates a new home
-    fun createNewHouse(name: String, password: String, usernames: List<String>, onResult: (Boolean, String?) -> Unit) {
+    fun createNewHouse(
+        name: String,
+        password: String,
+        usernames: List<String>,
+        onResult: (Boolean, String?) -> Unit,
+    ) {
         val userIds = mutableListOf<String>()
         var completedTasks = 0
         val totalTasks = usernames.size
@@ -397,15 +440,16 @@ class AccountService {
                     completedTasks++
                     if (completedTasks == totalTasks) {
                         // If all tasks are completed, create the new household
-                        val homeData = hashMapOf(
-                            "home" to name,
-                            "password" to password,
-                            "members" to userIds
-                        )
+                        val homeData =
+                            hashMapOf(
+                                "home" to name,
+                                "password" to password,
+                                "members" to userIds,
+                            )
 
                         homesCollection.add(homeData) // Add new household to Firestore
                             .addOnSuccessListener { newHomeDoc ->
-                                userDocs.forEach{doc ->
+                                userDocs.forEach { doc ->
                                     // sending the home id generated to the user document connected to the home id
                                     AccountService.currentHomeId = newHomeDoc.id
                                     doc.reference.update("homeId", newHomeDoc.id)
@@ -422,7 +466,4 @@ class AccountService {
                 }
         }
     }
-
-
-
 }

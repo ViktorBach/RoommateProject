@@ -22,16 +22,17 @@ import com.example.roommateproject.ui.theme.lightYellow
 fun RoomRegisterButton(
     isLoading: Boolean,
     navigateFrontPage: () -> Unit,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
     val roomViewModel = viewModel<RoomViewModel>()
 
     Box(
-        modifier = Modifier
-            .background(Color.White)
-            .fillMaxHeight(0.75f)
-            .fillMaxWidth(0.5f),
-        contentAlignment = Alignment.Center
+        modifier =
+            Modifier
+                .background(Color.White)
+                .fillMaxHeight(0.75f)
+                .fillMaxWidth(0.5f),
+        contentAlignment = Alignment.Center,
     ) {
         Button(
             onClick = {
@@ -45,15 +46,16 @@ fun RoomRegisterButton(
                     // Show an appropriate error message to the user (e.g., Toast)
                 }
             },
-            colors = ButtonDefaults.buttonColors(
-                lightYellow
-            )
+            colors =
+                ButtonDefaults.buttonColors(
+                    lightYellow,
+                ),
         ) {
             Text(
                 text = "Register",
                 fontFamily = jaldiFontFamily,
                 style = Typography.labelSmall,
-                color = darkGreen // Ensure this is the correct color from your theme
+                color = darkGreen, // Ensure this is the correct color from your theme
             )
         }
     }

@@ -19,24 +19,29 @@ import com.example.roommateproject.FrontPage.FrontPageViewModel
 import com.example.roommateproject.R
 
 /*****************************************************************************/
-                    // Logout Button Implementation //
+// Logout Button Implementation //
+
 /*****************************************************************************/
 @Composable
-fun LogoutButton(navigateRegisterPage: () -> Unit, onClick: () -> Unit) {
+fun LogoutButton(
+    navigateRegisterPage: () -> Unit,
+    onClick: () -> Unit,
+) {
     val frontPageViewModel = viewModel<FrontPageViewModel>()
     Box(
-        modifier = Modifier
-            .background(Color.Transparent)
-            .fillMaxHeight(0.8f)
-            .fillMaxWidth(0.85f)
-            .clickable(onClick = onClick)
-            .padding(top = 15.dp),
-        contentAlignment = Alignment.Center
+        modifier =
+            Modifier
+                .background(Color.Transparent)
+                .fillMaxHeight(0.8f)
+                .fillMaxWidth(0.85f)
+                .clickable(onClick = onClick)
+                .padding(top = 15.dp),
+        contentAlignment = Alignment.Center,
     ) {
         Image(
             painter = painterResource(id = R.drawable.logouticon),
             contentDescription = "Logout",
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier.fillMaxSize(),
         )
     }
 }

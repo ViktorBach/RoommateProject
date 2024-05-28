@@ -36,17 +36,18 @@ import com.example.roommateproject.ui.theme.jaldiFontFamily
 import com.example.roommateproject.ui.theme.white
 
 /*****************************************************************************/
-                // Room Login Screen Composable Functions //
+// Room Login Screen Composable Functions //
+
 /*****************************************************************************/
 @Composable
-fun RoomLogin (navigateFrontPage: () -> Unit) {
-
+fun RoomLogin(navigateFrontPage: () -> Unit) {
     val roomViewModel = viewModel<RoomViewModel>()
     var isLoading by remember { mutableStateOf(false) }
 
     Column(
-        modifier = Modifier
-            .background(white)
+        modifier =
+            Modifier
+                .background(white),
     ) {
         Spacer(modifier = Modifier.width(16.dp))
         Row {
@@ -75,7 +76,7 @@ fun RoomLogin (navigateFrontPage: () -> Unit) {
                         isLoading = false
                         navigateFrontPage()
                     }
-                }
+                },
             )
             RoomLoginButton(
                 isLoading = isLoading,
@@ -86,7 +87,7 @@ fun RoomLogin (navigateFrontPage: () -> Unit) {
                         isLoading = false
                         navigateFrontPage()
                     }
-                }
+                },
             )
         }
         // Loading Bar
@@ -98,13 +99,19 @@ fun RoomLogin (navigateFrontPage: () -> Unit) {
 
 // Box Layout for Input Fields
 @Composable
-fun BoxLayout( value: String, onValueChange: (String) -> Unit, labelText: String, height: Float ) {
+fun BoxLayout(
+    value: String,
+    onValueChange: (String) -> Unit,
+    labelText: String,
+    height: Float,
+) {
     Box(
-        modifier = Modifier
-            .background(Color.White)
-            .fillMaxHeight(height)
-            .fillMaxWidth(),
-        contentAlignment = Alignment.Center
+        modifier =
+            Modifier
+                .background(Color.White)
+                .fillMaxHeight(height)
+                .fillMaxWidth(),
+        contentAlignment = Alignment.Center,
     ) {
         OutlinedTextField(
             value = value,
@@ -114,22 +121,24 @@ fun BoxLayout( value: String, onValueChange: (String) -> Unit, labelText: String
                     labelText,
                     fontFamily = jaldiFontFamily,
                     style = Typography.labelMedium,
-                    color = Color.DarkGray
+                    color = Color.DarkGray,
                 )
             },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp),
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp),
             shape = RoundedCornerShape(20.dp),
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedBorderColor = Color.Gray,
-                unfocusedBorderColor = Color.LightGray)
+            colors =
+                OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = Color.Gray,
+                    unfocusedBorderColor = Color.LightGray,
+                ),
         )
     }
 }
 
-
 @Composable
-fun RoomPreview () {
+fun RoomPreview() {
     RoomLogin(navigateFrontPage = {})
 }
