@@ -21,6 +21,9 @@ import com.example.roommateproject.ui.theme.Typography
 import com.example.roommateproject.ui.theme.jaldiBoldFontFamily
 import com.example.roommateproject.ui.theme.white
 
+/*****************************************************************************/
+                            // List Add Button //
+/*****************************************************************************/
 @Composable
 fun ListAddButton(onAddItem: (String) -> Unit) {
     var showDialog by remember { mutableStateOf(false) }

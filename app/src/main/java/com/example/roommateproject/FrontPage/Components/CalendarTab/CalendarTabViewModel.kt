@@ -5,6 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.roommateproject.Services.AccountService
 
+/*****************************************************************************/
+                        // CalendarTabViewModel class //
+/*****************************************************************************/
 class CalendarTabViewModel : ViewModel() {
         private val accountService: AccountService = AccountService()
 

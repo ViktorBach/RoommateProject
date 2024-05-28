@@ -20,6 +20,9 @@ import com.example.roommateproject.ui.theme.jaldiBoldFontFamily
 import com.example.roommateproject.ui.theme.lightYellow
 import com.example.roommateproject.ui.theme.white
 
+/*****************************************************************************/
+                            //  Home Button Toggle //
+/*****************************************************************************/
 @Composable
 fun HomeToggleButton(viewModel: HomeButtonViewModel = viewModel(
     factory = HomeButtonViewModelFactory(AccountService()))) {

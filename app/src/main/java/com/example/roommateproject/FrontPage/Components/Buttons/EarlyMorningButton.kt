@@ -20,6 +20,9 @@ import com.example.roommateproject.ui.theme.lightYellow
 import com.example.roommateproject.ui.theme.white
 import sendNotification
 
+/*****************************************************************************/
+                            // Early Morning Button //
+/*****************************************************************************/
 @Composable
 fun EarlyMorningButton() {
     val accountService: AccountService = AccountService();

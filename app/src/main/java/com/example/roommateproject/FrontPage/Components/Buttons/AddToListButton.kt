@@ -25,6 +25,9 @@ import com.example.roommateproject.ui.theme.lightYellow
 import com.example.roommateproject.ui.theme.orange
 import com.example.roommateproject.ui.theme.white
 
+/*****************************************************************************/
+                            // Add to list button //
+/*****************************************************************************/
 @Composable
 fun AddToListButton(onAddItem: (String) -> Unit) {
     var showDialog by remember { mutableStateOf(false) }
