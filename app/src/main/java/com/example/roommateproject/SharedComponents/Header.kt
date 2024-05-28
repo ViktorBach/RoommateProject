@@ -18,6 +18,7 @@ import com.example.roommateproject.ui.theme.orange
 
 //Header composable for all screens
 
+// Natazja
 @Composable
 fun Header() {
     Row {

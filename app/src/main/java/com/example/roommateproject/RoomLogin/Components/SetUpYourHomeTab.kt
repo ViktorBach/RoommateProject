@@ -13,6 +13,7 @@ import com.example.roommateproject.ui.theme.Typography
 import com.example.roommateproject.ui.theme.lightYellow
 import com.example.roommateproject.ui.theme.playFairDisplayFontFamily
 
+// Natazja
 @Composable
 fun SetUpYourHomeTab() {
     Box(

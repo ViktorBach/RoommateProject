@@ -46,6 +46,8 @@ import com.example.roommateproject.ui.theme.white
 // Register Screen //
 
 /*****************************************************************************/
+
+// Everyone
 @Composable
 fun Register(
     navigateRoomLogin: () -> Unit,

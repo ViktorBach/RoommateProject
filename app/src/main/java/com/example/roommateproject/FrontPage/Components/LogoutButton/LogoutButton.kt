@@ -22,6 +22,8 @@ import com.example.roommateproject.R
 // Logout Button Implementation //
 
 /*****************************************************************************/
+
+// Natazja
 @Composable
 fun LogoutButton(
     navigateRegisterPage: () -> Unit,

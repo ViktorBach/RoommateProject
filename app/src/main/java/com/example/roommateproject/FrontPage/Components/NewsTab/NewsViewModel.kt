@@ -14,6 +14,8 @@ import java.util.Date
 // NewsViewModel class //
 
 /*****************************************************************************/
+
+// Sofie
 data class Event(val eventType: String, val timeStamp: Long)
 
 class NewsViewModel : ViewModel() {

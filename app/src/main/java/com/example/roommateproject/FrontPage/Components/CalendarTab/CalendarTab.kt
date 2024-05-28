@@ -61,6 +61,8 @@ import kotlinx.coroutines.launch
 // Calendar Tab Screen //
 
 /*****************************************************************************/
+
+// Sofie
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -142,7 +144,7 @@ fun CalendarTab() {
             selectedDate = date,
             onClose = { isAddingEvent = false },
             onAddEvent = { eventText ->
-                calendarTapViewModel.addCalendarEvent(eventText)
+                calendarTapViewModel.addEventToCalendar(eventText)
                 isAddingEvent = false
                 // Fetch updated events for the selected date after adding the new one
                 calendarTapViewModel.fetchEventsFilteredByDate(date)
@@ -162,6 +164,7 @@ fun CalendarTab() {
     }
 }
 
+// Birk
 @Composable
 fun AddEventDialog(
     selectedDate: String,
@@ -215,6 +218,7 @@ fun AddEventDialog(
     )
 }
 
+// Sofie
 @Composable
 fun ShowEvents(events: List<AccountService.CalendarData>) {
     val calendarTapViewModel = viewModel<CalendarTabViewModel>()

@@ -25,6 +25,8 @@ import com.example.roommateproject.FrontPage.Components.ListView.ListScreenState
 import com.example.roommateproject.R
 import com.example.roommateproject.ui.theme.lightBlue
 
+// Custom drawer that opens and closes the to-do list
+// Natazja
 @Composable
 fun CustomDrawer(
     isOpen: Boolean,

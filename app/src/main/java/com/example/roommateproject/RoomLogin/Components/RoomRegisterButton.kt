@@ -18,6 +18,7 @@ import com.example.roommateproject.ui.theme.darkGreen
 import com.example.roommateproject.ui.theme.jaldiFontFamily
 import com.example.roommateproject.ui.theme.lightYellow
 
+// Natazja
 @Composable
 fun RoomRegisterButton(
     isLoading: Boolean,

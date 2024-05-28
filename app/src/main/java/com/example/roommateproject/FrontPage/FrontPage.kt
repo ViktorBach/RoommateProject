@@ -54,6 +54,8 @@ import kotlinx.coroutines.launch
 // FrontPage UI //
 
 /*****************************************************************************/
+
+// Everyone
 @SuppressLint("Range")
 @Composable
 fun FrontPage(

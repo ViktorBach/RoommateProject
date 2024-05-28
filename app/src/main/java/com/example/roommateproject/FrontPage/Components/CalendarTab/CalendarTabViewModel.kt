@@ -9,6 +9,8 @@ import com.example.roommateproject.Services.AccountService
 // CalendarTabViewModel class //
 
 /*****************************************************************************/
+
+// Sofie
 class CalendarTabViewModel : ViewModel() {
     private val accountService: AccountService = AccountService()
 
@@ -27,9 +29,8 @@ class CalendarTabViewModel : ViewModel() {
         }
     }
 
-    fun addCalendarEvent(eventText: String) {
+    fun addEventToCalendar(eventText: String) {
         accountService.addCalendarEvent(eventText)
-        // Optionally fetch updated events
     }
 
     fun deleteEventByUid(uid: String) {
@@ -45,3 +46,4 @@ class CalendarTabViewModel : ViewModel() {
         )
     }
 }
+

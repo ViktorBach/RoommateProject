@@ -13,6 +13,8 @@ import sendNotification
 // HomeButtonViewModel class //
 
 /*****************************************************************************/
+
+// Natazja
 class HomeButtonViewModel(
     private val accountService: AccountService,
 ) : ViewModel() {

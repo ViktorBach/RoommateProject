@@ -11,6 +11,8 @@ import kotlinx.coroutines.launch
 // RegisterViewModel class represents the ViewModel for the Register screen. //
 
 /*****************************************************************************/
+
+// Everyone
 class RegisterViewModel : ViewModel() {
     private val accountService: AccountService = AccountService()
 

@@ -16,6 +16,8 @@ import com.example.roommateproject.R
 
 /*****************************************************************************/
 
+// Birk
+
 const val MY_CHANNEL_ID = "my_channel_id"
 const val PERMISSION_REQUEST_CODE = 123
 

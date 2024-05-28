@@ -8,6 +8,8 @@ import com.example.roommateproject.Services.AccountService
 // HomeButtonViewModelFactory class //
 
 /*****************************************************************************/
+
+// Natazja
 class HomeButtonViewModelFactory(
     private val accountService: AccountService,
 ) : ViewModelProvider.Factory {

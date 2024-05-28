@@ -39,6 +39,8 @@ import com.example.roommateproject.ui.theme.white
 // Room Login Screen Composable Functions //
 
 /*****************************************************************************/
+
+// Everyone
 @Composable
 fun RoomLogin(navigateFrontPage: () -> Unit) {
     val roomViewModel = viewModel<RoomViewModel>()

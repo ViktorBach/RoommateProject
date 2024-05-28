@@ -4,6 +4,7 @@ package com.example.roommateproject.FrontPage.Components.ListView
 // ShoppingList data class //
 
 /*****************************************************************************/
+
 //Viktor
 //Data class declaring content of each shopping list item
 data class ShoppingList(

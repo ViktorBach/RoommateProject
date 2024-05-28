@@ -14,6 +14,8 @@ import kotlinx.coroutines.launch
 // RoomViewModel class represents the ViewModel for the RoomLogin screen. //
 
 /*****************************************************************************/
+
+// Everyone
 class RoomViewModel : ViewModel() {
     private val accountService: AccountService = AccountService()
 

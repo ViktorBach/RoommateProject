@@ -32,6 +32,8 @@ import java.util.Locale
 // News Tab Screen Composable Function //
 
 /*****************************************************************************/
+
+// Sofie
 @Composable
 fun NewsTab(newsViewModel: NewsViewModel = viewModel()) {
     val events by newsViewModel.events.collectAsState()

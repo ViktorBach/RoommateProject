@@ -8,6 +8,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.example.roommateproject.R
 
+// Natazja
 // Set of Material typography styles to start with
 val Typography =
     Typography(

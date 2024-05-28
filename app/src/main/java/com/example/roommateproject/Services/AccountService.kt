@@ -30,6 +30,7 @@ class AccountService {
     private val calendarCollection = db.collection("calendars")
     private val shoppingListCollection = db.collection("shoppinglist")
 
+    // Sofie
     companion object {
         var currentEvents: List<EventData> = listOf()
         var currentUserId = ""
@@ -39,6 +40,7 @@ class AccountService {
         var currentDate = ""
     }
 
+    // Sofie + Natazja
     // enum class that contains the internal name and value of the EventTypes we have predefined
     enum class EventType(val eventText: String) {
         I_AM_HOME("${AccountService.currentUserName} is home"),
@@ -51,12 +53,14 @@ class AccountService {
         CALENDAR_EVENT("${AccountService.currentUserName} added a calendar event"),
     }
 
+    // Sofie
     // Data class that represents an event in the application
     data class EventData(
         var eventType: String,
         var timeStamp: String,
     )
 
+    // Sofie
     // Function that adds an event to Firestore
     fun addEvent(eventType: EventType) {
         val eventData =
@@ -71,8 +75,8 @@ class AccountService {
         eventsCollection.add(eventData) // Adds new event to Firestore
     }
 
-    // Function that requests to get shopping list data from firestore collection
     //Viktor
+    // Function that requests to get shopping list data from firestore collection
     fun addShoppingListItem(taskTitle: String) {
         val itemData =
             hashMapOf(
@@ -108,8 +112,8 @@ class AccountService {
             }
     }
 
-    // Function that requests to get shopping list data from firestore collection
     //Viktor
+    // Function that requests to get shopping list data from firestore collection
     fun getShoppingListItems(onResult: (Boolean, List<ShoppingList>) -> Unit) {
         shoppingListCollection.document(currentHomeId).get()
             .addOnSuccessListener { document ->
@@ -132,8 +136,8 @@ class AccountService {
             }
     }
 
+    // Viktor
     // Function that requests to get shopping list data from firestore collection
-    //Viktor
     fun removeShoppingListItem(
         taskTitle: String,
         onResult: (Boolean) -> Unit,
@@ -164,8 +168,8 @@ class AccountService {
             }
     }
 
+    // Viktor
     // Function that requests to get shopping list data from firestore collection
-    //Viktor
     fun updateShoppingListItem(
         taskTitle: String,
         isCompleted: Boolean,
@@ -189,6 +193,7 @@ class AccountService {
             }
     }
 
+    // Sofie
     // Data class that represents a calendar event in the application
     data class CalendarData(
         var eventText: String,
@@ -196,6 +201,7 @@ class AccountService {
         var uid: String = "",
     )
 
+    // Sofie
     // Function that adds a calendar event to Firestore
     fun addCalendarEvent(event: String) {
         val newEventRef = calendarCollection.document()
@@ -215,6 +221,7 @@ class AccountService {
             }
     }
 
+    // Sofie
     // Function that requests to get calendar event data from firestore collection
     fun getCalendarEvents(onResult: (Boolean, List<CalendarData>) -> Unit) {
         calendarCollection
@@ -233,12 +240,9 @@ class AccountService {
             }
     }
 
+    // Sofie + Birk
     // Function that deletes calendar event data from firestore collection
-    fun deleteCalendarEventByUid(
-        uid: String,
-        onSuccess: () -> Unit,
-        onFailure: (Exception) -> Unit,
-    ) {
+    fun deleteCalendarEventByUid(uid: String, onSuccess: () -> Unit, onFailure: (Exception) -> Unit, ) {
         calendarCollection.document(uid).delete()
             .addOnSuccessListener {
                 onSuccess()
@@ -248,6 +252,7 @@ class AccountService {
             }
     }
 
+    // Sofie
     // Function that requests to get news event data from firestore collection
     suspend fun getEvents() {
         // calculates the amount of days we would like to fetch events by timestamp
@@ -280,6 +285,7 @@ class AccountService {
                 }.toList()
     }
 
+    // Everyone
     // Function that registers a user with email and password
     fun authenticate(
         email: String,
@@ -309,6 +315,7 @@ class AccountService {
             }
     }
 
+    // Everyone
     // Function that logs in a user with email and password
     fun login(
         email: String,
@@ -342,6 +349,7 @@ class AccountService {
             }
     }
 
+    // Birk
     // Function that sends a password reset email to the user
     fun sendPasswordResetEmail(
         email: String,
@@ -356,6 +364,7 @@ class AccountService {
             }
     }
 
+    // Everyone
     // Function that logs in a home with name and password
     fun homeLogin(
         name: String,
@@ -417,8 +426,8 @@ class AccountService {
             }
     }
 
+    // Everyone
     // Function that creates a new home
-    //Viktor
     fun createNewHouse(
         name: String,
         password: String,

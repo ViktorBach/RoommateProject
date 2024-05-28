@@ -70,8 +70,8 @@ class MainActivity : ComponentActivity() {
 
     private val PERMISSION_REQUEST_CODE = 123
 
+    // Birk
     //Function asking for permission on the device
-    //Birk
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<String>, // Change to Array<String>

@@ -27,7 +27,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.roommateproject.FrontPage.Components.Buttons.ListAddButton
 import com.example.roommateproject.ui.theme.Shadow10
 import com.example.roommateproject.ui.theme.Typography
 import com.example.roommateproject.ui.theme.darkGreen
@@ -40,6 +39,7 @@ import com.example.roommateproject.ui.theme.white
 // ListScreen.kt file //
 
 /*****************************************************************************/
+
 // Viktor
 @Composable
 //Stateful function that handles state for the shopping list
@@ -56,7 +56,8 @@ fun ListScreenStateful(listViewModel: ListViewModel = viewModel()) {
         onAddItem = { listViewModel.createTask(it) },
     )
 }
-//Viktor
+
+//Viktor + Natazja
 @Composable
 fun ListsScreen(
     lists: List<ShoppingList>,
@@ -66,7 +67,6 @@ fun ListsScreen(
     onRemoveCompleted: () -> Unit,
     onAddItem: (String) -> Unit,
 ) {
-    //Natazja
     Column(
         modifier =
             Modifier
@@ -116,7 +116,6 @@ fun ListsScreen(
                         .background(skyBlue)
                         .padding(16.dp),
             )
-            //Viktor
             lists.forEach { task ->
                 Row(
                     modifier =
@@ -134,7 +133,6 @@ fun ListsScreen(
                     )
                 }
             }
-            //Natazja
             Spacer(modifier = Modifier.height(16.dp))
 
             Row {

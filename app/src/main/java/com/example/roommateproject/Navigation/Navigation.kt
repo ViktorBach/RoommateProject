@@ -12,6 +12,8 @@ import com.example.roommateproject.RoomLogin.RoomLogin
 /*****************************************************************************/
 // Navigation Composable //
 /*****************************************************************************/
+
+// Everyone
 @Composable
 fun Navigation(drawerState: DrawerState) {
     val navController = rememberNavController()

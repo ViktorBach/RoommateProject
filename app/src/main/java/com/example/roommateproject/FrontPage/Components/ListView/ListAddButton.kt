@@ -1,4 +1,4 @@
-package com.example.roommateproject.FrontPage.Components.Buttons
+package com.example.roommateproject.FrontPage.Components.ListView
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -25,6 +25,8 @@ import com.example.roommateproject.ui.theme.white
 // List Add Button //
 
 /*****************************************************************************/
+
+// Natazja
 @Composable
 fun ListAddButton(onAddItem: (String) -> Unit) {
     var showDialog by remember { mutableStateOf(false) }

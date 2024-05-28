@@ -14,6 +14,7 @@ import kotlinx.coroutines.launch
 // ListViewModel.kt - ViewModel for the shopping list screen //
 
 /*****************************************************************************/
+
 //Viktor
 class ListViewModel : ViewModel() {
     private val accountService: AccountService = AccountService()

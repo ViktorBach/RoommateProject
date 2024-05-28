@@ -25,6 +25,8 @@ import sendNotification
 // Guest Visit Button //
 
 /*****************************************************************************/
+
+// Natazja
 @Composable
 fun GuestVisitButton() {
     val accountService: AccountService = AccountService()

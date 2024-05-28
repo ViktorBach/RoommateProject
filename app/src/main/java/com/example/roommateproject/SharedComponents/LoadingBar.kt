@@ -15,6 +15,7 @@ import com.example.roommateproject.ui.theme.lightBlue
 
 //Loading bar for register screens
 
+// Natazja
 @Composable
 fun CustomLoadingBar() {
     Box(

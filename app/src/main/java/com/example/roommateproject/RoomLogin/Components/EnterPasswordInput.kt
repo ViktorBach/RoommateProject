@@ -5,6 +5,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.roommateproject.RoomLogin.BoxLayout
 import com.example.roommateproject.RoomLogin.RoomViewModel
 
+// Sofie
 @Composable
 fun EnterPasswordInput(navigateFrontPage: () -> Unit) {
     val roomViewModel = viewModel<RoomViewModel>()

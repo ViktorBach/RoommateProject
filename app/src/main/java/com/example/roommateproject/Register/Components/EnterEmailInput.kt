@@ -5,6 +5,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.roommateproject.Register.BoxLayout
 import com.example.roommateproject.Register.RegisterViewModel
 
+// Sofie
 @Composable
 fun EnterEmailInput(navigateRoomLogin: () -> Unit) {
     val registerViewModel = viewModel<RegisterViewModel>()

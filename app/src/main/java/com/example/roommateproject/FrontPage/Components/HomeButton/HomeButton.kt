@@ -24,6 +24,8 @@ import com.example.roommateproject.ui.theme.white
 //  Home Button Toggle //
 
 /*****************************************************************************/
+
+// Natazja
 @Composable
 fun HomeToggleButton(
     viewModel: HomeButtonViewModel =
