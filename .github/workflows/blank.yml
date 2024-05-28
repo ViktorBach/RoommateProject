@@ -28,7 +28,10 @@ jobs:
       - name: Install Ktlint
         run: curl -sSLO https://github.com/pinterest/ktlint/releases/download/0.45.2/ktlint && chmod a+x ktlint
 
-      - name: Run Ktlint
+      - name: Run Ktlint to Fix Issues
+        run: ./ktlint -F "**/*.kt"
+
+      - name: Run Ktlint to Check for Issues
         run: ./ktlint "**/*.kt" --reporter=plain --reporter=checkstyle,output=ktlint-report.xml
 
       - name: Upload Ktlint Report
