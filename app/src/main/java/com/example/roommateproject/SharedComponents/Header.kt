@@ -16,6 +16,8 @@ import com.example.roommateproject.ui.theme.karantinaFontFamily
 import com.example.roommateproject.ui.theme.katibehFontFamily
 import com.example.roommateproject.ui.theme.orange
 
+//Header composable for all screens
+
 @Composable
 fun Header() {
     Row {

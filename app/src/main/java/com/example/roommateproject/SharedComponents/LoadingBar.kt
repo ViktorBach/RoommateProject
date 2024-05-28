@@ -13,6 +13,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.roommateproject.ui.theme.lightBlue
 
+//Loading bar for register screens
+
 @Composable
 fun CustomLoadingBar() {
     Box(

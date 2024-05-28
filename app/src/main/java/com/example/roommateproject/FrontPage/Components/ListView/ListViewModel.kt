@@ -14,6 +14,7 @@ import kotlinx.coroutines.launch
 // ListViewModel.kt - ViewModel for the shopping list screen //
 
 /*****************************************************************************/
+//Viktor
 class ListViewModel : ViewModel() {
     private val accountService: AccountService = AccountService()
 
@@ -25,12 +26,14 @@ class ListViewModel : ViewModel() {
         fetchTasks() // Fetch tasks when ViewModel is initialized
     }
 
+    //Create a shopping list item with the ShoppingList data class
     fun createTask(taskTitle: String) {
         tasks.add(0, ShoppingList(taskTitle))
         inputState.value = null
-        accountService.addShoppingListItem(taskTitle) // Add to Firestore
+        accountService.addShoppingListItem(taskTitle) // Add to Firestore through accountService
     }
 
+    //Get items from accountService and firebase firestore
     fun fetchTasks() {
         accountService.getShoppingListItems { success, items ->
             if (success) {
@@ -40,11 +43,12 @@ class ListViewModel : ViewModel() {
         }
     }
 
+    //Toggle tasks complete and add the checkmark
     fun toggleTaskCompleted(taskId: String) {
         tasks.firstOrNull { it.id == taskId }?.let { task ->
             val toggledTask = task.toggled()
             tasks[tasks.indexOf(task)] = toggledTask
-
+            //Coroutine to update shopping list items in firebase firestore through accountService
             CoroutineScope(Dispatchers.IO).launch {
                 accountService.updateShoppingListItem(task.title, toggledTask.completed)
             }
@@ -55,10 +59,7 @@ class ListViewModel : ViewModel() {
         inputState.value = input
     }
 
-    /*fun removeCompletedItems() {
-        tasks.removeAll { it.completed }
-    }*/
-
+    //Remove all list items from list that are completed
     fun removeCompletedItems() {
         val completedItems = tasks.filter { it.completed }
         completedItems.forEach { item ->

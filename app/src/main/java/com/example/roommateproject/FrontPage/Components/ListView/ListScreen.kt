@@ -40,7 +40,9 @@ import com.example.roommateproject.ui.theme.white
 // ListScreen.kt file //
 
 /*****************************************************************************/
+// Viktor
 @Composable
+//Stateful function that handles state for the shopping list
 fun ListScreenStateful(listViewModel: ListViewModel = viewModel()) {
     val lists: List<ShoppingList> = listViewModel.tasks
     val input: State<String?> = listViewModel.inputState
@@ -51,10 +53,10 @@ fun ListScreenStateful(listViewModel: ListViewModel = viewModel()) {
         onTaskClick = { listViewModel.toggleTaskCompleted(it.id) },
         onInputChange = { listViewModel.onInputChange(it) },
         onRemoveCompleted = { listViewModel.removeCompletedItems() },
-        onAddItem = { listViewModel.createTask(it) }, // Pass the add item function
+        onAddItem = { listViewModel.createTask(it) },
     )
 }
-
+//Viktor
 @Composable
 fun ListsScreen(
     lists: List<ShoppingList>,
@@ -64,6 +66,7 @@ fun ListsScreen(
     onRemoveCompleted: () -> Unit,
     onAddItem: (String) -> Unit,
 ) {
+    //Natazja
     Column(
         modifier =
             Modifier
@@ -113,6 +116,7 @@ fun ListsScreen(
                         .background(skyBlue)
                         .padding(16.dp),
             )
+            //Viktor
             lists.forEach { task ->
                 Row(
                     modifier =
@@ -130,6 +134,7 @@ fun ListsScreen(
                     )
                 }
             }
+            //Natazja
             Spacer(modifier = Modifier.height(16.dp))
 
             Row {
@@ -158,16 +163,3 @@ fun ListsScreen(
         }
     }
 }
-
-/*@Preview(showBackground = true)
-@Composable
-fun PreviewTasksScreen() {
-    ListsScreen(
-        lists = ListViewModel.sampleTasks,
-        input = null,
-        onTaskClick = {},
-        onInputChange = {},
-        onRemoveCompleted = {},
-        onAddItem = {}
-    )
-}*/

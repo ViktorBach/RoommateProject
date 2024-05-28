@@ -1,9 +1,11 @@
 package com.example.roommateproject.FrontPage.Components.ListView
 
 /*****************************************************************************/
-// ShoppingList class //
+// ShoppingList data class //
 
 /*****************************************************************************/
+//Viktor
+//Data class declaring content of each shopping list item
 data class ShoppingList(
     val title: String,
     val completed: Boolean = false,
@@ -11,8 +13,6 @@ data class ShoppingList(
 ) {
     val id: String = createdAt.toString()
 
-    /**
-     * Creates a copy of this task with the opposite completed state
-     */
+    //Creates a copy of the list item with opposite completed state
     fun toggled(): ShoppingList = this.copy(completed = !this.completed)
 }

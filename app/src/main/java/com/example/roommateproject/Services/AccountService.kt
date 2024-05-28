@@ -72,6 +72,7 @@ class AccountService {
     }
 
     // Function that requests to get shopping list data from firestore collection
+    //Viktor
     fun addShoppingListItem(taskTitle: String) {
         val itemData =
             hashMapOf(
@@ -108,6 +109,7 @@ class AccountService {
     }
 
     // Function that requests to get shopping list data from firestore collection
+    //Viktor
     fun getShoppingListItems(onResult: (Boolean, List<ShoppingList>) -> Unit) {
         shoppingListCollection.document(currentHomeId).get()
             .addOnSuccessListener { document ->
@@ -131,6 +133,7 @@ class AccountService {
     }
 
     // Function that requests to get shopping list data from firestore collection
+    //Viktor
     fun removeShoppingListItem(
         taskTitle: String,
         onResult: (Boolean) -> Unit,
@@ -162,6 +165,7 @@ class AccountService {
     }
 
     // Function that requests to get shopping list data from firestore collection
+    //Viktor
     fun updateShoppingListItem(
         taskTitle: String,
         isCompleted: Boolean,
@@ -414,6 +418,7 @@ class AccountService {
     }
 
     // Function that creates a new home
+    //Viktor
     fun createNewHouse(
         name: String,
         password: String,

@@ -26,6 +26,8 @@ import createNotificationChannel
 import kotlinx.coroutines.launch
 import sendNotification
 
+//Main activity class running program
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,6 +70,8 @@ class MainActivity : ComponentActivity() {
 
     private val PERMISSION_REQUEST_CODE = 123
 
+    //Function asking for permission on the device
+    //Birk
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<String>, // Change to Array<String>
@@ -80,11 +84,13 @@ class MainActivity : ComponentActivity() {
                 // Permission granted, send the notification
                 sendNotification("Notification permission granted", this)
             } else {
-                // Permission denied, handle accordingly
+                sendNotification("Notification permission not granted", this)
             }
         }
     }
 
+    //Birk
+    //Function checking if permission is allowed
     private fun checkNotificationPermission() {
         if (!NotificationManagerCompat.from(this).areNotificationsEnabled()) {
             Log.d("MainActivity", "Notifications are not enabled")
