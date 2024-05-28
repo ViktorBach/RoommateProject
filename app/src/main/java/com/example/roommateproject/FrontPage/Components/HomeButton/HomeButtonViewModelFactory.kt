@@ -4,6 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.roommateproject.Services.AccountService
 
+/*****************************************************************************/
+                        // HomeButtonViewModelFactory class //
+/*****************************************************************************/
 class HomeButtonViewModelFactory(
     private val accountService: AccountService
 ) : ViewModelProvider.Factory {

@@ -57,6 +57,9 @@ import com.example.roommateproject.ui.theme.lightYellow
 import com.example.roommateproject.ui.theme.orange
 import kotlinx.coroutines.launch
 
+/*****************************************************************************/
+                        // Calendar Tab Screen //
+/*****************************************************************************/
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

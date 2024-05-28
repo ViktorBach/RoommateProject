@@ -18,6 +18,9 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.roommateproject.FrontPage.FrontPageViewModel
 import com.example.roommateproject.R
 
+/*****************************************************************************/
+                    // Logout Button Implementation //
+/*****************************************************************************/
 @Composable
 fun LogoutButton(navigateRegisterPage: () -> Unit, onClick: () -> Unit) {
     val frontPageViewModel = viewModel<FrontPageViewModel>()

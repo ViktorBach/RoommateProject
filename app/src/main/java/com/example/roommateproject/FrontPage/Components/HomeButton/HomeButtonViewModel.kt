@@ -9,6 +9,9 @@ import com.example.roommateproject.Services.AccountService
 import kotlinx.coroutines.launch
 import sendNotification
 
+/*****************************************************************************/
+                        // HomeButtonViewModel class //
+/*****************************************************************************/
 class HomeButtonViewModel(
     private val accountService: AccountService
 ) : ViewModel() {

@@ -21,6 +21,9 @@ import com.example.roommateproject.ui.theme.lightYellow
 import com.example.roommateproject.ui.theme.white
 import sendNotification
 
+/*****************************************************************************/
+                            // Sleeping Button //
+/*****************************************************************************/
 @Composable
 fun SleepingButton() {
     val accountService: AccountService = AccountService();

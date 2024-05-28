@@ -10,6 +10,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+/*****************************************************************************/
+// ListViewModel.kt - ViewModel for the shopping list screen //
+/*****************************************************************************/
 class ListViewModel : ViewModel() {
 
     private val accountService: AccountService = AccountService()

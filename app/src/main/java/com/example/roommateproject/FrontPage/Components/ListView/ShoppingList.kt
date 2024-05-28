@@ -1,5 +1,8 @@
 package com.example.roommateproject.FrontPage.Components.ListView
 
+/*****************************************************************************/
+                            // ShoppingList class //
+/*****************************************************************************/
 data class ShoppingList(
     val title: String,
     val completed: Boolean = false,

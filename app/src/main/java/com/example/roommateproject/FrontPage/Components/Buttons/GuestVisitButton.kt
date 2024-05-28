@@ -21,6 +21,9 @@ import com.example.roommateproject.ui.theme.lightYellow
 import com.example.roommateproject.ui.theme.white
 import sendNotification
 
+/*****************************************************************************/
+                            // Guest Visit Button //
+/*****************************************************************************/
 @Composable
 fun GuestVisitButton() {
     val accountService: AccountService = AccountService();

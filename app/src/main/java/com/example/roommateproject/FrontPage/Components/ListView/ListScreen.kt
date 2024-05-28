@@ -36,6 +36,9 @@ import com.example.roommateproject.ui.theme.playFairDisplayFontFamily
 import com.example.roommateproject.ui.theme.skyBlue
 import com.example.roommateproject.ui.theme.white
 
+/*****************************************************************************/
+                            // ListScreen.kt file //
+/*****************************************************************************/
 @Composable
 fun ListScreenStateful(listViewModel: ListViewModel = viewModel()) {
     val lists: List<ShoppingList> = listViewModel.tasks
