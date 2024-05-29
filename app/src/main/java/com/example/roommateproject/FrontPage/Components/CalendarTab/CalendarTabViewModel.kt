@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.roommateproject.Services.AccountService
+import com.example.roommateproject.Services.LocalDataStorage.CalendarData
 
 /*****************************************************************************/
                     // CalendarTabViewModel class //
@@ -13,9 +14,9 @@ import com.example.roommateproject.Services.AccountService
 class CalendarTabViewModel : ViewModel() {
     private val accountService: AccountService = AccountService()
 
-    private val liveEvents = MutableLiveData<List<AccountService.CalendarData>>()
+    private val liveEvents = MutableLiveData<List<CalendarData>>()
 
-    val events: LiveData<List<AccountService.CalendarData>> get() = liveEvents
+    val events: LiveData<List<CalendarData>> get() = liveEvents
 
     fun fetchEventsFilteredByDate(date: String) {
         accountService.getCalendarEvents { success, calendarEvents ->

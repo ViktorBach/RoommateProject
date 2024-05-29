@@ -14,6 +14,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.example.roommateproject.Services.AccountService
+import com.example.roommateproject.Services.LocalDataStorage.EventType
+import com.example.roommateproject.Services.LocalDataStorage.LocalDataStorage
 import com.example.roommateproject.ui.theme.Typography
 import com.example.roommateproject.ui.theme.jaldiBoldFontFamily
 import com.example.roommateproject.ui.theme.lightYellow
@@ -41,8 +43,8 @@ fun WorkingLateButton() {
     ) {
         Button(
             onClick = {
-                sendNotification("${AccountService.currentUserName} is going to be home late", context)
-                accountService.addEvent(AccountService.EventType.I_AM_WORKING_LATE)
+                sendNotification("${LocalDataStorage.currentUserName} is going to be home late", context)
+                accountService.addEvent(EventType.I_AM_WORKING_LATE)
             }, // Insert notification that user is going to be home late
             shape = androidx.compose.foundation.shape.RoundedCornerShape(8.dp),
             colors =

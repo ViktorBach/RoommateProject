@@ -15,6 +15,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.example.roommateproject.Services.AccountService
+import com.example.roommateproject.Services.LocalDataStorage.EventType
+import com.example.roommateproject.Services.LocalDataStorage.LocalDataStorage
 import com.example.roommateproject.ui.theme.Typography
 import com.example.roommateproject.ui.theme.jaldiBoldFontFamily
 import com.example.roommateproject.ui.theme.lightYellow
@@ -41,8 +43,8 @@ fun SleepingButton() {
     ) {
         Button(
             onClick = {
-                sendNotification("${AccountService.currentUserName} is going to bed", context)
-                accountService.addEvent(AccountService.EventType.I_AM_SLEEPING)
+                sendNotification("${LocalDataStorage.currentUserName} is going to bed", context)
+                accountService.addEvent(EventType.I_AM_SLEEPING)
             }, // insert notification that user is going to bed
             shape = androidx.compose.foundation.shape.RoundedCornerShape(8.dp),
             colors =

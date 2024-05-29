@@ -1,6 +1,10 @@
 package com.example.roommateproject.Services
 
 import com.example.roommateproject.FrontPage.Components.ListView.ShoppingList
+import com.example.roommateproject.Services.LocalDataStorage.CalendarData
+import com.example.roommateproject.Services.LocalDataStorage.EventData
+import com.example.roommateproject.Services.LocalDataStorage.EventType
+import com.example.roommateproject.Services.LocalDataStorage.LocalDataStorage
 import com.google.firebase.Firebase
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
@@ -19,6 +23,7 @@ import java.util.Date
 // AccountService class is responsible for handling user authentication and data //
 /*****************************************************************************/
 
+
 class AccountService {
     // Initialize Firebase Auth
     private val auth = FirebaseAuth.getInstance()
@@ -29,35 +34,9 @@ class AccountService {
     private val calendarCollection = db.collection("calendars")
     private val shoppingListCollection = db.collection("shoppinglist")
 
-    // Sofie
-    companion object {
-        var currentEvents: List<EventData> = listOf()
-        var currentUserId = ""
-        var currentUserName = ""
-        var currentHomeId = ""
-        var currentCalendarEvents: List<CalendarData> = listOf()
-        var currentDate = ""
-    }
 
-    // Sofie + Natazja
-    // enum class that contains the internal name and value of the EventTypes we have predefined
-    enum class EventType(val eventText: String) {
-        I_AM_HOME("${AccountService.currentUserName} is home"),
-        I_AM_SLEEPING("${AccountService.currentUserName} is sleeping"),
-        I_AM_WORKING_LATE("${AccountService.currentUserName} is working late"),
-        I_AM_LEAVING("${AccountService.currentUserName} is leaving"),
-        ADD_TO_LIST("${AccountService.currentUserName} added groceries"),
-        GUEST_VISIT("${AccountService.currentUserName} has a guest over"),
-        EARLY_MORNING("${AccountService.currentUserName} has an early morning"),
-        CALENDAR_EVENT("${AccountService.currentUserName} added a calendar event"),
-    }
 
-    // Sofie
-    // Data class that represents an event in the application
-    data class EventData(
-        var eventType: String,
-        var timeStamp: String,
-    )
+                /********************    Event services   ********************/
 
     // Sofie
     // Function that adds an event to Firestore
@@ -66,13 +45,49 @@ class AccountService {
             hashMapOf(
                 "eventName" to eventType.name, // Store the name of the enum
                 "eventText" to eventType.eventText, // Store the event text
-                "homeId" to currentHomeId,
+                "homeId" to LocalDataStorage.currentHomeId,
                 "timeStamp" to Timestamp.now(),
-                "userId" to currentUserId,
+                "userId" to LocalDataStorage.currentUserId,
             )
 
         eventsCollection.add(eventData) // Adds new event to Firestore
     }
+
+    // Sofie
+    // Function that requests to get news event data from firestore collection
+    suspend fun getEvents() {
+        // calculates the amount of days we would like to fetch events by timestamp
+        val oneDay = Instant.now().minus(java.time.Duration.ofDays(1)) // 24 hours ago
+        // sets the currentEvent companion object to the firestore eventsCollection
+        LocalDataStorage.currentEvents =
+            eventsCollection
+                .whereEqualTo("homeId", LocalDataStorage.currentHomeId)
+                .whereGreaterThan("timeStamp", Timestamp(Date.from(oneDay)))
+                .get().await()
+                .map { doc ->
+                    val timeStamp = doc.get("timeStamp")
+                    val dateTime =
+                        when (timeStamp) {
+                            is Timestamp ->
+                                timeStamp.toDate().toInstant().atZone(
+                                    ZoneId.systemDefault(),
+                                ).toLocalDateTime()
+                            is String -> LocalDateTime.parse(timeStamp, DateTimeFormatter.ISO_DATE_TIME)
+                            else -> null
+                        }
+
+                    val formatter = DateTimeFormatter.ofPattern("EEEE HH:mm") // Defines the date format
+                    val formattedDate = dateTime?.format(formatter) ?: "Unknown date"
+
+                    EventData(
+                        eventType = doc.getString("eventText") ?: "Unknown event", // Fetching the event text directly
+                        timeStamp = formattedDate,
+                    )
+                }.toList()
+    }
+
+
+                /********************    Grocery list services   ********************/
 
     //Viktor
     // Function that requests to get shopping list data from firestore collection
@@ -84,7 +99,7 @@ class AccountService {
                 "createdAt" to Timestamp.now(),
             )
 
-        val documentReference = shoppingListCollection.document(currentHomeId)
+        val documentReference = shoppingListCollection.document(LocalDataStorage.currentHomeId)
 
         documentReference.get()
             .addOnSuccessListener { document ->
@@ -114,7 +129,7 @@ class AccountService {
     //Viktor
     // Function that requests to get shopping list data from firestore collection
     fun getShoppingListItems(onResult: (Boolean, List<ShoppingList>) -> Unit) {
-        shoppingListCollection.document(currentHomeId).get()
+        shoppingListCollection.document(LocalDataStorage.currentHomeId).get()
             .addOnSuccessListener { document ->
                 if (document.exists()) {
                     val items =
@@ -141,7 +156,7 @@ class AccountService {
         taskTitle: String,
         onResult: (Boolean) -> Unit,
     ) {
-        val documentReference = shoppingListCollection.document(currentHomeId)
+        val documentReference = shoppingListCollection.document(LocalDataStorage.currentHomeId)
 
         documentReference.get()
             .addOnSuccessListener { document ->
@@ -173,7 +188,7 @@ class AccountService {
         taskTitle: String,
         isCompleted: Boolean,
     ) {
-        val documentReference = shoppingListCollection.document(currentHomeId)
+        val documentReference = shoppingListCollection.document(LocalDataStorage.currentHomeId)
 
         documentReference.get()
             .addOnSuccessListener { document ->
@@ -192,13 +207,8 @@ class AccountService {
             }
     }
 
-    // Sofie
-    // Data class that represents a calendar event in the application
-    data class CalendarData(
-        var eventText: String,
-        var date: String,
-        var uid: String = "",
-    )
+
+                /********************    Calendar services   ********************/
 
     // Sofie
     // Function that adds a calendar event to Firestore
@@ -207,8 +217,8 @@ class AccountService {
         val calendarData =
             hashMapOf(
                 "eventText" to event,
-                "homeId" to currentHomeId,
-                "date" to currentDate,
+                "homeId" to LocalDataStorage.currentHomeId,
+                "date" to LocalDataStorage.currentDate,
                 "uid" to newEventRef.id,
             )
         newEventRef.set(calendarData)
@@ -224,7 +234,7 @@ class AccountService {
     // Function that requests to get calendar event data from firestore collection
     fun getCalendarEvents(onResult: (Boolean, List<CalendarData>) -> Unit) {
         calendarCollection
-            .whereEqualTo("homeId", AccountService.currentHomeId)
+            .whereEqualTo("homeId", LocalDataStorage.currentHomeId)
             .get().addOnSuccessListener { result ->
                 val eventList =
                     result.map { doc ->
@@ -251,38 +261,8 @@ class AccountService {
             }
     }
 
-    // Sofie
-    // Function that requests to get news event data from firestore collection
-    suspend fun getEvents() {
-        // calculates the amount of days we would like to fetch events by timestamp
-        val oneDay = Instant.now().minus(java.time.Duration.ofDays(1)) // 24 hours ago
-        // sets the currentEvent companion object to the firestore eventsCollection
-        currentEvents =
-            eventsCollection
-                .whereEqualTo("homeId", AccountService.currentHomeId)
-                .whereGreaterThan("timeStamp", Timestamp(Date.from(oneDay)))
-                .get().await()
-                .map { doc ->
-                    val timeStamp = doc.get("timeStamp")
-                    val dateTime =
-                        when (timeStamp) {
-                            is Timestamp ->
-                                timeStamp.toDate().toInstant().atZone(
-                                    ZoneId.systemDefault(),
-                                ).toLocalDateTime()
-                            is String -> LocalDateTime.parse(timeStamp, DateTimeFormatter.ISO_DATE_TIME)
-                            else -> null
-                        }
 
-                    val formatter = DateTimeFormatter.ofPattern("EEEE HH:mm") // Defines the date format
-                    val formattedDate = dateTime?.format(formatter) ?: "Unknown date"
-
-                    EventData(
-                        eventType = doc.getString("eventText") ?: "Unknown event", // Fetching the event text directly
-                        timeStamp = formattedDate,
-                    )
-                }.toList()
-    }
+                /********************    Register & Login services   ********************/
 
     // Everyone
     // Function that registers a user with email and password
@@ -330,9 +310,9 @@ class AccountService {
                 usersCollection.document(user!!.uid).get()
                     .addOnSuccessListener { document ->
                         val username = document.getString("username").toString()
-                        currentUserName = document.getString("username").toString()
-                        currentUserId = user.uid
-                        currentHomeId = document.getString("homeId").toString()
+                        LocalDataStorage.currentUserName = document.getString("username").toString()
+                        LocalDataStorage.currentUserId = user.uid
+                        LocalDataStorage.currentHomeId = document.getString("homeId").toString()
 
                         // Pass the username along with the login result
                         onResult(true, username)
@@ -464,7 +444,7 @@ class AccountService {
                             .addOnSuccessListener { newHomeDoc ->
                                 userDocs.forEach { doc ->
                                     // sending the home id generated to the user document connected to the home id
-                                    AccountService.currentHomeId = newHomeDoc.id
+                                    LocalDataStorage.currentHomeId = newHomeDoc.id
                                     doc.reference.update("homeId", newHomeDoc.id)
                                 }
                                 onResult(true, null) // Household added successfully

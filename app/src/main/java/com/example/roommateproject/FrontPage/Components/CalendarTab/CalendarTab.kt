@@ -49,6 +49,9 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.roommateproject.FrontPage.Components.CalendarTab.CalendarTabViewModel
 import com.example.roommateproject.Services.AccountService
+import com.example.roommateproject.Services.LocalDataStorage.CalendarData
+import com.example.roommateproject.Services.LocalDataStorage.EventType
+import com.example.roommateproject.Services.LocalDataStorage.LocalDataStorage
 import com.example.roommateproject.ui.theme.boxLayerGrey
 import com.example.roommateproject.ui.theme.jaldiFontFamily
 import com.example.roommateproject.ui.theme.lightBlue
@@ -98,7 +101,7 @@ fun CalendarTab() {
                     CalendarView(context).apply {
                         setOnDateChangeListener { _, year, month, day ->
                             date = "$day - ${month + 1} - $year"
-                            AccountService.currentDate = date
+                            LocalDataStorage.currentDate = date
 
                             calendarTapViewModel.fetchEventsFilteredByDate(date)
                         }
@@ -193,7 +196,7 @@ fun AddEventDialog(
                 onClick = {
                     onAddEvent(eventText)
                     onClose()
-                    accountService.addEvent(AccountService.EventType.CALENDAR_EVENT) // Log the event
+                    accountService.addEvent(EventType.CALENDAR_EVENT) // Log the event
                 },
                 colors =
                     ButtonDefaults.buttonColors(
@@ -219,7 +222,7 @@ fun AddEventDialog(
 
 // Sofie
 @Composable
-fun ShowEvents(events: List<AccountService.CalendarData>) {
+fun ShowEvents(events: List<CalendarData>) {
     val calendarTapViewModel = viewModel<CalendarTabViewModel>()
 
     Box(

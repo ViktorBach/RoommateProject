@@ -2,6 +2,7 @@ package com.example.roommateproject.FrontPage.Components.NewsTab
 
 import androidx.lifecycle.ViewModel
 import com.example.roommateproject.Services.AccountService
+import com.example.roommateproject.Services.LocalDataStorage.LocalDataStorage
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
@@ -38,7 +39,7 @@ class NewsViewModel : ViewModel() {
         listenerRegistration =
             db.collection("events")
                 .orderBy("timeStamp", com.google.firebase.firestore.Query.Direction.DESCENDING)
-                .whereEqualTo("homeId", AccountService.currentHomeId)
+                .whereEqualTo("homeId", LocalDataStorage.currentHomeId)
                 .addSnapshotListener { snapshot, exception ->
                     if (exception != null) {
                         // Handle error
