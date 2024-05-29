@@ -10,8 +10,7 @@ import com.example.roommateproject.Services.AccountService
 import com.google.firebase.auth.FirebaseAuth
 
 /*****************************************************************************/
-// FrontPageViewModel class for the front page of the app //
-
+        // FrontPageViewModel class for the front page of the app //
 /*****************************************************************************/
 
 // Viktor

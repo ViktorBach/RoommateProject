@@ -22,8 +22,7 @@ import com.example.roommateproject.ui.theme.white
 import sendNotification
 
 /*****************************************************************************/
-// Guest Visit Button //
-
+                            // Guest Visit Button //
 /*****************************************************************************/
 
 // Natazja

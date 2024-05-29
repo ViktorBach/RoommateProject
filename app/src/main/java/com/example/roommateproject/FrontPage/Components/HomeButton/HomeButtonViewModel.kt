@@ -10,8 +10,7 @@ import kotlinx.coroutines.launch
 import sendNotification
 
 /*****************************************************************************/
-// HomeButtonViewModel class //
-
+                        // HomeButtonViewModel class //
 /*****************************************************************************/
 
 // Natazja

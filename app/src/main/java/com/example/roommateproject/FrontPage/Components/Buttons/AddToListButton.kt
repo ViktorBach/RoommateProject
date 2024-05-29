@@ -26,8 +26,7 @@ import com.example.roommateproject.ui.theme.orange
 import com.example.roommateproject.ui.theme.white
 
 /*****************************************************************************/
-// Add to list button //
-
+                            // Add to list button //
 /*****************************************************************************/
 
 // Birk

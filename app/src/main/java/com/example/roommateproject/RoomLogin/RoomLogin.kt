@@ -36,8 +36,7 @@ import com.example.roommateproject.ui.theme.jaldiFontFamily
 import com.example.roommateproject.ui.theme.white
 
 /*****************************************************************************/
-// Room Login Screen Composable Functions //
-
+            // Room Login Screen Composable Functions //
 /*****************************************************************************/
 
 // Everyone

@@ -11,8 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 /*****************************************************************************/
-// ListViewModel.kt - ViewModel for the shopping list screen //
-
+        // ListViewModel.kt - ViewModel for the shopping list screen //
 /*****************************************************************************/
 
 //Viktor

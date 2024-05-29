@@ -58,8 +58,7 @@ import com.example.roommateproject.ui.theme.orange
 import kotlinx.coroutines.launch
 
 /*****************************************************************************/
-// Calendar Tab Screen //
-
+                        // Calendar Tab Screen //
 /*****************************************************************************/
 
 // Sofie

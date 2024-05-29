@@ -9,7 +9,6 @@ import com.example.roommateproject.Services.AccountService
 import kotlinx.coroutines.launch
 /*****************************************************************************/
 // RegisterViewModel class represents the ViewModel for the Register screen. //
-
 /*****************************************************************************/
 
 // Everyone

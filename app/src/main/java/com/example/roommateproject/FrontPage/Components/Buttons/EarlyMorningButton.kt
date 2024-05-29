@@ -21,8 +21,7 @@ import com.example.roommateproject.ui.theme.white
 import sendNotification
 
 /*****************************************************************************/
-// Early Morning Button //
-
+                            // Early Morning Button //
 /*****************************************************************************/
 
 // Natazja

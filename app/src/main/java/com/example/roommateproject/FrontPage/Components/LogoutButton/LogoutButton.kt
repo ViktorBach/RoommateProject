@@ -19,8 +19,7 @@ import com.example.roommateproject.FrontPage.FrontPageViewModel
 import com.example.roommateproject.R
 
 /*****************************************************************************/
-// Logout Button Implementation //
-
+                    // Logout Button Implementation //
 /*****************************************************************************/
 
 // Natazja

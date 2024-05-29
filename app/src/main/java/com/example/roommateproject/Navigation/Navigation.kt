@@ -10,7 +10,7 @@ import com.example.roommateproject.Register.Register
 import com.example.roommateproject.RoomLogin.RoomLogin
 
 /*****************************************************************************/
-// Navigation Composable //
+                            // Navigation Composable //
 /*****************************************************************************/
 
 // Everyone

@@ -36,8 +36,7 @@ import com.example.roommateproject.ui.theme.skyBlue
 import com.example.roommateproject.ui.theme.white
 
 /*****************************************************************************/
-// ListScreen.kt file //
-
+                            // ListScreen.kt file //
 /*****************************************************************************/
 
 // Viktor

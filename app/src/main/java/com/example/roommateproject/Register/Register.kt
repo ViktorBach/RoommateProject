@@ -43,8 +43,7 @@ import com.example.roommateproject.ui.theme.jaldiFontFamily
 import com.example.roommateproject.ui.theme.white
 
 /*****************************************************************************/
-// Register Screen //
-
+                            // Register Screen //
 /*****************************************************************************/
 
 // Everyone

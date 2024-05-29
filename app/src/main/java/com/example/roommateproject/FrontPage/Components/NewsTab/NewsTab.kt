@@ -29,8 +29,7 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 
 /*****************************************************************************/
-// News Tab Screen Composable Function //
-
+                // News Tab Screen Composable Function //
 /*****************************************************************************/
 
 // Sofie

@@ -6,8 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.example.roommateproject.Services.AccountService
 
 /*****************************************************************************/
-// CalendarTabViewModel class //
-
+                    // CalendarTabViewModel class //
 /*****************************************************************************/
 
 // Sofie

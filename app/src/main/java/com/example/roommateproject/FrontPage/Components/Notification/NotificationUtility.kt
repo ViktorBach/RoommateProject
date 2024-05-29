@@ -12,8 +12,7 @@ import androidx.core.content.ContextCompat
 import com.example.roommateproject.R
 
 /*****************************************************************************/
-// Notification Channel Setup and Functions //
-
+                // Notification Channel Setup and Functions //
 /*****************************************************************************/
 
 // Birk
