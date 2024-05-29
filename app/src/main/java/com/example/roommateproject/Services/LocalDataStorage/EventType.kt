@@ -1,7 +1,5 @@
 package com.example.roommateproject.Services.LocalDataStorage
 
-import com.example.roommateproject.Services.LocalDataStorage.LocalDataStorage
-
 // Sofie + Natazja
 // enum class that contains the internal name and value of the EventTypes we have predefined
 enum class EventType(val eventText: String) {
