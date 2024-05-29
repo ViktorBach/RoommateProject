@@ -5,8 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.roommateproject.Services.AccountService
 
 /*****************************************************************************/
-// HomeButtonViewModelFactory class //
-
+                // HomeButtonViewModelFactory class //
 /*****************************************************************************/
 
 // Natazja

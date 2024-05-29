@@ -1,8 +1,7 @@
 package com.example.roommateproject.FrontPage.Components.ListView
 
 /*****************************************************************************/
-// ShoppingList data class //
-
+                        // ShoppingList data class //
 /*****************************************************************************/
 
 //Viktor

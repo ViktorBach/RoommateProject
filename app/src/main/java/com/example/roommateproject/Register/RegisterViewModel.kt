@@ -10,7 +10,6 @@ import com.example.roommateproject.Services.LocalDataStorage.LocalDataStorage
 import kotlinx.coroutines.launch
 /*****************************************************************************/
 // RegisterViewModel class represents the ViewModel for the Register screen. //
-
 /*****************************************************************************/
 
 // Everyone

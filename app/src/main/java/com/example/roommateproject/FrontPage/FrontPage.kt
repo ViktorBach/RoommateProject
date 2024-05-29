@@ -51,8 +51,7 @@ import com.example.roommateproject.ui.theme.white
 import kotlinx.coroutines.launch
 
 /*****************************************************************************/
-// FrontPage UI //
-
+                            // FrontPage UI //
 /*****************************************************************************/
 
 // Everyone

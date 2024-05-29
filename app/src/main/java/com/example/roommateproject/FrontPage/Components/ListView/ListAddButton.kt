@@ -22,8 +22,7 @@ import com.example.roommateproject.ui.theme.jaldiBoldFontFamily
 import com.example.roommateproject.ui.theme.white
 
 /*****************************************************************************/
-// List Add Button //
-
+                            // List Add Button //
 /*****************************************************************************/
 
 // Natazja

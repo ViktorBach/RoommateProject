@@ -21,8 +21,7 @@ import com.example.roommateproject.ui.theme.lightYellow
 import com.example.roommateproject.ui.theme.white
 
 /*****************************************************************************/
-//  Home Button Toggle //
-
+                            //  Home Button Toggle //
 /*****************************************************************************/
 
 // Natazja

@@ -21,7 +21,6 @@ import java.util.Date
 
 /*****************************************************************************/
 // AccountService class is responsible for handling user authentication and data //
-
 /*****************************************************************************/
 
 

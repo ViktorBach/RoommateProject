@@ -7,8 +7,7 @@ import com.example.roommateproject.Services.AccountService
 import com.example.roommateproject.Services.LocalDataStorage.CalendarData
 
 /*****************************************************************************/
-// CalendarTabViewModel class //
-
+                    // CalendarTabViewModel class //
 /*****************************************************************************/
 
 // Sofie

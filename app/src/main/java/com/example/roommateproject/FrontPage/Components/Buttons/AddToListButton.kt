@@ -26,15 +26,14 @@ import com.example.roommateproject.ui.theme.orange
 import com.example.roommateproject.ui.theme.white
 
 /*****************************************************************************/
-// Add to list button //
-
+                            // Add to list button //
 /*****************************************************************************/
 
 // Birk
 @Composable
 fun AddToListButton(onAddItem: (String) -> Unit) {
     var showDialog by remember { mutableStateOf(false) }
-    var text by remember { mutableStateOf("") } // Declare text here to use it both in TextField and Button
+    var text by remember { mutableStateOf("") }
 
     if (showDialog) {
         AlertDialog(
@@ -97,7 +96,7 @@ fun AddToListButton(onAddItem: (String) -> Unit) {
             shape = androidx.compose.foundation.shape.RoundedCornerShape(8.dp),
             colors =
                 ButtonDefaults.buttonColors(
-                    lightYellow, // Set the button background to lightYellow
+                    lightYellow,
                 ),
             contentPadding =
                 androidx.compose.foundation.layout.PaddingValues(
@@ -106,7 +105,6 @@ fun AddToListButton(onAddItem: (String) -> Unit) {
                     bottom = 5.dp,
                     end = 15.dp,
                 ),
-            // Set content padding to zero
             modifier = Modifier,
         ) {
             Text(
