@@ -1,6 +1,7 @@
 # Homie app - a roommate project
 
-This app is a roommate and household management app that helps you and your roommates create a more manageable, stable and fun living space with and for each other.
+This app is a roommate and household management app that helps you and your roommates create a more manageable,
+stable and fun living space with and for each other.
 
 
 To install this project, follow these steps:
@@ -48,7 +49,16 @@ ViewModels: each page has a ViewModel that handles the state and logic, ensuring
 In order to use the app, simply create an account after you clone the repository, and register you and your roommates to your home.
 From here all the functionality is on the front page.
 
-    1. Register a user
+    1. Register a user:
+        ![img.png](img.png)
+
+    2. Move to next page:
+        ![img_1.png](img_1.png)
+
+    3. Register your household:
+        ![img_2.png](img_2.png)
+
+    4. Navigated to front page, feel free to have a look around.
 
 ## Contribution
 If you want to contribute to our project, simply fork the repository within GitHub or your desired terminal.
