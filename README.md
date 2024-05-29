@@ -50,13 +50,13 @@ In order to use the app, simply create an account after you clone the repository
 From here all the functionality is on the front page.
 
     1. Register a user:
-        ![img.png](img.png)
+        ![Register a user](readMeImages/img.png)
 
     2. Move to next page:
-        ![img_1.png](img_1.png)
+        ![Navigate to next page](readMeImages/img_1.png)
 
     3. Register your household:
-        ![img_2.png](img_2.png)
+        ![Register a household](readMeImages/img_2.png)
 
     4. Navigated to front page, feel free to have a look around.
 
