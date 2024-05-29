@@ -14,6 +14,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.example.roommateproject.Services.AccountService
+import com.example.roommateproject.Services.LocalDataStorage.EventType
+import com.example.roommateproject.Services.LocalDataStorage.LocalDataStorage
 import com.example.roommateproject.ui.theme.Typography
 import com.example.roommateproject.ui.theme.jaldiBoldFontFamily
 import com.example.roommateproject.ui.theme.lightYellow
@@ -41,9 +43,9 @@ fun EarlyMorningButton() {
     ) {
         Button(
             onClick = {
-                sendNotification("${AccountService.currentUserName} is getting up early in the morning", context)
+                sendNotification("${LocalDataStorage.currentUserName} is getting up early in the morning", context)
 
-                accountService.addEvent(AccountService.EventType.EARLY_MORNING)
+                accountService.addEvent(EventType.EARLY_MORNING)
             }, // Insert notification that user is getting up early in the morning
             shape = androidx.compose.foundation.shape.RoundedCornerShape(8.dp),
             colors =

@@ -6,6 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.roommateproject.Services.AccountService
+import com.example.roommateproject.Services.LocalDataStorage.EventType
 import kotlinx.coroutines.launch
 import sendNotification
 
@@ -26,10 +27,10 @@ class HomeButtonViewModel(
         viewModelScope.launch {
             if (_isHome.value) {
                 sendNotification("User is home", context)
-                accountService.addEvent(AccountService.EventType.I_AM_HOME)
+                accountService.addEvent(EventType.I_AM_HOME)
             } else {
                 sendNotification("User is leaving", context)
-                accountService.addEvent(AccountService.EventType.I_AM_LEAVING)
+                accountService.addEvent(EventType.I_AM_LEAVING)
             }
         }
     }

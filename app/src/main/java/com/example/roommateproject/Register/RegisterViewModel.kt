@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.roommateproject.Services.AccountService
+import com.example.roommateproject.Services.LocalDataStorage.LocalDataStorage
 import kotlinx.coroutines.launch
 /*****************************************************************************/
 // RegisterViewModel class represents the ViewModel for the Register screen. //
@@ -43,8 +44,8 @@ class RegisterViewModel : ViewModel() {
             accountService.authenticate(email, password, username) { success, errorMessage ->
                 if (success as Boolean) {
                     println("User registered successfully!")
-                    AccountService.currentUserName = username
-                    println(AccountService.currentUserName)
+                    LocalDataStorage.currentUserName = username
+                    println(LocalDataStorage.currentUserName)
                     navigateRoomLogin() // Navigates user to the RoomLogin screen
                 } else {
                     println("Registration failed: $errorMessage") // Registration failed

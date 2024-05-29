@@ -15,6 +15,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.example.roommateproject.Services.AccountService
+import com.example.roommateproject.Services.LocalDataStorage.EventType
+import com.example.roommateproject.Services.LocalDataStorage.LocalDataStorage
 import com.example.roommateproject.ui.theme.Typography
 import com.example.roommateproject.ui.theme.jaldiBoldFontFamily
 import com.example.roommateproject.ui.theme.lightYellow
@@ -42,9 +44,9 @@ fun GuestVisitButton() {
     ) {
         Button(
             onClick = {
-                sendNotification("${AccountService.currentUserName} is having guests over", context)
+                sendNotification("${LocalDataStorage.currentUserName} is having guests over", context)
 
-                accountService.addEvent(AccountService.EventType.GUEST_VISIT)
+                accountService.addEvent(EventType.GUEST_VISIT)
             }, // insert notification that user is having guests over
             shape = androidx.compose.foundation.shape.RoundedCornerShape(8.dp),
             colors =
